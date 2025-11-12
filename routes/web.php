@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminProdiController;
 use App\Http\Controllers\Admin\AdminMatkulController;
 use App\Http\Controllers\Admin\AdminKelasController;
 use App\Http\Controllers\Admin\AdminTahunAjaranController;
 use App\Http\Controllers\Admin\AdminDataTemuanController;
+use App\Http\Controllers\Admin\AdminRoleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::prefix('admin')->name('admin.')->group(function () {
         // CRUD USER
@@ -58,6 +61,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/data-temuan', [AdminDataTemuanController::class, 'store'])->name('dataTemuan.store');
         Route::put('/data-temuan/{dataTemuan}', [AdminDataTemuanController::class, 'update'])->name('dataTemuan.update');
         Route::delete('/data-temuan/{dataTemuan}', [AdminDataTemuanController::class, 'destroy'])->name('dataTemuan.destroy');
+
+        // CRUD ROLE
+        Route::resource('role', AdminRoleController::class);
     });
 });
 

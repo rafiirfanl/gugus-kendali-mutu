@@ -13,7 +13,9 @@ class AdminRoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('admin.role.index', compact('roles', 'permissions'));
     }
 
     /**
