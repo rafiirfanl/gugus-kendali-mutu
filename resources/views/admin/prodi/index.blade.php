@@ -5,6 +5,7 @@
 @section('content')
     <!-- Main content -->
     <section class="content">
+        @include('admin.prodi.create')
         <!-- Table -->
         <table id="example1" class="table table-bordered table-striped">
             <thead>

@@ -6,6 +6,7 @@
     <!-- Main content -->
     <section class="content">
         <!-- Table -->
+        @include('admin.user.create')
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
