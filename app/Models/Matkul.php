@@ -19,4 +19,8 @@ class Matkul extends Model
         'prodi_id',
     ];
 
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
+    }
 }

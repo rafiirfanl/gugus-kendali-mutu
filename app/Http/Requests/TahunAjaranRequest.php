@@ -22,7 +22,8 @@ class TahunAjaranRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tahun_ajaran' => 'required|max:100',
+            'is_aktif' => 'required|boolean',
         ];
     }
 }

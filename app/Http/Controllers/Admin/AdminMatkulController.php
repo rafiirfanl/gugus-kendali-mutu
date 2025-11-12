@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Matkul;
+use App\Models\Prodi;
 use App\Http\Requests\MatkulRequest;
 
 class AdminMatkulController extends Controller
@@ -13,8 +14,9 @@ class AdminMatkulController extends Controller
      */
     public function index()
     {
+        $prodis = Prodi::all();
         $matkuls = Matkul::all();
-        return view('admin.matkul.index', compact('matkuls'));
+        return view('admin.matkul.index', compact('matkuls', 'prodis'));
     }
 
     /**
@@ -22,7 +24,9 @@ class AdminMatkulController extends Controller
      */
     public function store(MatkulRequest $request)
     {
-        //
+        $data = $request->validated();
+        Matkul::create($data);
+        return back()->with('success', 'Successfully Add New Matkul!');
     }
 
     /**

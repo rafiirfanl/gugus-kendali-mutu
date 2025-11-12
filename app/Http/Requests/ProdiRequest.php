@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProdiRequest extends FormRequest
 {
@@ -21,8 +22,15 @@ class ProdiRequest extends FormRequest
      */
     public function rules(): array
     {
+       $id = $this->route('prodi');
+
         return [
-            //
+            'nama_prodi' => 'required|max:100',
+            'kode_prodi' => [
+                'required',
+                'max:255',
+                Rule::unique('prodis', 'kode_prodi')->ignore($id),
+            ],
         ];
     }
 }

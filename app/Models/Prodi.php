@@ -20,4 +20,9 @@ class Prodi extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function matkuls()
+    {
+        return $this->hasMany(Matkul::class);
+    }
 }

@@ -22,7 +22,9 @@ class AdminTahunAjaranController extends Controller
      */
     public function store(TahunAjaranRequest $request)
     {
-        //
+        $data = $request->validated();
+        TahunAjaran::create($data);
+        return back()->with('success', 'Successfully Add New Tahun Ajaran!');
     }
 
     /**

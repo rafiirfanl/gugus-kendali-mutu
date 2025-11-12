@@ -22,7 +22,9 @@ class AdminKelasController extends Controller
      */
     public function store(KelasRequest $request)
     {
-        //
+        $data = $request->validated();
+        Kelas::create($data);
+        return back()->with('success', 'Successfully Add New Kelas!');
     }
 
     /**

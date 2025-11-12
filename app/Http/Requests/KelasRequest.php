@@ -22,7 +22,9 @@ class KelasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_kelas' => 'required|max:100',
+            'matkul_dibuka_id' => 'required',
+            'tahun_ajaran_id' => 'required',
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MatkulRequest extends FormRequest
 {
@@ -21,8 +22,18 @@ class MatkulRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('matkul');
+
         return [
-            //
+            'nama_matkul' => 'required|max:100',
+            'kode_matkul' => [
+                'required',
+                'max:255',
+                Rule::unique('matkuls', 'kode_matkul')->ignore($id),
+            ],
+            'bobot_sks' => 'required|numeric',
+            'praktikum' => 'required|boolean',
+            'prodi_id' => 'required',
         ];
     }
 }
