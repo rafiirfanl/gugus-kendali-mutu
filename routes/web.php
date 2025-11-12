@@ -26,31 +26,37 @@ Route::middleware('auth')->group(function () {
         // CRUD USER
         Route::get('/user', [AdminUserController::class, 'index'])->name('user.index');
         Route::post('/user', [AdminUserController::class, 'store'])->name('user.store');
+        Route::put('/user/{user}', [AdminUserController::class, 'update'])->name('user.update');
         Route::delete('/user/{user}', [AdminUserController::class, 'destroy'])->name('user.destroy');
 
         // CRUD PRODI
         Route::get('/prodi', [AdminProdiController::class, 'index'])->name('prodi.index');
         Route::post('/prodi', [AdminProdiController::class, 'store'])->name('prodi.store');
+        Route::put('/prodi/{prodi}', [AdminProdiController::class, 'update'])->name('prodi.update');
         Route::delete('/prodi/{prodi}', [AdminProdiController::class, 'destroy'])->name('prodi.destroy');
 
         // CRUD MATKUL
         Route::get('/matkul', [AdminMatkulController::class, 'index'])->name('matkul.index');
         Route::post('/matkul', [AdminMatkulController::class, 'store'])->name('matkul.store');
+        Route::put('/matkul/{matkul}', [AdminMatkulController::class, 'update'])->name('matkul.update');
         Route::delete('/matkul/{matkul}', [AdminMatkulController::class, 'destroy'])->name('matkul.destroy');
 
         // CRUD KELAS
         Route::get('/kelas', [AdminKelasController::class, 'index'])->name('kelas.index');
         Route::post('/kelas', [AdminKelasController::class, 'store'])->name('kelas.store');
+        Route::put('/kelas/{kelas}', [AdminKelasController::class, 'update'])->name('kelas.update');
         Route::delete('/kelas/{kelas}', [AdminKelasController::class, 'destroy'])->name('kelas.destroy');
 
         // CRUD TAHUN AJARAN
         Route::get('/tahun-ajaran', [AdminTahunAjaranController::class, 'index'])->name('tahunAjaran.index');
         Route::post('/tahun-ajaran', [AdminTahunAjaranController::class, 'store'])->name('tahunAjaran.store');
+        Route::put('/tahun-ajaran/{tahunAjaran}', [AdminTahunAjaranController::class, 'update'])->name('tahunAjaran.update');
         Route::delete('/tahun-ajaran/{tahunAjaran}', [AdminTahunAjaranController::class, 'destroy'])->name('tahunAjaran.destroy');
 
         // CRUD DATA TEMUAN
         Route::get('/data-temuan', [AdminDataTemuanController::class, 'index'])->name('dataTemuan.index');
         Route::post('/data-temuan', [AdminDataTemuanController::class, 'store'])->name('dataTemuan.store');
+        Route::put('/data-temuan/{dataTemuan}', [AdminDataTemuanController::class, 'update'])->name('dataTemuan.update');
         Route::delete('/data-temuan/{dataTemuan}', [AdminDataTemuanController::class, 'destroy'])->name('dataTemuan.destroy');
     });
 });
