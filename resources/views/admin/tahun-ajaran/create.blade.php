@@ -30,7 +30,7 @@
                         
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('aktif') }}<span class="text-danger">*</span></label>
+                                <label class="form-label">{{ __('Aktif') }}<span class="text-danger">*</span></label>
                                 <select name="is_aktif" id="is_aktif" class="form-control @error('is_aktif') is-invalid @enderror" required>
                                     <option value="1" {{ old('is_aktif') == 1 ? 'selected' : '' }}>{{ __('Ya') }}</option>
                                     <option value="0" {{ old('is_aktif') == 0 ? 'selected' : '' }}>{{ __('Tidak') }}</option>

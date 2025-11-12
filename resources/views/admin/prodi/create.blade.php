@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('kode_prodi') }}<span class="text-danger">*</span></label>
+                                <label class="form-label">{{ __('Kode Prodi') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('kode_prodi') is-invalid @enderror"
                                     placeholder="kode_prodi" name="kode_prodi" id="kode_prodi" value="{{ old('kode_prodi') }}"
                                     required>

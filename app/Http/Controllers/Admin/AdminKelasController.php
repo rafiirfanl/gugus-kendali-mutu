@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
+use App\Models\TahunAjaran;
+use App\Models\Matkul;
 use App\Models\Kelas;
 use App\Http\Requests\KelasRequest;
 
@@ -13,8 +15,10 @@ class AdminKelasController extends Controller
      */
     public function index()
     {
+        $tahunAjarans = TahunAjaran::all();
+        $matkuls = Matkul::all();
         $kelases = Kelas::all();
-        return view('admin.kelas.index', compact('kelases'));
+        return view('admin.kelas.index', compact('kelases', 'matkuls', 'tahunAjarans'));
     }
 
     /**

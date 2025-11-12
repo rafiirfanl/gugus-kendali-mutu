@@ -16,7 +16,7 @@
                 </div>
                 <div class="modal-body text-left">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Name') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('nama_kelas') is-invalid @enderror"
@@ -30,9 +30,12 @@
                         <div class="col-md-6">
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Id matkul dibuka') }}<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('matkul_dibuka_id') is-invalid @enderror"
-                                    placeholder="matkul_dibuka_id" name="matkul_dibuka_id" id="matkul_dibuka_id" value="{{ old('matkul_dibuka_id') }}"
-                                    required>
+                                <select name="matkul_dibuka_id" id="matkul_dibuka_id" class="form-control @error('matkul_dibuka_id') is-invalid @enderror" required>
+                                    <option value="">{{ __('Select Matkul Dibuka') }}</option>
+                                    @foreach ($matkuls as $matkul)
+                                        <option value="{{ $matkul->id }}" {{ old('matkul_dibuka_id') == $matkul->id ? 'selected' : '' }}>{{ $matkul->nama_matkul }}</option>
+                                    @endforeach
+                                </select>
                                 @error('matkul_dibuka_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -41,9 +44,12 @@
                         <div class="col-md-6">
                             <div class="mb-2">
                                 <label class="form-label">{{ __('ID tahun ajaran') }}<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('tahun_ajaran_id') is-invalid @enderror"
-                                    placeholder="tahun_ajaran_id" name="tahun_ajaran_id" id="tahun_ajaran_id" value="{{ old('tahun_ajaran_id') }}"
-                                    required>
+                                <select name="tahun_ajaran_id" id="tahun_ajaran_id" class="form-control @error('tahun_ajaran_id') is-invalid @enderror" required>
+                                    <option value="">{{ __('Select Tahun Ajaran') }}</option>
+                                    @foreach ($tahunAjarans as $tahunAjaran)
+                                        <option value="{{ $tahunAjaran->id }}" {{ old('tahun_ajaran_id') == $tahunAjaran->id ? 'selected' : '' }}>{{ $tahunAjaran->tahun_ajaran }}</option>
+                                    @endforeach
+                                </select>
                                 @error('tahun_ajaran_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

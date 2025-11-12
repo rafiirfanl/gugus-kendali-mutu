@@ -16,7 +16,7 @@
                 </div>
                 <div class="modal-body text-left">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Name') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('nama_matkul') is-invalid @enderror"
@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('kode_matkul') }}<span class="text-danger">*</span></label>
+                                <label class="form-label">{{ __('Kode Matkul') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('kode_matkul') is-invalid @enderror"
                                     placeholder="kode_matkul" name="kode_matkul" id="kode_matkul" value="{{ old('kode_matkul') }}"
                                     required>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('prodi_id') }}<span class="text-danger">*</span></label>
+                                <label class="form-label">{{ __('Prodi') }}<span class="text-danger">*</span></label>
                                 <select name="prodi_id" id="prodi_id" class="form-control @error('prodi_id') is-invalid @enderror" required>
                                     <option value="">{{ __('Select Prodi') }}</option>
                                     @foreach ($prodis as $prodi)
