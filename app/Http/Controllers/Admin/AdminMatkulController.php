@@ -13,8 +13,8 @@ class AdminMatkulController extends Controller
      */
     public function index()
     {
-        $matkul = Matkul::all();
-        return view('admin.matkul.index', compact('matkul'));
+        $matkuls = Matkul::all();
+        return view('admin.matkul.index', compact('matkuls'));
     }
 
     /**
@@ -60,8 +60,9 @@ class AdminMatkulController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Matkul $matkul)
+    public function destroy(string $matkul)
     {
-        //
+        Matkul::findOrFail($matkul)->forceDelete();
+        return back()->with('success', 'Successfully Delete Matkul!');
     }
 }

@@ -16,14 +16,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($kelas as $item)
+                @foreach ($kelases as $kelas)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $item->nama_kelas ?? '-' }}</td>
-                        <td>{{ $item->matkul->nama_matkul ?? '-' }}</td>
+                        <td>{{ $kelas->nama_kelas ?? '-' }}</td>
+                        <td>{{ $kelas->matkul->nama_matkul ?? '-' }}</td>
                         <td class="text-center">
                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            @include('admin.kelas.delete')
                         </td>
                     </tr>
                 @endforeach

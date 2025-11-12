@@ -13,8 +13,8 @@ class AdminTahunAjaranController extends Controller
      */
     public function index()
     {
-        $tahunAjaran = TahunAjaran::all();
-        return view('admin.tahun-ajaran.index', compact('tahunAjaran'));
+        $tahunAjarans = TahunAjaran::all();
+        return view('admin.tahun-ajaran.index', compact('tahunAjarans'));
     }
 
     /**
@@ -60,8 +60,9 @@ class AdminTahunAjaranController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TahunAjaran $tahunAjaran)
+    public function destroy(string $tahunAjaran)
     {
-        //
+        TahunAjaran::findOrFail($tahunAjaran)->forceDelete();
+        return back()->with('success', 'Successfully Delete Tahun Ajaran!');
     }
 }

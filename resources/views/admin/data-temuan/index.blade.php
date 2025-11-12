@@ -20,30 +20,30 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($dataTemuans as $item)
+                @foreach ($dataTemuans as $dataTemuan)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td class="text-center">
-                            {{ $item->hasil_temuan ?? '-' }}
+                            {{ $dataTemuan->hasil_temuan ?? '-' }}
                         </td>
                         <td class="text-center">
-                            {{ $item->status_tahun_lalu ?? '-' }}        
+                            {{ $dataTemuan->status_tahun_lalu ?? '-' }}        
                         </td>
                         <td class="text-center">    
-                            {{ $item->status_tahun_ini ?? '-' }}
+                            {{ $dataTemuan->status_tahun_ini ?? '-' }}
                         </td>
                         <td class="text-center">
-                            {{ $item->kendala ?? '-' }}    
+                            {{ $dataTemuan->kendala ?? '-' }}    
                         </td>
                         <td class="text-center">
-                            {{ $item->tindak_lanjut ?? '-' }}
+                            {{ $dataTemuan->tindak_lanjut ?? '-' }}
                         </td>
                         <td class="text-center">
-                            {{ $item->masukkan ?? '-' }}    
+                            {{ $dataTemuan->masukkan ?? '-' }}    
                         </td>
                         <td class="text-center">
                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            @include('admin.data-temuan.delete')
                         </td>
                     </tr>
                 @endforeach

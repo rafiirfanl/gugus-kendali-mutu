@@ -13,8 +13,8 @@ class AdminKelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::all();
-        return view('admin.kelas.index', compact('kelas'));
+        $kelases = Kelas::all();
+        return view('admin.kelas.index', compact('kelases'));
     }
 
     /**
@@ -60,8 +60,9 @@ class AdminKelasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kelas $kelas)
+    public function destroy(string $kelas)
     {
-        //
+        Kelas::findOrFail($kelas)->forceDelete();
+        return back()->with('success', 'Successfully Delete Kelas!');
     }
 }

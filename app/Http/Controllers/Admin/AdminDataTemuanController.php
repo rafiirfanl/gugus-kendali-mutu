@@ -60,8 +60,9 @@ class AdminDataTemuanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DataTemuan $dataTemuan)
+    public function destroy(string $dataTemuan)
     {
-        //
+        DataTemuan::findOrFail($dataTemuan)->forceDelete();
+        return back()->with('success', 'Successfully Delete Data Temuan!');
     }
 }

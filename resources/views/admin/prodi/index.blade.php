@@ -16,14 +16,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($prodi as $item)
+                @foreach ($prodis as $prodi)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->nama_prodi ?? '-' }}</td>
-                        <td>{{ $item->kode_prodi ?? '-' }}</td>
+                        <td>{{ $prodi->nama_prodi ?? '-' }}</td>
+                        <td>{{ $prodi->kode_prodi ?? '-' }}</td>
                         <td class="text-center">
                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            @include('admin.prodi.delete')
                         </td>
                     </tr>
                 @endforeach

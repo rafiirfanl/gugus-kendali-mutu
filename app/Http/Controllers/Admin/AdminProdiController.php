@@ -14,8 +14,8 @@ class AdminProdiController extends Controller
      */
     public function index()
     {
-        $prodi = Prodi::all();
-        return view('admin.prodi.index', compact('prodi'));
+        $prodis = Prodi::all();
+        return view('admin.prodi.index', compact('prodis'));
     }
 
     /**
@@ -61,8 +61,9 @@ class AdminProdiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Prodi $prodi)
+    public function destroy(string $prodi)
     {
-        //
+        Prodi::findOrFail($prodi)->forceDelete();
+        return back()->with('success', 'Successfully Delete Prodi!');
     }
 }

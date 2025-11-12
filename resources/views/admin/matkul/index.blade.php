@@ -18,16 +18,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($matkul as $item)
+                @foreach ($matkuls as $matkul)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $item->nama_matkul ?? '-' }}</td>
-                        <td>{{ $item->kode_matkul ?? '-' }}</td>
-                        <td class="text-center">{{ $item->bobot_sks ?? '-' }}</td>
-                        <td class="text-center">{{ $item->praktikum ?? '-' }}</td>
+                        <td>{{ $matkul->nama_matkul ?? '-' }}</td>
+                        <td>{{ $matkul->kode_matkul ?? '-' }}</td>
+                        <td class="text-center">{{ $matkul->bobot_sks ?? '-' }}</td>
+                        <td class="text-center">{{ $matkul->praktikum ?? '-' }}</td>
                         <td class="text-center">
                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            @include('admin.matkul.delete')
                         </td>
                     </tr>
                 @endforeach

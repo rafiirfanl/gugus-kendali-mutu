@@ -59,8 +59,9 @@ class AdminRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role)
+    public function destroy(string $role)
     {
-        //
+        Role::findOrFail($role)->forceDelete();
+        return back()->with('success', 'Successfully Delete Role!');
     }
 }

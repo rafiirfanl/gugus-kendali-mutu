@@ -16,14 +16,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tahunAjaran as $item)
+                @foreach ($tahunAjarans as $tahunAjaran)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->tahun_ajaran ?? '-' }}</td>
-                        <td>{{ $item->is_aktif ? 'Aktif' : 'Tidak Aktif' }}</td>
+                        <td>{{ $tahunAjaran->tahun_ajaran ?? '-' }}</td>
+                        <td>{{ $tahunAjaran->is_aktif ? 'Aktif' : 'Tidak Aktif' }}</td>
                         <td class="text-center">
                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            @include('admin.tahun-ajaran.delete')
                         </td>
                     </tr>
                 @endforeach

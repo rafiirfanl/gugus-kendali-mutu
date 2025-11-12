@@ -22,23 +22,31 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // CRUD USER
-    Route::get('/user', [AdminUserController::class, 'index'])->name('user.index');
+    Route::prefix('admin')->name('admin.')->group(function () {
+        // CRUD USER
+        Route::get('/user', [AdminUserController::class, 'index'])->name('user.index');
+        Route::delete('/user/{user}', [AdminUserController::class, 'destroy'])->name('user.destroy');
 
-    // CRUD PRODI
-    Route::get('/prodi', [AdminProdiController::class, 'index'])->name('prodi.index');
+        // CRUD PRODI
+        Route::get('/prodi', [AdminProdiController::class, 'index'])->name('prodi.index');
+        Route::delete('/prodi/{prodi}', [AdminProdiController::class, 'destroy'])->name('prodi.destroy');  
 
-    // CRUD MATKUL
-    Route::get('/matkul', [AdminMatkulController::class, 'index'])->name('matkul.index');
+        // CRUD MATKUL
+        Route::get('/matkul', [AdminMatkulController::class, 'index'])->name('matkul.index');
+        Route::delete('/matkul/{matkul}', [AdminMatkulController::class, 'destroy'])->name('matkul.destroy');
 
-    // CRUD KELAS
-    Route::get('/kelas', [AdminKelasController::class, 'index'])->name('kelas.index');
+        // CRUD KELAS
+        Route::get('/kelas', [AdminKelasController::class, 'index'])->name('kelas.index');
+        Route::delete('/kelas/{kelas}', [AdminKelasController::class, 'destroy'])->name('kelas.destroy');
 
-    // CRUD TAHUN AJARAN
-    Route::get('/tahun-ajaran', [AdminTahunAjaranController::class, 'index'])->name('tahun-ajaran.index');
+        // CRUD TAHUN AJARAN
+        Route::get('/tahun-ajaran', [AdminTahunAjaranController::class, 'index'])->name('tahunAjaran.index');
+        Route::delete('/tahun-ajaran/{tahunAjaran}', [AdminTahunAjaranController::class, 'destroy'])->name('tahunAjaran.destroy');
 
-    // CRUD DATA TEMUAN
-    Route::get('/data-temuan', [AdminDataTemuanController::class, 'index'])->name('data-temuan.index');
+        // CRUD DATA TEMUAN
+        Route::get('/data-temuan', [AdminDataTemuanController::class, 'index'])->name('dataTemuan.index');
+        Route::delete('/data-temuan/{dataTemuan}', [AdminDataTemuanController::class, 'destroy'])->name('dataTemuan.destroy');
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
