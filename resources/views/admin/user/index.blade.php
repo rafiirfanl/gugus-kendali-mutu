@@ -33,7 +33,7 @@
                             @endif
                         </td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            @include('admin.user.edit')
                             @include('admin.user.delete')
                         </td>
                     </tr>

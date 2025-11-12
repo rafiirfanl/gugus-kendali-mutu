@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
@@ -25,7 +26,26 @@ class AdminUserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $userData = $request->validated();
+
+        if ($request->email_verified) {
+            $userData->email_verified_at = now();
+        } else {
+            $userData->email_verified_at = null;
+        }
+
+        if (!empty($userData['password'])) {
+            $userData['password'] = Hash::make($userData['password']);
+        }
+
+        $role = $userData['role'];
+        unset($userData['role']);
+
+        $user = User::create($userData);
+
+        $user->assignRole($role);
+
+        return back()->with('success', 'Successfully Create New User!');
     }
 
     /**
@@ -33,7 +53,29 @@ class AdminUserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user = User::findOrFail($user->id);
+        $userData = $request->validated();
+
+        if ($request->email_verified == '1') {
+            $user->email_verified_at = now();
+        } else {
+            $user->email_verified_at = null;
+        }
+
+        if (!empty($userData['password'])) {
+            $userData['password'] = Hash::make($userData['password']);
+        } else {
+            unset($userData['password']);
+        }
+
+        $role = $userData['role'];
+        unset($userData['role']);
+
+        $user->update($userData);
+
+        $user->syncRoles($role);
+
+        return back()->with('success', 'Successfully Edit User!');
     }
 
     /**
