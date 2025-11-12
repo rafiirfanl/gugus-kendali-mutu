@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
@@ -29,9 +30,9 @@ class AdminUserController extends Controller
         $userData = $request->validated();
 
         if ($request->email_verified) {
-            $userData->email_verified_at = now();
+            $userData['email_verified_at'] = now();
         } else {
-            $userData->email_verified_at = null;
+            $userData['email_verified_at'] = null;
         }
 
         if (!empty($userData['password'])) {
@@ -42,7 +43,6 @@ class AdminUserController extends Controller
         unset($userData['role']);
 
         $user = User::create($userData);
-
         $user->assignRole($role);
 
         return back()->with('success', 'Successfully Create New User!');
