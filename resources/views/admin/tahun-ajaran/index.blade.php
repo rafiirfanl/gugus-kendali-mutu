@@ -5,7 +5,9 @@
 @section('content')
     <!-- Main content -->
     <section class="content">
-        @include('admin.tahun-ajaran.create')
+        @can('create:tahun-ajaran')
+            @include('admin.tahun-ajaran.create')
+        @endcan
         <!-- Table -->
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -23,8 +25,12 @@
                         <td>{{ $tahunAjaran->tahun_ajaran ?? '-' }}</td>
                         <td>{{ $tahunAjaran->is_aktif ? 'Aktif' : 'Tidak Aktif' }}</td>
                         <td class="text-center"> 
-                            @include('admin.tahun-ajaran.edit')
-                            @include('admin.tahun-ajaran.delete')
+                            @can('edit:tahun-ajaran')
+                                @include('admin.tahun-ajaran.edit')
+                            @endcan
+                            @can('delete:tahun-ajaran')
+                                @include('admin.tahun-ajaran.delete')
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

@@ -9,6 +9,14 @@ use App\Http\Requests\MatkulRequest;
 
 class AdminMatkulController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view:matkul')->only(['index']);
+        $this->middleware('permission:create:matkul')->only(['store']);
+        $this->middleware('permission:edit:matkul')->only(['update']);
+        $this->middleware('permission:delete:matkul')->only(['destroy']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

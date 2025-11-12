@@ -8,6 +8,14 @@ use App\Http\Requests\TahunAjaranRequest;
 
 class AdminTahunAjaranController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view:tahun-ajaran')->only(['index']);
+        $this->middleware('permission:create:tahun-ajaran')->only(['store']);
+        $this->middleware('permission:edit:tahun-ajaran')->only(['update']);
+        $this->middleware('permission:delete:tahun-ajaran')->only(['destroy']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

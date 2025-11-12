@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 
 class AdminDashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view:dashboard')->only(['index']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

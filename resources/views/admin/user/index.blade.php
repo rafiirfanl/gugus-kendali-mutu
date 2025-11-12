@@ -6,7 +6,9 @@
     <!-- Main content -->
     <section class="content">
         <!-- Table -->
-        @include('admin.user.create')
+        @can('create:user')
+            @include('admin.user.create')
+        @endcan
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -33,8 +35,12 @@
                             @endif
                         </td>
                         <td class="text-center">
-                            @include('admin.user.edit')
-                            @include('admin.user.delete')
+                            @can('edit:user')
+                                @include('admin.user.edit')
+                            @endcan
+                            @can('delete:user')
+                                @include('admin.user.delete')
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

@@ -9,6 +9,14 @@ use App\Http\Requests\ProdiRequest;
 
 class AdminProdiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view:prodi')->only(['index']);
+        $this->middleware('permission:create:prodi')->only(['store']);
+        $this->middleware('permission:edit:prodi')->only(['update']);
+        $this->middleware('permission:delete:prodi')->only(['destroy']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

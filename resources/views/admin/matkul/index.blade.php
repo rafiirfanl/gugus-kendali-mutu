@@ -5,7 +5,9 @@
 @section('content')
     <!-- Main content -->
     <section class="content">
-        @include('admin.matkul.create')
+        @can('create:matkul')
+            @include('admin.matkul.create')
+        @endcan
         <!-- Table -->
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -27,8 +29,12 @@
                         <td class="text-center">{{ $matkul->bobot_sks ?? '-' }}</td>
                         <td class="text-center">{{ $matkul->praktikum ?? '-' }}</td>
                         <td class="text-center">
-                            @include('admin.matkul.edit')
-                            @include('admin.matkul.delete')
+                            @can('edit:matkul')
+                                @include('admin.matkul.edit')
+                            @endcan
+                            @can('delete:matkul')
+                                @include('admin.matkul.delete')        
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

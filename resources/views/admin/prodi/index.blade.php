@@ -5,7 +5,9 @@
 @section('content')
     <!-- Main content -->
     <section class="content">
-        @include('admin.prodi.create')
+        @can('create:prodi')
+            @include('admin.prodi.create')
+        @endcan
         <!-- Table -->
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -23,8 +25,12 @@
                         <td>{{ $prodi->nama_prodi ?? '-' }}</td>
                         <td>{{ $prodi->kode_prodi ?? '-' }}</td>
                         <td class="text-center">
-                            @include('admin.prodi.edit')
-                            @include('admin.prodi.delete')
+                            @can('edit:prodi')
+                                @include('admin.prodi.edit')
+                            @endcan
+                            @can('delete:prodi')
+                                @include('admin.prodi.delete')
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

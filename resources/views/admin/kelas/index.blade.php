@@ -5,7 +5,9 @@
 @section('content')
     <!-- Main content -->
     <section class="content">
-        @include('admin.kelas.create')
+        @can('create:kelas')
+            @include('admin.kelas.create')
+        @endcan
         <!-- Table -->
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -23,8 +25,12 @@
                         <td>{{ $kelas->nama_kelas ?? '-' }}</td>
                         <td>{{ $kelas->matkul->nama_matkul ?? '-' }}</td>
                         <td class="text-center">
-                            @include('admin.kelas.edit')
-                            @include('admin.kelas.delete')
+                            @can('edit:kelas')
+                                @include('admin.kelas.edit')
+                            @endcan
+                            @can('delete:kelas')
+                                @include('admin.kelas.delete')
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

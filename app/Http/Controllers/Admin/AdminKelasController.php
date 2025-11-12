@@ -10,6 +10,14 @@ use App\Http\Requests\KelasRequest;
 
 class AdminKelasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view:kelas')->only(['index']);
+        $this->middleware('permission:create:kelas')->only(['store']);
+        $this->middleware('permission:edit:kelas')->only(['update']);
+        $this->middleware('permission:delete:kelas')->only(['destroy']);
+    }
+    
     /**
      * Display a listing of the resource.
      */
