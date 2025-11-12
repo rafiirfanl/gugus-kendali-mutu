@@ -12,7 +12,7 @@ class DataTemuan extends Model
 
     protected $table = 'data_temuans';
     protected $fillable = [
-    'id_sub_kriteria',
+    'sub_kriteria_id',
     'hasil_temuan',
     'status_tahun_lalu',
     'status_tahun_ini',

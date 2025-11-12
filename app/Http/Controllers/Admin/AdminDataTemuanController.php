@@ -13,7 +13,8 @@ class AdminDataTemuanController extends Controller
      */
     public function index()
     {
-        //
+        $dataTemuans = DataTemuan::all();
+        return view('admin.data-temuan.index', compact('dataTemuans'));
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'User Management')
+@section('title', 'Prodi Management')
 
 @section('content')
     <!-- Main content -->
@@ -10,27 +10,17 @@
             <thead>
                 <tr>
                     <th>{{ __('No') }}</th>
-                    <th>{{ __('Name') }}</th>
-                    <th>{{ __('Email') }}</th>
-                    <th>{{ __('Role') }}</th>
-                    <th>{{ __('Status') }}</th>
+                    <th>{{ __('Program Studi') }}</th>
+                    <th>{{ __('Kode Program Studi') }}</th>
                     <th class="text-center">{{ __('Action') }}</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($prodi as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $user->name ?? '-' }}</td>
-                        <td>{{ $user->email ?? '-' }}</td>
-                        <td>{{ $user->getRoleNames()->implode(', ') ?? '-' }}</td>
-                        <td>
-                            @if ($user->email_verified_at)
-                                <span class="badge badge-success">Aktif</span>
-                            @else
-                                <span class="badge badge-danger">Tidak Aktif</span>
-                            @endif
-                        </td>
+                        <td>{{ $item->nama_prodi ?? '-' }}</td>
+                        <td>{{ $item->kode_prodi ?? '-' }}</td>
                         <td class="text-center">
                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
                             <a href="#" class="btn btn-danger btn-sm">Delete</a>

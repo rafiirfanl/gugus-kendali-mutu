@@ -14,7 +14,8 @@ class AdminProdiController extends Controller
      */
     public function index()
     {
-        //
+        $prodi = Prodi::all();
+        return view('admin.prodi.index', compact('prodi'));
     }
 
     /**

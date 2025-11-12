@@ -13,7 +13,17 @@ class Kelas extends Model
     protected $table = 'kelas';
     protected $fillable = [
         'nama_kelas',
-        'id_matkul_dibuka',
-        'id_tahun_ajaran',
+        'matkul_dibuka_id',
+        'tahun_ajaran_id',
     ];
+
+    public function matkul()
+    {
+        return $this->belongsTo(Matkul::class, 'matkul_dibuka_id');
+    }
+
+    // public function tahunAjaran()
+    // {
+    //     return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
+    // }
 }
