@@ -1,15 +1,18 @@
 <!-- Button to open modal -->
-<button role="button" class="btn btn-sm m-1 btn-primary" data-bs-toggle="modal" data-bs-target=".formCreate"><i
-        class="fas fa-plus"></i><span class="d-none d-sm-inline"> {{ __('Add') }}</span></button>
+<button role="button" class="btn btn-sm m-1 btn-warning" data-bs-toggle="modal"
+    data-bs-target=".formEdit{{ $kelas->id }}"><i class="fas fa-edit"></i><span class="d-none d-sm-inline">
+        {{ __('Edit') }}</span></button>
 
 <!-- Modal -->
-<div class="modal fade formCreate" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
+<div class="modal fade formEdit{{ $kelas->id }}" tabindex="-1" role="dialog" aria-hidden="">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="{{ route('admin.kelas.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.kelas.update', $kelas->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalFormLabel">{{ __('Add Data') }}</h5>
+                    <h5 class="modal-title" id="modalFormLabel">{{ __('Edit Data') }}
+                    </h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -20,8 +23,8 @@
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Name') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('nama_kelas') is-invalid @enderror"
-                                    placeholder="nama_kelas" name="nama_kelas" id="nama_kelas" value="{{ old('nama_kelas') }}"
-                                    required>
+                                    placeholder="nama_kelas" name="nama_kelas" id="nama_kelas"
+                                    value="{{ old('nama_kelas', $kelas->nama_kelas) }}" required>
                                 @error('nama_kelas')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -29,11 +32,15 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('Matkul dibuka') }}<span class="text-danger">*</span></label>
-                                <select name="matkul_dibuka_id" id="matkul_dibuka_id" class="form-control @error('matkul_dibuka_id') is-invalid @enderror" required>
+                                <label class="form-label">{{ __('Matkul dibuka') }}<span
+                                        class="text-danger">*</span></label>
+                                <select name="matkul_dibuka_id" id="matkul_dibuka_id"
+                                    class="form-control @error('matkul_dibuka_id') is-invalid @enderror" required>
                                     <option value="">{{ __('Select Matkul Dibuka') }}</option>
                                     @foreach ($matkuls as $matkul)
-                                        <option value="{{ $matkul->id }}" {{ old('matkul_dibuka_id') == $matkul->id ? 'selected' : '' }}>{{ $matkul->nama_matkul }}</option>
+                                        <option value="{{ $matkul->id }}"
+                                            {{ old('matkul_dibuka_id', $kelas->matkul_dibuka_id) == $matkul->id ? 'selected' : '' }}>
+                                            {{ $matkul->nama_matkul }}</option>
                                     @endforeach
                                 </select>
                                 @error('matkul_dibuka_id')
@@ -43,11 +50,15 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('Tahun Ajaran') }}<span class="text-danger">*</span></label>
-                                <select name="tahun_ajaran_id" id="tahun_ajaran_id" class="form-control @error('tahun_ajaran_id') is-invalid @enderror" required>
+                                <label class="form-label">{{ __('Tahun Ajaran') }}<span
+                                        class="text-danger">*</span></label>
+                                <select name="tahun_ajaran_id" id="tahun_ajaran_id"
+                                    class="form-control @error('tahun_ajaran_id') is-invalid @enderror" required>
                                     <option value="">{{ __('Select Tahun Ajaran') }}</option>
                                     @foreach ($tahunAjarans as $tahunAjaran)
-                                        <option value="{{ $tahunAjaran->id }}" {{ old('tahun_ajaran_id') == $tahunAjaran->id ? 'selected' : '' }}>{{ $tahunAjaran->tahun_ajaran }}</option>
+                                        <option value="{{ $tahunAjaran->id }}"
+                                            {{ old('tahun_ajaran_id', $kelas->tahun_ajaran_id) == $tahunAjaran->id ? 'selected' : '' }}>
+                                            {{ $tahunAjaran->tahun_ajaran }}</option>
                                     @endforeach
                                 </select>
                                 @error('tahun_ajaran_id')
@@ -58,7 +69,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">{{ __('Close') }}</button>
                     <button type="submit" class="btn btn-primary btn-submit">
                         <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                         <span class="btn-text">{{ __('Save') }}</span>

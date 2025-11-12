@@ -23,7 +23,7 @@
                         <td>{{ $kelas->nama_kelas ?? '-' }}</td>
                         <td>{{ $kelas->matkul->nama_matkul ?? '-' }}</td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            @include('admin.kelas.edit')
                             @include('admin.kelas.delete')
                         </td>
                     </tr>

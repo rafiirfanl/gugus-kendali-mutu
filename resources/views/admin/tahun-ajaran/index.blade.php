@@ -22,8 +22,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $tahunAjaran->tahun_ajaran ?? '-' }}</td>
                         <td>{{ $tahunAjaran->is_aktif ? 'Aktif' : 'Tidak Aktif' }}</td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        <td class="text-center"> 
+                            @include('admin.tahun-ajaran.edit')
                             @include('admin.tahun-ajaran.delete')
                         </td>
                     </tr>

@@ -34,7 +34,9 @@ class AdminMatkulController extends Controller
      */
     public function update(MatkulRequest $request, Matkul $matkul)
     {
-        //
+        $data = $request->validated();
+        $matkul->update($data);
+        return back()->with('success', 'Successfully Update Matkul!');
     }
 
     /**

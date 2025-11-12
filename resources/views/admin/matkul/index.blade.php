@@ -27,7 +27,7 @@
                         <td class="text-center">{{ $matkul->bobot_sks ?? '-' }}</td>
                         <td class="text-center">{{ $matkul->praktikum ?? '-' }}</td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            @include('admin.matkul.edit')
                             @include('admin.matkul.delete')
                         </td>
                     </tr>

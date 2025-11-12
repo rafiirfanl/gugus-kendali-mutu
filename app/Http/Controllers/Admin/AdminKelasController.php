@@ -36,7 +36,9 @@ class AdminKelasController extends Controller
      */
     public function update(KelasRequest $request, Kelas $kelas)
     {
-        //
+        $data = $request->validated();
+        $kelas->update($data);
+        return back()->with('success', 'Successfully Update Kelas!');
     }
 
     /**

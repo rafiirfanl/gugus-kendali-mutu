@@ -23,7 +23,7 @@
                         <td>{{ $prodi->nama_prodi ?? '-' }}</td>
                         <td>{{ $prodi->kode_prodi ?? '-' }}</td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            @include('admin.prodi.edit')
                             @include('admin.prodi.delete')
                         </td>
                     </tr>

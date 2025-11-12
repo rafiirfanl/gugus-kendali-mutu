@@ -32,7 +32,9 @@ class AdminTahunAjaranController extends Controller
      */
     public function update(TahunAjaranRequest $request, TahunAjaran $tahunAjaran)
     {
-        //
+        $data = $request->validated();
+        $tahunAjaran->update($data);
+        return back()->with('success', 'Successfully Update Tahun Ajaran!');
     }
 
     /**

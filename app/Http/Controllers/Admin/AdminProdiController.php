@@ -33,7 +33,9 @@ class AdminProdiController extends Controller
      */
     public function update(ProdiRequest $request, Prodi $prodi)
     {
-        //
+        $data = $request->validated();
+        $prodi->update($data);
+        return back()->with('success', 'Successfully Update Prodi!');
     }
 
     /**
