@@ -23,7 +23,9 @@ class AdminProdiController extends Controller
      */
     public function store(ProdiRequest $request)
     {
-        //
+        $data = $request->validated();
+        Prodi::create($data);
+        return back()->with('success', 'Successfully Add New Prodi!');
     }
 
     /**

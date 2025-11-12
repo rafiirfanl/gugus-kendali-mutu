@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'name'      => 'Admin GKMF',
             'email'     => 'gkmf@itera.ac.id',
             'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
         ]);
         $gkmf->assignRole('gkmf');
 
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             'name'      => 'Admin GKMP',
             'email'     => 'gkmp@itera.ac.id',
             'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
             'prodi_id'  => 1,
         ]);
         $gkmp->assignRole('gkmp');
@@ -33,6 +35,7 @@ class UserSeeder extends Seeder
             'name'      => 'Andika Setiawan S.Kom., M.Cs.',
             'email'     => 'andika.setiawan@if.itera.ac.id',
             'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
             'prodi_id'  => 1,
         ]);
         $kaprodi->assignRole('kaprodi');
@@ -42,6 +45,7 @@ class UserSeeder extends Seeder
             'name'      => 'Dosen Dosen',
             'email'     => 'dosen@itera.ac.id',
             'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
             'prodi_id'  => 1,
         ]);
         $dosen->assignRole('dosen');
