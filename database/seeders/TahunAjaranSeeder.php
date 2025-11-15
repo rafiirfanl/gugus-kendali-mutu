@@ -16,16 +16,22 @@ class TahunAjaranSeeder extends Seeder
     {
         TahunAjaran::create([
             'tahun_ajaran' => '2020/2021',
-            'is_aktif' => true
+            'jenis' => 'Ganjil',
+            'tanggal_mulai_kuliah' => '2020-09-01',
+            'is_aktif' => false
         ]);
 
         TahunAjaran::create([
             'tahun_ajaran' => '2021/2022',
-            'is_aktif' => true
+            'jenis' => 'Genap',
+            'tanggal_mulai_kuliah' => '2022-02-01',
+            'is_aktif' => false
         ]);
 
         TahunAjaran::create([
             'tahun_ajaran' => '2022/2023',
+            'jenis' => 'Pendek',
+            'tanggal_mulai_kuliah' => '2022-09-01',
             'is_aktif' => true
         ]);
     }

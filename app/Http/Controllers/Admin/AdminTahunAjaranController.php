@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\TahunAjaran;
@@ -15,7 +16,7 @@ class AdminTahunAjaranController extends Controller
         $this->middleware('permission:edit:tahun-ajaran')->only(['update']);
         $this->middleware('permission:delete:tahun-ajaran')->only(['destroy']);
     }
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -30,9 +31,21 @@ class AdminTahunAjaranController extends Controller
      */
     public function store(TahunAjaranRequest $request)
     {
-        $data = $request->validated();
-        TahunAjaran::create($data);
-        return back()->with('success', 'Successfully Add New Tahun Ajaran!');
+        // Gabungkan tahun1/tahun2 menjadi format 2025/2026
+        $tahun_ajaran = $request->tahun1 . '/' . $request->tahun2;
+
+        // Semua data lama dibuat tidak aktif
+        TahunAjaran::where('is_aktif', true)->update(['is_aktif' => false]);
+
+        // Simpan TA baru sebagai aktif
+        TahunAjaran::create([
+            'tahun_ajaran'          => $tahun_ajaran,
+            'jenis'                 => $request->jenis,
+            'tanggal_mulai_kuliah'  => $request->tanggal_mulai_kuliah,
+            'is_aktif'              => 1, // otomatis aktif
+        ]);
+
+        return back()->with('success', 'Tahun Ajaran Baru Berhasil Ditambahkan!');
     }
 
     /**

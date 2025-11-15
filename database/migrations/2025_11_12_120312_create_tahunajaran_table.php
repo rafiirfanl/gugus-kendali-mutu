@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tahun_ajarans', function (Blueprint $table) {
             $table->id();
             $table->string('tahun_ajaran');
+            $table->date('tanggal_mulai_kuliah');
+            $table->enum('jenis', ['Ganjil', 'Genap', 'Pendek'])->default('Ganjil');
             $table->boolean('is_aktif')->default(false);
             $table->timestamps();
         });

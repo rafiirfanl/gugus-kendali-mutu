@@ -23,7 +23,7 @@
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Tahun Ajaran') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('tahun_ajaran') is-invalid @enderror"
-                                    placeholder="tahun_ajaran" name="tahun_ajaran" id="tahun_ajaran"
+                                    placeholder="2020/2021" name="tahun_ajaran" id="tahun_ajaran"
                                     value="{{ old('tahun_ajaran', $tahunAjaran->tahun_ajaran) }}" required>
                                 @error('tahun_ajaran')
                                     <div class="invalid-feedback">{{ $message }}</div>

@@ -22,8 +22,10 @@ class TahunAjaranRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tahun_ajaran' => 'required|max:100',
-            'is_aktif' => 'required|boolean',
+            'tahun1' => 'required|digits:4|integer|min:2000|max:3000',
+            'tahun2' => 'required|digits:4|integer|min:2000|max:3000',
+            'jenis' => 'required|in:Ganjil,Genap,Pendek',
+            'tanggal_mulai_kuliah' => 'required|date',
         ];
     }
 }

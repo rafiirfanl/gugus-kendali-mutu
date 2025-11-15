@@ -13,6 +13,8 @@ class TahunAjaran extends Model
     protected $table = 'tahun_ajarans';
     protected $fillable = [
         'tahun_ajaran',
+        'jenis',
+        'tanggal_mulai_kuliah',
         'is_aktif',
     ];
 
