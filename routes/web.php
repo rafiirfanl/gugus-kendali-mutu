@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminMatkulController;
 use App\Http\Controllers\Admin\AdminKelasController;
 use App\Http\Controllers\Admin\AdminTahunAjaranController;
 use App\Http\Controllers\Admin\AdminDataTemuanController;
+use App\Http\Controllers\Admin\AdminDokumenPerkuliahanController;
 use App\Http\Controllers\Admin\AdminRoleController;
 
 Route::get('/', function () {
@@ -62,6 +63,12 @@ Route::middleware('auth')->group(function () {
 
         // CRUD ROLE
         Route::resource('role', AdminRoleController::class);
+
+        // CRUD DOKUMEN PERKULIAHAN
+        Route::get('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'index'])->name('dokumenPerkuliahan.index');
+        Route::post('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'store'])->name('dokumenPerkuliahan.store');
+        Route::put('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'update'])->name('dokumenPerkuliahan.update');
+        Route::delete('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'destroy'])->name('dokumenPerkuliahan.destroy');
     });
 });
 
