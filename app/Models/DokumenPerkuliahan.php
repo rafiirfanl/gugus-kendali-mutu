@@ -15,7 +15,6 @@ class DokumenPerkuliahan extends Model
         'nama_dokumen',
         'sesi',
         'tenggat_waktu_default',
-        'dikumpulkan_per',
         'template',
     ];
 

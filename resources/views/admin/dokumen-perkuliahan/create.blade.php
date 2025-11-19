@@ -42,23 +42,29 @@
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Tenggat Waktu Default') }}<span
                                         class="text-danger">*</span></label>
-                                <input type="text"
+                                {{-- <input type="text"
                                     class="form-control @error('tenggat_waktu_default') is-invalid @enderror"
                                     placeholder="tenggat_waktu_default" name="tenggat_waktu_default"
-                                    id="tenggat_waktu_default" value="{{ old('tenggat_waktu_default') }}" required>
+                                    id="tenggat_waktu_default" value="{{ old('tenggat_waktu_default') }}" required> --}}
+                                    <select name="tenggat_waktu_default" id="tenggat_waktu_default" class="form-control @error('tenggat_waktu_default') is-invalid @enderror" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                    </select>
                                 @error('tenggat_waktu_default')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-2">
-                                <label class="form-label">{{ __('Dikumpulkan Per') }}<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('dikumpulkan_per') is-invalid @enderror"
-                                    placeholder="dikumpulkan_per" name="dikumpulkan_per" id="dikumpulkan_per"
-                                    value="{{ old('dikumpulkan_per') }}" required>
-                                @error('dikumpulkan_per')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

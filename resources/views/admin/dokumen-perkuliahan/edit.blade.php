@@ -4,12 +4,11 @@
         {{ __('Edit') }}</span></button>
 
 <!-- Modal -->
-<div class="modal fade formEdit{{ $dokumenPerkuliahan->id }}" tabindex="-1" role="dialog"
-    aria-labelledby="modalFormLabel" aria-hidden="true">
+<div class="modal fade formEdit{{ $dokumenPerkuliahan->id }}" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST"
-                action="{{ route('admin.dokumenPerkuliahan.update', $dokumenPerkuliahan->id) }}"
+            <form method="POST" action="{{ route('admin.dokumenPerkuliahan.update', $dokumenPerkuliahan->id) }}"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -24,8 +23,7 @@
                         <div class="col-md-6">
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Name') }}<span class="text-danger">*</span></label>
-                                <input type="text"
-                                    class="form-control @error('nama_dokumen') is-invalid @enderror"
+                                <input type="text" class="form-control @error('nama_dokumen') is-invalid @enderror"
                                     placeholder="nama_dokumen" name="nama_dokumen" id="nama_dokumen"
                                     value="{{ old('nama_dokumen', $dokumenPerkuliahan->nama_dokumen) }}" required>
                                 @error('nama_dokumen')
@@ -37,8 +35,8 @@
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Sesi') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('sesi') is-invalid @enderror"
-                                    placeholder="sesi" name="sesi" id="sesi" value="{{ old('sesi', $dokumenPerkuliahan->sesi) }}"
-                                    required>
+                                    placeholder="sesi" name="sesi" id="sesi"
+                                    value="{{ old('sesi', $dokumenPerkuliahan->sesi) }}" required>
                                 @error('sesi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -48,31 +46,25 @@
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Tenggat Waktu Default') }}<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('tenggat_waktu_default') is-invalid @enderror"
-                                    placeholder="tenggat_waktu_default" name="tenggat_waktu_default" id="tenggat_waktu_default"
-                                    value="{{ old('tenggat_waktu_default', $dokumenPerkuliahan->tenggat_waktu_default) }}" required>
+                                <input type="text"
+                                    class="form-control @error('tenggat_waktu_default') is-invalid @enderror"
+                                    placeholder="tenggat_waktu_default" name="tenggat_waktu_default"
+                                    id="tenggat_waktu_default"
+                                    value="{{ old('tenggat_waktu_default', $dokumenPerkuliahan->tenggat_waktu_default) }}"
+                                    required>
                                 @error('tenggat_waktu_default')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('Dikumpulkan Per') }}<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('dikumpulkan_per') is-invalid @enderror"
-                                    placeholder="dikumpulkan_per" name="dikumpulkan_per" id="dikumpulkan_per"
-                                    value="{{ old('dikumpulkan_per', $dokumenPerkuliahan->dikumpulkan_per) }}" required>
-                                @error('dikumpulkan_per')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-2">
-                                <label class="form-label">{{ __('Template') }}<span class="text-danger">*</span> <span class="text-muted">(Allowed file types: doc, docx, pdf. Max size: 2MB)</span></label>
+                                <label class="form-label">{{ __('Template') }}<span class="text-danger">*</span> <span
+                                        class="text-muted">(Allowed file types: doc, docx, pdf. Max size:
+                                        2MB)</span></label>
                                 <input type="file" class="form-control @error('template') is-invalid @enderror"
-                                    placeholder="template" name="template" id="template" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                    placeholder="template" name="template" id="template"
+                                    accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                                     value="{{ old('template', $dokumenPerkuliahan->template) }}" required>
                                 @error('template')
                                     <div class="invalid-feedback">{{ $message }}</div>

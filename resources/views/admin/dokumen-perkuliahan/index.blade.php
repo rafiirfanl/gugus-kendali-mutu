@@ -28,7 +28,6 @@
                         <td>{{ $dokumenPerkuliahan->nama_dokumen }}</td>
                         <td>{{ $dokumenPerkuliahan->sesi }}</td>
                         <td>{{ $dokumenPerkuliahan->tenggat_waktu_default }}</td>
-                        <td>{{ $dokumenPerkuliahan->dikumpulkan_per }}</td>
                         <td>
                             @if ($dokumenPerkuliahan->template)
                                 <a href="{{ Storage::disk('public')->url($dokumenPerkuliahan->template) }}" target="_blank">Lihat Dokumen</a>

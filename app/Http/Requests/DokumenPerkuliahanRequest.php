@@ -25,7 +25,6 @@ class DokumenPerkuliahanRequest extends FormRequest
             'nama_dokumen' => 'required|max:100',
             'sesi'=>'required',
             'tenggat_waktu_default'  => 'required|integer|max:3000',
-            'dikumpulkan_per' => 'required|max:100',
             'template' => 'required|file|mimes:doc,docx,pdf,xls,xlsx,ppt,pptx|max:2048',
         ];
     }

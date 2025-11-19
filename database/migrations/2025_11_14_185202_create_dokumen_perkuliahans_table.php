@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_dokumen');
             $table->integer('sesi');
             $table->integer('tenggat_waktu_default')->nullable();
-            $table->string('dikumpulkan_per')->nullable();
             $table->string('template')->nullable();
             $table->timestamps();
 
