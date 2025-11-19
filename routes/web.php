@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminTahunAjaranController;
 use App\Http\Controllers\Admin\AdminDataTemuanController;
 use App\Http\Controllers\Admin\AdminDokumenPerkuliahanController;
 use App\Http\Controllers\Admin\AdminRoleController;
+use App\Http\Controllers\Admin\AdminAssignmentDosenController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -63,6 +64,19 @@ Route::middleware('auth')->group(function () {
 
         // CRUD ROLE
         Route::resource('role', AdminRoleController::class);
+
+        // ASSIGNMENT DOSEN — STEP 1
+        Route::get('/assignment-dosen', [AdminAssignmentDosenController::class, 'stepOne'])
+            ->name('assignmentDosen.stepOne');
+
+        // ASSIGNMENT DOSEN — STEP 2
+        Route::get('/assignment-dosen/step-two', [AdminAssignmentDosenController::class, 'stepTwo'])
+            ->name('assignmentDosen.stepTwo');
+
+        // ASSIGNMENT DOSEN — SUBMIT STEP 1 DAN 2
+        Route::post('/assignment-dosen/step-two', [AdminAssignmentDosenController::class, 'submitStepTwo'])
+            ->name('assignmentDosen.submitStepTwo');
+
 
         // CRUD DOKUMEN PERKULIAHAN
         Route::get('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'index'])->name('dokumenPerkuliahan.index');

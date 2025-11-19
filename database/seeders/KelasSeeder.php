@@ -15,13 +15,15 @@ class KelasSeeder extends Seeder
     public function run(): void
     {
         Kelas::create([
-            'nama_kelas' => 'Kelas A',
+            'nama_kelas' => 'Kelas RA',
+            'dosen_id' => '1',
             'matkul_dibuka_id' => 1,
             'tahun_ajaran_id' => 1,
         ]);
 
         Kelas::create([
-            'nama_kelas' => 'Kelas B',
+            'nama_kelas' => 'Kelas RB',
+            'dosen_id' => '2',
             'matkul_dibuka_id' => 2,
             'tahun_ajaran_id' => 1,
         ]);
