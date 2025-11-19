@@ -16,7 +16,7 @@ class ProdiSeeder extends Seeder
     {      
         Prodi::create([
             'nama_prodi'    => 'Teknik Informatika',
-            'kode_prodi'    => 'TI',
+            'kode_prodi'    => 'IF',
         ]);
 
         Prodi::create([
@@ -33,5 +33,26 @@ class ProdiSeeder extends Seeder
             'nama_prodi'    => 'Teknik Fisika',
             'kode_prodi'    => 'TF',
         ]);
+
+        Prodi::create([
+            'nama_prodi'    => 'Teknik Kimia',
+            'kode_prodi'    => 'TK',
+        ]);
+
+        Prodi::create([
+            'nama_prodi'    => 'Teknik Industri',
+            'kode_prodi'    => 'TI',
+        ]);
+
+        Prodi::create([
+            'nama_prodi'    => 'Teknik Mesin',
+            'kode_prodi'    => 'TM',
+        ]);
+
+        Prodi::create([
+            'nama_prodi'    => 'Geologi',
+            'kode_prodi'    => 'GL',
+        ]);
+
     }
 }
