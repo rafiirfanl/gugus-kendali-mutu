@@ -53,16 +53,7 @@ class AdminAssignmentDosenController extends Controller
         $matkul_id = session('matkul_id', []);
         $jumlah_kelas = session('jumlah_kelas', []);
 
-        // Ambil data kelas
         $kelas = $request->kelas;
-
-        // Cek dulu dengan dd
-        // dd([
-        //     'matkul_id' => $matkul_id,
-        //     'jumlah_kelas' => $jumlah_kelas,
-        //     'kelas' => $kelas
-        // ]);
-
         $tahunAjaranAktif = TahunAjaran::where('is_aktif', true)->first();
 
         foreach ($matkul_id as $i => $item) {
