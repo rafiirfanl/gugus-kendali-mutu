@@ -13,6 +13,7 @@ class Kelas extends Model
     protected $table = 'kelas';
     protected $fillable = [
         'nama_kelas',
+        'dosen_id',
         'matkul_dibuka_id',
         'tahun_ajaran_id',
     ];
@@ -30,5 +31,10 @@ class Kelas extends Model
     public function dosen()
     {
         return $this->belongsTo(User::class, 'dosen_id');
+    }
+
+    public function dokumenKelas()
+    {
+        return $this->hasMany(DokumenKelas::class, 'kelas_id');
     }
 }

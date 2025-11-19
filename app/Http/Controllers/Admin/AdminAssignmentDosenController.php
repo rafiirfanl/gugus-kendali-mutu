@@ -17,7 +17,7 @@ class AdminAssignmentDosenController extends Controller
     {
         $matkuls = Matkul::where('prodi_id', Auth::user()->prodi_id)->get();
 
-        return view('admin.assignment-dosen.step-one', compact('matkuls'));
+        return view('gkmp.assignment-dosen.step-one', compact('matkuls'));
     }
 
     public function stepTwo(Request $request)
@@ -41,7 +41,7 @@ class AdminAssignmentDosenController extends Controller
                 ->get();
         }
 
-        return view('admin.assignment-dosen.step-two', compact(
+        return view('gkmp.assignment-dosen.step-two', compact(
             'matkul',
             'jumlah_kelas',
             'dosen'

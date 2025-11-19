@@ -53,7 +53,7 @@
 
                                                     <input type="text" class="form-control"
                                                         name="kelas[{{ $m->id }}][{{ $i }}][nama_kelas]"
-                                                        value="{{ 'R' . ($jumlah_kelas[$key] == 1 ? '' : $huruf) }}"
+                                                        value="{{ 'Kelas R' . ($jumlah_kelas[$key] == 1 ? '' : $huruf) }}"
                                                         readonly>
 
                                                 </td>
@@ -100,5 +100,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: 'bootstrap-5',
+                width: '100%'
+            });
+        });
+    </script>
+
 
 @endsection

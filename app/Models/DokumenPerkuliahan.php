@@ -12,11 +12,15 @@ class DokumenPerkuliahan extends Model
 
     protected $table = 'dokumen_perkuliahans';
     protected $fillable = [
-        //'dokumen_id',
         'nama_dokumen',
         'sesi',
         'tenggat_waktu_default',
         'dikumpulkan_per',
         'template',
     ];
+
+    public function dokumenKelas()
+    {
+        return $this->hasMany(DokumenKelas::class, 'dokumen_perkuliahan_id');
+    }
 }

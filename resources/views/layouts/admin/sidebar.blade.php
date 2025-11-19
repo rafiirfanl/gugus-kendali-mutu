@@ -101,18 +101,6 @@
                             </li>
                         @endcan
 
-                        {{-- KELAS --}}
-                        @can('view:kelas')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.kelas.index') }}" class="nav-link text-white">
-                                    <i class="nav-icon fas fa-building"></i>
-                                    <p>
-                                        Manajemen Kelas
-                                    </p>
-                                </a>
-                            </li>
-                        @endcan
-
                         {{-- ROLE --}}
                         @can('view:role')
                             <li class="nav-item">
@@ -133,6 +121,19 @@
                         <a href="{{ route('admin.assignmentDosen.stepOne') }}" class="nav-link text-white">
                             <i class="nav-icon fas fa-user-tie"></i>
                             <p>Assignment Dosen</p>
+                        </a>
+                    </li>
+                @endcan
+
+
+                {{-- KELAS --}}
+                @can('view:kelas')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.kelas.index') }}" class="nav-link text-white">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Manajemen Kelas
+                            </p>
                         </a>
                     </li>
                 @endcan
