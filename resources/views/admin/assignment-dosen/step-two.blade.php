@@ -22,7 +22,7 @@
             </div>
             <div class="card-body">
 
-                <form action="{{ route('admin.assignmentDosen.submitStepTwo') }}" method="POST">
+                <form action="{{ route('admin.assignmentDosen.submitStepOneAndTwo') }}" method="POST">
                     @csrf
 
                     <!-- ======================= -->

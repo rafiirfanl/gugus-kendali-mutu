@@ -16,9 +16,8 @@ class AdminAssignmentDosenController extends Controller
     public function stepOne()
     {
         $matkuls = Matkul::where('prodi_id', Auth::user()->prodi_id)->get();
-        $tahunAjaranAktif = TahunAjaran::where('is_aktif', true)->first();
 
-        return view('admin.assignment-dosen.step-one', compact('matkuls', 'tahunAjaranAktif'));
+        return view('admin.assignment-dosen.step-one', compact('matkuls'));
     }
 
     public function stepTwo(Request $request)
@@ -49,7 +48,7 @@ class AdminAssignmentDosenController extends Controller
         ));
     }
 
-    public function submitStepTwo(Request $request)
+    public function submitStepOneAndTwo(Request $request)
     {
         $matkul_id = session('matkul_id', []);
         $jumlah_kelas = session('jumlah_kelas', []);
@@ -66,17 +65,17 @@ class AdminAssignmentDosenController extends Controller
 
         $tahunAjaranAktif = TahunAjaran::where('is_aktif', true)->first();
 
-        foreach ($matkul_id as $i => $mId) {
+        foreach ($matkul_id as $i => $item) {
 
-            // 1. Simpan Matkul Dibuka
+            // 1. Simpan Matkul Dibuka step 1
             $matkulDibuka = MatkulDibuka::create([
-                'matkul_id'        => $mId,
+                'matkul_id'        => $item,
                 'tahun_ajaran_id'  => $tahunAjaranAktif->id,
                 'jumlah_kelas'     => $jumlah_kelas[$i],
             ]);
 
-            // 2. Simpan kelas
-            foreach ($kelas[$mId] as $dataKelas) {
+            // 2. Simpan kelas step 2
+            foreach ($kelas[$item] as $dataKelas) {
                 Kelas::create([
                     'nama_kelas'        => $dataKelas['nama_kelas'],
                     'dosen_id'          => $dataKelas['dosen_id'],
