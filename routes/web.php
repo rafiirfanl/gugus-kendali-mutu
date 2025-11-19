@@ -65,11 +65,6 @@ Route::middleware('auth')->group(function () {
         // CRUD ROLE
         Route::resource('role', AdminRoleController::class);
 
-        // ASSIGNMENT 
-        Route::get('/dokumen-perkuliahan/step-one', [AdminDokumenPerkuliahanController::class, 'stepOne'])->name('dokumenPerkuliahan.stepOne');
-        Route::get('/dokumen-perkuliahan/step-two', [AdminDokumenPerkuliahanController::class, 'stepTwo'])->name('dokumenPerkuliahan.stepTwo');
-        Route::get('/dokumen-perkuliahan/step-three', [AdminDokumenPerkuliahanController::class, 'stepThree'])->name('dokumenPerkuliahan.stepThree');
-
          // ASSIGNMENT DOSEN — STEP 1
         Route::get('/assignment-dosen', [AdminAssignmentDosenController::class, 'stepOne'])
             ->name('assignmentDosen.stepOne');

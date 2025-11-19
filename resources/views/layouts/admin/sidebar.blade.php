@@ -32,80 +32,114 @@
                     </a>
                 </li>
 
-                {{-- USER MANAGEMENT --}}
-                @can('view:user')
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Master Data
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        {{-- USER MANAGEMENT --}}
+                        @can('view:user')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.user.index') }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Manajemen User
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        {{-- TAHUN AJARAN --}}
+                        @can('view:tahun-ajaran')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.tahunAjaran.index') }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-calendar"></i>
+                                    <p>
+                                        Manajemen Tahun Ajaran
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        {{-- PRODI --}}
+                        @can('view:prodi')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.prodi.index') }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-university"></i>
+                                    <p>
+                                        Manajemen Prodi
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        {{-- DOKUMEN PERKULIAHAN --}}
+                        @can('view:dokumen-perkuliahan')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.dokumenPerkuliahan.index') }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-file-alt"></i>
+                                    <p>
+                                        Manajemen Dokumen Perkuliahan
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        {{-- MATKUL --}}
+                        @can('view:matkul')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.matkul.index') }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Manajemen Mata Kuliah
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        {{-- KELAS --}}
+                        @can('view:kelas')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.kelas.index') }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-building"></i>
+                                    <p>
+                                        Manajemen Kelas
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        {{-- ROLE --}}
+                        @can('view:role')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.role.index') }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-key"></i>
+                                    <p>
+                                        Manajemen Role
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+
+                {{-- ASSIGNMENT DOSEN --}}
+                @can('view:assignment-dosen')
                     <li class="nav-item">
-                        <a href="{{ route('admin.user.index') }}" class="nav-link text-white">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Manajemen User
-                            </p>
+                        <a href="{{ route('admin.assignmentDosen.stepOne') }}" class="nav-link text-white">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>Assignment Dosen</p>
                         </a>
                     </li>
                 @endcan
 
-                {{-- TAHUN AJARAN --}}
-                @can('view:tahun-ajaran')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.tahunAjaran.index') }}" class="nav-link text-white">
-                            <i class="nav-icon fas fa-calendar"></i>
-                            <p>
-                                Manajemen Tahun Ajaran
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-
-                {{-- PRODI --}}
-                @can('view:prodi')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.prodi.index') }}" class="nav-link text-white">
-                            <i class="nav-icon fas fa-university"></i>
-                            <p>
-                                Manajemen Prodi
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-
-                {{-- MATKUL --}}
-                @can('view:matkul')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.matkul.index') }}" class="nav-link text-white">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p>
-                                Manajemen Mata Kuliah
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-
-                {{-- KELAS --}}
-                @can('view:kelas')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.kelas.index') }}" class="nav-link text-white">
-                            <i class="nav-icon fas fa-building"></i>
-                            <p>
-                                Manajemen Kelas
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-
-                {{-- ROLE --}}
-                @can('view:role')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.role.index') }}" class="nav-link text-white">
-                            <i class="nav-icon fas fa-key"></i>
-                            <p>
-                                Manajemen Role
-                            </p>
-                        </a>
-                    </li>
-                @endcan
 
                 {{-- LOGOUT --}}
-                 <li class="nav-item">
+                <li class="nav-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
                         @csrf
                     </form>
