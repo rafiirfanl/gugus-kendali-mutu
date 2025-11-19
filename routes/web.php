@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminDataTemuanController;
 use App\Http\Controllers\Admin\AdminDokumenPerkuliahanController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminAssignmentDosenController;
+use App\Http\Controllers\Admin\GKMPProgresKelasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -65,7 +66,7 @@ Route::middleware('auth')->group(function () {
         // CRUD ROLE
         Route::resource('role', AdminRoleController::class);
 
-         // ASSIGNMENT DOSEN — STEP 1
+        // ASSIGNMENT DOSEN — STEP 1
         Route::get('/assignment-dosen', [AdminAssignmentDosenController::class, 'stepOne'])
             ->name('assignmentDosen.stepOne');
 
@@ -83,6 +84,17 @@ Route::middleware('auth')->group(function () {
         Route::post('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'store'])->name('dokumenPerkuliahan.store');
         Route::put('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'update'])->name('dokumenPerkuliahan.update');
         Route::delete('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'destroy'])->name('dokumenPerkuliahan.destroy');
+    });
+
+    Route::prefix('gkmp')->name('gkmp.')->group(function () {
+        // PROGRES KELAS
+        Route::get('/progres-kelas', [GKMPProgresKelasController::class, 'index'])->name('progresKelas.index');
+
+        // DETAIL-KELAS
+        Route::get('/progres-kelas/{id}', [GKMPProgresKelasController::class, 'detailKelas'])->name('detailKelas.index');
+
+        // TOLAK DOKUMEN
+        Route::post('/gkmp/progres-kelas/tolak', [GKMPProgresKelasController::class, 'tolak'])->name('progres-kelas.tolak');
     });
 });
 

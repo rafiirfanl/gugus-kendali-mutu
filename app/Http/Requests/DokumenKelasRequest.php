@@ -26,7 +26,7 @@ class DokumenPerkuliahanRequest extends FormRequest
             'dokumen_perkuliahan_id' => 'required|exists:dokumen_perkuliahans,id',
             'file_dokumen' => 'required|file|mimes:doc,docx,pdf,xls,xlsx,ppt,pptx|max:2048',
             'waktu_pengumpulan' => 'required|date',
-            'status' => 'required|in:diterima,belum_dikumpulkan,ditolak',
+            'status' => 'required|in:dikumpulkan,ditolak',
             'catatan' => 'nullable|string|max:500',
         ];
     }
