@@ -20,6 +20,6 @@ class DokumenPerkuliahan extends Model
 
     public function dokumenKelas()
     {
-        return $this->hasMany(DokumenKelas::class, 'dokumen_perkuliahan_id');
+        return $this->hasMany(DokumenKelas::class, 'dokumen_perkuliahan_id', 'id');
     }
 }

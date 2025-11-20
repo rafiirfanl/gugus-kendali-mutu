@@ -10,6 +10,7 @@ use App\Models\DokumenPerkuliahan;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class GKMPProgresKelasController extends Controller
 {
@@ -23,15 +24,16 @@ class GKMPProgresKelasController extends Controller
      */
     public function index()
     {
-        $kelasList = Kelas::withCount([])->get();
-
         $tahunAjaran = TahunAjaran::where('is_aktif', true)->first();
-        $dokumenPerkuliahan = DokumenPerkuliahan::all();
-        $tanggalMulaiKuliah = $tahunAjaran ? $tahunAjaran->tanggal_mulai_kuliah : null;
+        $userProdi = Auth::user()->prodi_id;
+        $kelasList = Kelas::where('tahun_ajaran_id', $tahunAjaran->id)
+            ->whereHas('matkulDibuka.matkul', function ($q) use ($userProdi) {
+                $q->where('prodi_id', $userProdi);
+            })
+            ->get();
 
-        // isi dari dokumen perkuliahan
         $sesiList = DokumenPerkuliahan::select('sesi')->distinct()->orderBy('sesi')->get();
-        $now = now(); // Carbon instance
+        $now = now();
 
         $progres = DokumenKelas::selectRaw("
         dokumen_kelas.kelas_id,
@@ -56,22 +58,20 @@ class GKMPProgresKelasController extends Controller
             ->get()
             ->keyBy('kelas_id');
 
-        // dd($sesiList);
-
-
         return view('gkmp.progres-kelas.index', compact('kelasList', 'progres', 'sesiList'));
     }
 
     public function previewSesiPDF($sesi)
     {
         $now = now();
+        $tahunAjaran = TahunAjaran::where('is_aktif', true)->first();
+        $userProdi = Auth::user()->prodi_id;
+        $kelasList = Kelas::where('tahun_ajaran_id', $tahunAjaran->id)
+            ->whereHas('matkulDibuka.matkul', function ($q) use ($userProdi) {
+                $q->where('prodi_id', $userProdi);
+            })
+            ->get();
 
-        // Ambil semua kelas yang memiliki dokumen dengan sesi tertentu
-        $kelasList = Kelas::whereHas('dokumenKelas.dokumenPerkuliahan', function ($q) use ($sesi) {
-            $q->where('sesi', $sesi);
-        })->get();
-
-        // Hitung progres
         $progres = DokumenKelas::selectRaw("
         dokumen_kelas.kelas_id,
         SUM(CASE WHEN dokumen_kelas.status = 'dikumpulkan' THEN 1 ELSE 0 END) AS terkumpul,
@@ -96,8 +96,6 @@ class GKMPProgresKelasController extends Controller
             ->pluck('nama_dokumen')
             ->toArray();
 
-        $tempat = "Ruang D215, Prodi Teknik Informatika";
-
         $groupedProgres = [];
 
         foreach ($kelasList as $kelas) {
@@ -105,7 +103,6 @@ class GKMPProgresKelasController extends Controller
 
             foreach ($namaDokumenList as $dokumenName) {
 
-                // Cari dokumen perkuliahan berdasarkan nama + sesi
                 $dokumenPerkuliahan = DokumenPerkuliahan::where('sesi', $sesi)
                     ->where('nama_dokumen', $dokumenName)
                     ->first();
@@ -115,12 +112,10 @@ class GKMPProgresKelasController extends Controller
                     continue;
                 }
 
-                // Cari apakah kelas ini punya dokumen tersebut
                 $dokumenKelas = DokumenKelas::where('kelas_id', $kelas->id)
                     ->where('dokumen_perkuliahan_id', $dokumenPerkuliahan->id)
                     ->first();
 
-                // Status: dikumpulkan = Ada, lainnya = Tidak Ada
                 $dokumens[$dokumenName] = $dokumenKelas && $dokumenKelas->status === 'dikumpulkan';
             }
 
@@ -131,17 +126,25 @@ class GKMPProgresKelasController extends Controller
             ];
         }
 
-        $prodi = optional(optional($kelasList->first())->matkul)->prodi->nama_prodi ?? '-';
+        $kelas = $kelasList->first();
+
+        $prodi_id    = $kelas?->matkulDibuka?->matkul?->prodi_id;
+        $nama_prodi  = $kelas?->matkulDibuka?->matkul?->prodi?->nama_prodi ?? '-';
+        $ruang_prodi = $kelas?->matkulDibuka?->matkul?->prodi?->ruang_prodi ?? '-';
+
         $kaprodiUser = User::role('kaprodi')
-            ->where('prodi_id', optional(optional($kelasList->first())->matkul)->prodi_id)
+            ->where('prodi_id', $prodi_id)
             ->first();
-        $kaprodi = $kaprodiUser->name ?? '-';
-        $nip_kaprodi = $kaprodiUser->nip ?? '-';
+
+        $kaprodi     = $kaprodiUser->name ?? '-';
+        $nip_kaprodi = $kaprodiUser->nip  ?? '-';
+
         $gkmpUser = User::role('gkmp')
-            ->where('prodi_id', optional(optional($kelasList->first())->matkul)->prodi_id)
+            ->where('prodi_id', $prodi_id)
             ->first();
-        $gkmp = $gkmpUser->name ?? '-';
-        $nip_gkmp = $gkmpUser->nip ?? '-';
+
+        $gkmp     = $gkmpUser->name ?? '-';
+        $nip_gkmp = $gkmpUser->nip  ?? '-';
 
 
         // LOAD VIEW PDF
@@ -150,10 +153,10 @@ class GKMPProgresKelasController extends Controller
             'progres'   => $progres,
             'sesi'      => $sesi,
             'namaDokumenList' => $namaDokumenList,
-            'tempat' => $tempat,
             'groupedProgres' => $groupedProgres,
             'dokumenSesi'    => $namaDokumenList,
-            'prodi' => $prodi,
+            'nama_prodi' => $nama_prodi,
+            'ruang_prodi' => $ruang_prodi,
             'kaprodi' => $kaprodi,
             'nip_kaprodi' => $nip_kaprodi,
             'gkmp' => $gkmp,

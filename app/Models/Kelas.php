@@ -20,21 +20,21 @@ class Kelas extends Model
 
     public function matkulDibuka()
     {
-        return $this->belongsTo(MatkulDibuka::class, 'matkul_dibuka_id');
+        return $this->belongsTo(MatkulDibuka::class, 'matkul_dibuka_id', 'id');
     }
 
     public function tahunAjaran()
     {
-        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id', 'id');
     }
 
     public function dosen()
     {
-        return $this->belongsTo(User::class, 'dosen_id');
+        return $this->belongsTo(User::class, 'dosen_id', 'id');
     }
 
     public function dokumenKelas()
     {
-        return $this->hasMany(DokumenKelas::class, 'kelas_id');
+        return $this->hasMany(DokumenKelas::class, 'kelas_id', 'id');
     }
 }

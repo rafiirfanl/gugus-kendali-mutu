@@ -14,6 +14,7 @@ class Prodi extends Model
     protected $fillable = [
         'nama_prodi',
         'kode_prodi',
+        // 'ruang_prodi',
     ];
 
     public function users()

@@ -161,11 +161,11 @@ $waktu = date('H:i');
             </tr>
             <tr>
                 <td style="width: 25%;">Tempat</td>
-                <td style="width: 75%;">: {{ $tempat ?? '-' }}</td>
+                <td style="width: 75%;">: {{ $ruang_prodi ?? '-' }}</td>
             </tr>
         </table>
 
-        <p align="justify">yang dilaksanakan oleh Gugus Kendali Mutu Prodi {{ $prodi }} dengan hasil pemeriksaan
+        <p align="justify">yang dilaksanakan oleh Gugus Kendali Mutu Prodi {{ $nama_prodi }} dengan hasil pemeriksaan
             diketahui bahwa:</p>
     </div>
 
@@ -190,16 +190,23 @@ $waktu = date('H:i');
                 </tr>
             </thead>
             <tbody>
-                @foreach ($groupedProgres as $index => $data)
+                @forelse ($groupedProgres as $index => $data)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $data['matkul'] }}</td>
-                        <td>{{ $data['dosen'] }}</td>
+                        <td>{{ $data['matkul'] ?? '-' }}</td>
+                        <td>{{ $data['dosen'] ?? '-' }}</td>
+
                         @foreach ($dokumenSesi as $namaDokumen)
-                            <td>{{ $data['dokumens'][$namaDokumen] ? 'Ada' : 'Tidak Ada' }}</td>
+                            <td>{{ $data['dokumens'][$namaDokumen] ?? false ? 'Ada' : '-' }}</td>
                         @endforeach
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="{{ 3 + count($dokumenSesi) }}" class="text-center">
+                            Tidak ada data
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
@@ -212,8 +219,9 @@ $waktu = date('H:i');
         <div class="signature-2">
             <table class="no-border" style="width: 100%; margin-top: 20px;">
                 <tr>
-                    <td width="50%"><br><br>Mengetahui, <br>Prodi {{ $prodi }}<br><br><br><br><br>{{ $kaprodi }}<br>NIP. {{ $nip_kaprodi }}</td>
-                    <td width="50%"><br><br>Lampung Selatan, {{ $tanggal ?? '-' }}<br>GKMP {{ $prodi }}<br>
+                    <td width="50%"><br><br>Mengetahui, <br>Prodi
+                        {{ $nama_prodi }}<br><br><br><br><br>{{ $kaprodi }}<br>NIP. {{ $nip_kaprodi }}</td>
+                    <td width="50%"><br><br>Lampung Selatan, {{ $tanggal ?? '-' }}<br>GKMP {{ $nama_prodi }}<br>
                         <br><br><br><br>{{ $gkmp }}<br>NIP. {{ $nip_gkmp }}
                     </td>
                 </tr>
