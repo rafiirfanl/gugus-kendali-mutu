@@ -6,8 +6,10 @@ use App\Models\Matkul;
 use App\Models\TahunAjaran;
 use App\Models\User;
 use App\Models\MatkulDibuka;
+use App\Models\DokumenKelas;
 use App\Models\Kelas;
 use App\Http\Controllers\Controller;
+use App\Models\DokumenPerkuliahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +57,7 @@ class AdminAssignmentDosenController extends Controller
 
         $kelas = $request->kelas;
         $tahunAjaranAktif = TahunAjaran::where('is_aktif', true)->first();
+        $dokumenPerkuliahan = DokumenPerkuliahan::all();
 
         foreach ($matkul_id as $i => $item) {
 
@@ -67,12 +70,23 @@ class AdminAssignmentDosenController extends Controller
 
             // 2. Simpan kelas step 2
             foreach ($kelas[$item] as $dataKelas) {
-                Kelas::create([
+
+                // Create kelas
+                $kelasBaru = Kelas::create([
                     'nama_kelas'        => $dataKelas['nama_kelas'],
                     'dosen_id'          => $dataKelas['dosen_id'],
                     'matkul_dibuka_id'  => $matkulDibuka->id,
                     'tahun_ajaran_id'   => $tahunAjaranAktif->id,
                 ]);
+
+                // 3. Generate dokumen kelas untuk setiap dokumen master
+                foreach ($dokumenPerkuliahan as $dok) {
+                    DokumenKelas::create([
+                        'kelas_id'                 => $kelasBaru->id,
+                        'dokumen_perkuliahan_id'   => $dok->id,
+                        'status'                   => 'ditolak',
+                    ]);
+                }
             }
         }
 
