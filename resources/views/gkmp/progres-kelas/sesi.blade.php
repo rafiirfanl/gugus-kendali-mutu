@@ -219,15 +219,41 @@ $waktu = date('H:i');
         <div class="signature-2">
             <table class="no-border" style="width: 100%; margin-top: 20px;">
                 <tr>
-                    <td width="50%"><br><br>Mengetahui, <br>Prodi
-                        {{ $nama_prodi }}<br><br><br><br><br>{{ $kaprodi }}<br>NIP. {{ $nip_kaprodi }}</td>
-                    <td width="50%"><br><br>Lampung Selatan, {{ $tanggal ?? '-' }}<br>GKMP {{ $nama_prodi }}<br>
-                        <br><br><br><br>{{ $gkmp }}<br>NIP. {{ $nip_gkmp }}
+                    <!-- Kolom KAPRODI -->
+                    <td width="50%">
+                        <br><br>Mengetahui, <br>Prodi {{ $nama_prodi }}<br><br>
+
+                        {{-- TTD Kaprodi --}}
+                        @if (!empty($ttd_kaprodi))
+                            <img src="{{ public_path('storage/' . $ttd_kaprodi) }}" alt="TTD Kaprodi" height="80">
+                        @else
+                            <div style="height:80px;"></div>
+                        @endif
+                        <br>
+
+                        {{ $kaprodi }} <br>
+                        NIP. {{ $nip_kaprodi }}
+                    </td>
+
+                    <!-- Kolom GKMP -->
+                    <td width="50%">
+                        <br><br>Lampung Selatan, {{ $tanggal ?? '-' }}<br>GKMP {{ $nama_prodi }}<br><br>
+
+                        {{-- TTD GKMP --}}
+                        @if (!empty($ttd_gkmp))
+                            <img src="{{ public_path('storage/' . $ttd_gkmp) }}" alt="TTD GKMP" height="80">
+                        @else
+                            <div style="height:80px;"></div>
+                        @endif
+                        <br>
+
+                        {{ $gkmp }} <br>
+                        NIP. {{ $nip_gkmp }}
                     </td>
                 </tr>
             </table>
-            <br><br>
         </div>
+    </div>
 
 </body>
 

@@ -138,6 +138,7 @@ class GKMPProgresKelasController extends Controller
 
         $kaprodi     = $kaprodiUser->name ?? '-';
         $nip_kaprodi = $kaprodiUser->nip  ?? '-';
+        $ttd_kaprodi = $kaprodiUser->ttd ?? null;
 
         $gkmpUser = User::role('gkmp')
             ->where('prodi_id', $prodi_id)
@@ -145,7 +146,7 @@ class GKMPProgresKelasController extends Controller
 
         $gkmp     = $gkmpUser->name ?? '-';
         $nip_gkmp = $gkmpUser->nip  ?? '-';
-
+        $ttd_gkmp = $gkmpUser->ttd ?? null;
 
         // LOAD VIEW PDF
         $pdf = Pdf::loadView('gkmp.progres-kelas.sesi', [
@@ -159,8 +160,10 @@ class GKMPProgresKelasController extends Controller
             'ruang_prodi' => $ruang_prodi,
             'kaprodi' => $kaprodi,
             'nip_kaprodi' => $nip_kaprodi,
+            'ttd_kaprodi' => $ttd_kaprodi,
             'gkmp' => $gkmp,
             'nip_gkmp' => $nip_gkmp,
+            'ttd_gkmp' => $ttd_gkmp,
         ]);
 
         return $pdf->stream('Progres Sesi ' . $sesi . '.pdf');

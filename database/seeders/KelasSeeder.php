@@ -31,7 +31,7 @@ class KelasSeeder extends Seeder
         Kelas::create([
             'nama_kelas' => 'Kelas RA - geologi',
             'dosen_id' => 2,
-            'matkul_dibuka_id' => 4,
+            'matkul_dibuka_id' => 3,
             'tahun_ajaran_id' => 3,
         ]);
         

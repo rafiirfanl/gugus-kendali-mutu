@@ -25,5 +25,11 @@ class MatkulDibukaSeeder extends Seeder
             'tahun_ajaran_id' => 3,
             'jumlah_kelas' => 2,
         ]);
+
+        MatkulDibuka::create([
+            'matkul_id' => 4,
+            'tahun_ajaran_id' => 3,
+            'jumlah_kelas' => 2,
+        ]);
     }
 }
