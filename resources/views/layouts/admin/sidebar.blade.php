@@ -125,6 +125,16 @@
                     </li>
                 @endcan
 
+                {{-- PROGRES KELAS --}}
+                @can('view:progres-kelas')
+                    <li class="nav-item">
+                        <a href="{{ route('gkmp.progresKelas.index') }}" class="nav-link text-white">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>Progres Kelas</p>
+                        </a>
+                    </li>
+                @endcan
+
 
                 {{-- KELAS --}}
                 @can('view:kelas')

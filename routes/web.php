@@ -90,6 +90,10 @@ Route::middleware('auth')->group(function () {
         // PROGRES KELAS
         Route::get('/progres-kelas', [GKMPProgresKelasController::class, 'index'])->name('progresKelas.index');
 
+        // PROGRES BY SESI
+        Route::get('/progres-kelas/sesi/{sesi}', [GKMPProgresKelasController::class, 'previewSesiPDF'])
+            ->name('progresKelas.sesi');
+
         // DETAIL-KELAS
         Route::get('/progres-kelas/{id}', [GKMPProgresKelasController::class, 'detailKelas'])->name('detailKelas.index');
 

@@ -18,9 +18,9 @@ class Kelas extends Model
         'tahun_ajaran_id',
     ];
 
-    public function matkul()
+    public function matkulDibuka()
     {
-        return $this->belongsTo(Matkul::class, 'matkul_dibuka_id');
+        return $this->belongsTo(MatkulDibuka::class, 'matkul_dibuka_id');
     }
 
     public function tahunAjaran()

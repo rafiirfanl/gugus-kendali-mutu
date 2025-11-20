@@ -42,21 +42,11 @@
                     <i class="fas fa-download"></i> Unduh Semua Dokumen
                 </a>
 
-                <button class="btn btn-secondary btn-sm">
-                    <i class="fas fa-file-pdf"></i> Sesi 1
-                </button>
-                <button class="btn btn-secondary btn-sm">
-                    <i class="fas fa-file-pdf"></i> Sesi 2
-                </button>
-                <button class="btn btn-secondary btn-sm">
-                    <i class="fas fa-file-pdf"></i> Sesi 3
-                </button>
-                <button class="btn btn-secondary btn-sm">
-                    <i class="fas fa-file-pdf"></i> Sesi 4
-                </button>
-                <button class="btn btn-secondary btn-sm">
-                    <i class="fas fa-file-pdf"></i> Sesi 5
-                </button>
+                @foreach ($sesiList as $item)
+                    <a href="{{ route('gkmp.progresKelas.sesi', $item->sesi) }}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-file-pdf"></i> Sesi {{ $item->sesi }}
+                    </a>
+                @endforeach
             </div>
 
             <div class="d-flex">
