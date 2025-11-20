@@ -24,7 +24,7 @@
                     @foreach ($dokumenKelas as $dokumen)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $dokumen->dokumen_perkuliahan->nama_dokumen_perkuliahan ?? 'Dokumen Dummy' }}</td>
+                            <td>{{ $dokumen->dokumenPerkuliahan->nama_dokumen ?? 'Dokumen Dummy' }}</td>
                             <td class="text-center">
                                 @if ($dokumen->status == 'diterima')
                                     <span class="badge bg-success">Terkumpul</span>
