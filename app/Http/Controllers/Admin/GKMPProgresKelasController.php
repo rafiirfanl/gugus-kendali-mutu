@@ -120,7 +120,7 @@ class GKMPProgresKelasController extends Controller
             }
 
             $groupedProgres[] = [
-                'matkul' => $kelas->matkul->nama_matkul ?? '-',
+                'matkul' => $kelas?->matkulDibuka?->matkul?->nama_matkul ?? '-',
                 'dosen'  => $kelas->dosen->name ?? '-',
                 'dokumens' => $dokumens,
             ];
