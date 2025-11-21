@@ -40,6 +40,29 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
+                                <label class="form-label">{{ __('NIP') }}<span class="text-danger">*</span></label>
+                                <input type="email" class="form-control @error('nip') is-invalid @enderror"
+                                    placeholder="nip" name="nip" id="nip" value="{{ old('nip') }}"
+                                    required>
+                                @error('nip')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('Tanda Tangan') }}<span
+                                        class="text-danger">*</span></label>
+                                <input type="file" class="form-control @error('ttd') is-invalid @enderror"
+                                    name="ttd" id="ttd" accept="image/png,image/jpeg" required>
+                                @error('ttd')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
                                 <label class="form-label">{{ __('Password') }}<span
                                         class="text-danger">*</span></label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
@@ -83,9 +106,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">{{ __('Close') }}</button>
                     <button type="submit" class="btn btn-primary btn-submit">
-                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        <span class="spinner-border spinner-border-sm d-none" role="status"
+                            aria-hidden="true"></span>
                         <span class="btn-text">{{ __('Save') }}</span>
                     </button>
                 </div>

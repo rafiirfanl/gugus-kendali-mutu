@@ -47,6 +47,10 @@ class AdminUserController extends Controller
             $userData['password'] = Hash::make($userData['password']);
         }
 
+        if ($request->hasFile('ttd')) {
+            $userData['ttd'] = $request->file('ttd')->store('ttd', 'public');
+        }
+
         $role = $userData['role'];
         unset($userData['role']);
 
@@ -74,6 +78,16 @@ class AdminUserController extends Controller
             $userData['password'] = Hash::make($userData['password']);
         } else {
             unset($userData['password']);
+        }
+
+
+        if ($request->hasFile('ttd')) {
+            // Hapus file lama jika ada
+            if ($user->ttd && file_exists(storage_path('app/public/' . $user->ttd))) {
+                unlink(storage_path('app/public/' . $user->ttd));
+            }
+
+            $userData['ttd'] = $request->file('ttd')->store('ttd', 'public');
         }
 
         $role = $userData['role'];

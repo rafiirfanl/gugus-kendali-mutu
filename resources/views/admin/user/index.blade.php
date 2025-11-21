@@ -15,6 +15,8 @@
                     <th>{{ __('No') }}</th>
                     <th>{{ __('Name') }}</th>
                     <th>{{ __('Email') }}</th>
+                    <th>{{ __('NIP') }}</th>
+                    <th>{{ __('Tanda Tangan') }}</th>
                     <th>{{ __('Role') }}</th>
                     <th>{{ __('Status') }}</th>
                     <th class="text-center">{{ __('Action') }}</th>
@@ -26,6 +28,14 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $user->name ?? '-' }}</td>
                         <td>{{ $user->email ?? '-' }}</td>
+                        <td>{{ $user->nip ?? '-' }}</td>
+                        <td>
+                            @if ($user->ttd)
+                                <span class="badge bg-success">Ada</span>
+                            @else
+                                <span class="badge bg-danger">Tidak Ada</span>
+                            @endif
+                        </td>
                         <td>{{ $user->getRoleNames()->implode(', ') ?? '-' }}</td>
                         <td>
                             @if ($user->email_verified_at)
