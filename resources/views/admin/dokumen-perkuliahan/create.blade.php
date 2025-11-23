@@ -16,7 +16,7 @@
                 </div>
                 <div class="modal-body text-left">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Name') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('nama_dokumen') is-invalid @enderror"
@@ -30,7 +30,7 @@
                         <div class="col-md-6">
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Sesi') }}<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('sesi') is-invalid @enderror"
+                                <input type="number" class="form-control @error('sesi') is-invalid @enderror"
                                     placeholder="sesi" name="sesi" id="sesi" value="{{ old('sesi') }}"
                                     required>
                                 @error('sesi')
