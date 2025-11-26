@@ -16,7 +16,6 @@ use App\Http\Controllers\Admin\DosenKelasDiampuController;
 use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
 use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
 use App\Http\Controllers\Admin\DataTemuan\SubkriteriaController;
-use App\Http\Controllers\Admin\DataTemuan\IsiSubkriteriaController;
 
 
 Route::get('/', function () {

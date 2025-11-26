@@ -25,7 +25,6 @@ class RoleAndPermissionSeeder extends Seeder
             'riwayat-dokumen' => ['view', 'edit'],
             'kriteria' => ['view', 'create', 'edit', 'delete'],
             'subkriteria' => ['view', 'create', 'edit', 'delete'],
-            'isi-subkriteria' => ['view', 'create', 'edit', 'delete'],
             'master-data' => ['view'],
         ];
 
@@ -58,10 +57,6 @@ class RoleAndPermissionSeeder extends Seeder
                 'create:matkul',
                 'edit:matkul',
                 'delete:matkul',
-                'view:data-temuan',
-                'create:data-temuan',
-                'edit:data-temuan',
-                'delete:data-temuan',
                 'view:dokumen-perkuliahan',
                 'create:dokumen-perkuliahan',
                 'edit:dokumen-perkuliahan',
@@ -74,14 +69,10 @@ class RoleAndPermissionSeeder extends Seeder
                 'create:subkriteria',
                 'edit:subkriteria',
                 'delete:subkriteria',
-                'view:isi-subkriteria',
-                'create:isi-subkriteria',
-                'edit:isi-subkriteria',
-                'delete:isi-subkriteria',
                 'view:master-data',
             ],
 
-            // gkmp tidak dapat mengelola role atau operasi massal (-all)
+            // gkmp
             'gkmp' => [
                 'view:dashboard',
                 'view:matkul',
@@ -92,7 +83,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'view:progres-kelas',     
             ],
 
-            // kaprodi tidak boleh punya permission apapun yang berkaitan dengan "prodi"
+            // kaprodi 
             'kaprodi' => [
                 'view:dashboard',
                 'view:matkul',
@@ -103,7 +94,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'view:progres-kelas',                   
             ],
 
-            // dosen hanya bisa mengelola data-temuan
+            // dosen 
             'dosen' => [
                 'view:dashboard',
                 'view:kelas-diampu',
