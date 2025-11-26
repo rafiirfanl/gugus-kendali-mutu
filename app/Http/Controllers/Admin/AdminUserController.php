@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminUserController extends Controller
 {
@@ -27,6 +28,21 @@ class AdminUserController extends Controller
     {
         $roles = Role::all();
         $users = User::all();
+
+        if (Auth::user()->hasRole('gkmf')) {
+            $roles = Role::whereIn('name', ['gkmf', 'gkmp', 'kaprodi'])->get();
+            $users = User::whereHas('roles', function ($query) {
+                $query->whereIn('name', ['gkmf', 'gkmp', 'kaprodi']);
+            })->get();
+        }
+
+        if (Auth::user()->hasRole('gkmp') || Auth::user()->hasRole('kaprodi')) {
+            $roles = Role::whereIn('name', ['dosen'])->get();
+            $users = User::whereHas('roles', function ($query) {
+                $query->where('name', 'dosen');
+            })->where('prodi_id', Auth::user()->prodi_id)->get();
+        }
+
         return view('admin.user.index', compact('users', 'roles'));
     }
 

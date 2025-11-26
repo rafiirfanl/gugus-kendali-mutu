@@ -25,7 +25,6 @@ class RoleAndPermissionSeeder extends Seeder
             'riwayat-dokumen' => ['view', 'edit'],
             'kriteria' => ['view', 'create', 'edit', 'delete'],
             'subkriteria' => ['view', 'create', 'edit', 'delete'],
-            'master-data' => ['view'],
         ];
 
         foreach ($entities as $entity => $actions) {
@@ -53,10 +52,6 @@ class RoleAndPermissionSeeder extends Seeder
                 'create:prodi',
                 'edit:prodi',
                 'delete:prodi',
-                'view:matkul',
-                'create:matkul',
-                'edit:matkul',
-                'delete:matkul',
                 'view:dokumen-perkuliahan',
                 'create:dokumen-perkuliahan',
                 'edit:dokumen-perkuliahan',
@@ -69,29 +64,42 @@ class RoleAndPermissionSeeder extends Seeder
                 'create:subkriteria',
                 'edit:subkriteria',
                 'delete:subkriteria',
-                'view:master-data',
             ],
 
             // gkmp
             'gkmp' => [
                 'view:dashboard',
                 'view:matkul',
+                'create:matkul',
+                'edit:matkul',
+                'delete:matkul',
                 'view:assignment-dosen',
                 'create:assignment-dosen',
                 'edit:assignment-dosen',
                 'delete:assignment-dosen',
-                'view:progres-kelas',     
+                'view:progres-kelas',
+                'view:user',
+                'create:user',
+                'edit:user',
+                'delete:user',     
             ],
 
             // kaprodi 
             'kaprodi' => [
                 'view:dashboard',
                 'view:matkul',
+                'create:matkul',
+                'edit:matkul',
+                'delete:matkul',
                 'view:assignment-dosen',
                 'create:assignment-dosen',
                 'edit:assignment-dosen',
                 'delete:assignment-dosen',
                 'view:progres-kelas',                   
+                'view:user',
+                'create:user',
+                'edit:user',
+                'delete:user',     
             ],
 
             // dosen 

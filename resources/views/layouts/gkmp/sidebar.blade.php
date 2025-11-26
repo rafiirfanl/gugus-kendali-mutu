@@ -32,7 +32,7 @@
                     </a>
                 </li>
 
-                @canany(['view:user', 'view:tahun-ajaran', 'view:prodi', 'view:dokumen-perkuliahan', 'view:matkul', 'view:role'])
+                @can('view:master-data')
                     {{-- MASTER DATA --}}
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">
@@ -117,7 +117,7 @@
                             @endcan
                         </ul>
                     </li>
-                @endcanany
+                @endcan
 
                 {{-- ASSIGNMENT DOSEN --}}
                 @can('view:assignment-dosen')
