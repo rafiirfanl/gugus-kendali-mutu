@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DataTemuanSeeder::class);
         $this->call(DokumenPerkuliahanSeeder::class);
         $this->call(DokumenKelasSeeder::class);
+        $this->call(KriteriaSeeder::class);
     }
 }
