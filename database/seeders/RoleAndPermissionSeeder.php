@@ -21,8 +21,14 @@ class RoleAndPermissionSeeder extends Seeder
             'data-temuan' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
             'dokumen-perkuliahan' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
             'assignment-dosen' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
-            'progres-kelas' => ['view']
-            
+            'progres-kelas' => ['view'],
+            'kelas-diampu' => ['view'],
+            'submission-dokumen' => ['view', 'upload'],
+            'riwayat-dokumen' => ['view', 'edit'],
+            'kriteria' => ['view', 'create', 'edit', 'delete'],
+            'subkriteria' => ['view', 'create', 'edit', 'delete'],
+            'isi-subkriteria' => ['view', 'create', 'edit', 'delete'],
+            'master-data' => ['view'],
         ];
 
         foreach ($entities as $entity => $actions) {
@@ -53,10 +59,10 @@ class RoleAndPermissionSeeder extends Seeder
             // dosen hanya bisa mengelola data-temuan
             'dosen' => [
                 'view:dashboard',
-                'view:data-temuan',
-                'create:data-temuan',
-                'edit:data-temuan',
-                'delete:data-temuan',
+                'view:kelas-diampu',
+                'view:submission-dokumen',
+                'upload:submission-dokumen',
+                'view:riwayat-dokumen',
             ],
         ];
 

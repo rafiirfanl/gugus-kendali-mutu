@@ -8,11 +8,16 @@ use App\Http\Controllers\Admin\AdminProdiController;
 use App\Http\Controllers\Admin\AdminMatkulController;
 use App\Http\Controllers\Admin\AdminKelasController;
 use App\Http\Controllers\Admin\AdminTahunAjaranController;
-use App\Http\Controllers\Admin\AdminDataTemuanController;
 use App\Http\Controllers\Admin\AdminDokumenPerkuliahanController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminAssignmentDosenController;
 use App\Http\Controllers\Admin\GKMPProgresKelasController;
+use App\Http\Controllers\Admin\DosenKelasDiampuController;
+use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
+use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
+use App\Http\Controllers\Admin\DataTemuan\SubkriteriaController;
+use App\Http\Controllers\Admin\DataTemuan\IsiSubkriteriaController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,12 +62,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/tahun-ajaran/{tahunAjaran}', [AdminTahunAjaranController::class, 'update'])->name('tahunAjaran.update');
         Route::delete('/tahun-ajaran/{tahunAjaran}', [AdminTahunAjaranController::class, 'destroy'])->name('tahunAjaran.destroy');
 
-        // CRUD DATA TEMUAN
-        Route::get('/data-temuan', [AdminDataTemuanController::class, 'index'])->name('dataTemuan.index');
-        Route::post('/data-temuan', [AdminDataTemuanController::class, 'store'])->name('dataTemuan.store');
-        Route::put('/data-temuan/{dataTemuan}', [AdminDataTemuanController::class, 'update'])->name('dataTemuan.update');
-        Route::delete('/data-temuan/{dataTemuan}', [AdminDataTemuanController::class, 'destroy'])->name('dataTemuan.destroy');
-
         // CRUD ROLE
         Route::resource('role', AdminRoleController::class);
 
@@ -84,6 +83,46 @@ Route::middleware('auth')->group(function () {
         Route::post('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'store'])->name('dokumenPerkuliahan.store');
         Route::put('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'update'])->name('dokumenPerkuliahan.update');
         Route::delete('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'destroy'])->name('dokumenPerkuliahan.destroy');
+
+
+        // LEVEL 1: KRITERIA
+        Route::prefix('temuan')->name('temuan.')->group(function () {
+
+            Route::get('/', [KriteriaController::class, 'index'])->name('index');
+            Route::get('/create', [KriteriaController::class, 'create'])->name('create');
+            Route::post('/', [KriteriaController::class, 'store'])->name('store');
+
+            // LEVEL 2: SUBKRITERIA
+            Route::prefix('{kriteria}/sub')->name('sub.')->group(function () {
+
+                Route::get('/create', [SubkriteriaController::class, 'create'])->name('create');
+                Route::post('/', [SubkriteriaController::class, 'store'])->name('store');
+
+                Route::get('/{sub}', [SubkriteriaController::class, 'show'])->name('show');
+                Route::get('/{sub}/edit', [SubkriteriaController::class, 'edit'])->name('edit');
+                Route::put('/{sub}', [SubkriteriaController::class, 'update'])->name('update');
+
+                Route::delete('/{sub}', [SubkriteriaController::class, 'destroy'])->name('destroy');
+
+                // LEVEL 3: ISI SUBKRITERIA
+                Route::prefix('{sub}/isi')->name('isi.')->group(function () {
+
+                    Route::get('/create', [IsiSubkriteriaController::class, 'create'])->name('create');
+                    Route::post('/', [IsiSubkriteriaController::class, 'store'])->name('store');
+
+                    Route::get('/{isi}/edit', [IsiSubkriteriaController::class, 'edit'])->name('edit');
+                    Route::put('/{isi}', [IsiSubkriteriaController::class, 'update'])->name('update');
+
+                    Route::delete('/{isi}', [IsiSubkriteriaController::class, 'destroy'])->name('destroy');
+                });
+            });
+
+
+            Route::get('/{kriteria}', [KriteriaController::class, 'show'])->name('show');
+            Route::get('/{kriteria}/edit', [KriteriaController::class, 'edit'])->name('edit');
+            Route::put('/{kriteria}', [KriteriaController::class, 'update'])->name('update');
+            Route::delete('/{kriteria}', [KriteriaController::class, 'destroy'])->name('destroy');
+        });
     });
 
     Route::prefix('gkmp')->name('gkmp.')->group(function () {
@@ -99,6 +138,15 @@ Route::middleware('auth')->group(function () {
 
         // TOLAK DOKUMEN
         Route::post('/gkmp/progres-kelas/tolak', [GKMPProgresKelasController::class, 'tolak'])->name('progres-kelas.tolak');
+    });
+
+    Route::prefix('dosen')->name('dosen.')->group(function () {
+
+        Route::get('/kelas-diampu', [DosenKelasDiampuController::class, 'index'])->name('kelasDiampu.index');
+        Route::get('/kelas-diampu/{kelasID}', [DosenKelasDiampuController::class, 'show'])->name('kelasDiampu.show');
+        Route::post('/kelas-diampu/upload/{dokumenKelas}', [DosenKelasDiampuController::class, 'upload'])->name('kelasDiampu.upload');
+
+        Route::get('/riwayat-dokumen', [DosenRiwayatDokumenController::class, 'index'])->name('riwayatDokumen.index');
     });
 });
 
