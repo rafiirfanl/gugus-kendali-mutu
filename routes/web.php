@@ -104,17 +104,6 @@ Route::middleware('auth')->group(function () {
 
                 Route::delete('/{sub}', [SubkriteriaController::class, 'destroy'])->name('destroy');
 
-                // LEVEL 3: ISI SUBKRITERIA
-                Route::prefix('{sub}/isi')->name('isi.')->group(function () {
-
-                    Route::get('/create', [IsiSubkriteriaController::class, 'create'])->name('create');
-                    Route::post('/', [IsiSubkriteriaController::class, 'store'])->name('store');
-
-                    Route::get('/{isi}/edit', [IsiSubkriteriaController::class, 'edit'])->name('edit');
-                    Route::put('/{isi}', [IsiSubkriteriaController::class, 'update'])->name('update');
-
-                    Route::delete('/{isi}', [IsiSubkriteriaController::class, 'destroy'])->name('destroy');
-                });
             });
 
 

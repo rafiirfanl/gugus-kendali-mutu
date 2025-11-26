@@ -28,8 +28,4 @@ class TahunAjaran extends Model
         return $this->hasMany(MatkulDibuka::class);
     }
 
-    public function dataTemuan()
-    {
-        return $this->hasMany(DataTemuan::class);
-    }
 }

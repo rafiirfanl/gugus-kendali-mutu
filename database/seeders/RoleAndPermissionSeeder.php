@@ -14,12 +14,10 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard' => ['view'],
             'user' => ['view', 'create', 'edit', 'delete'],
             'role' => ['view', 'create', 'edit', 'delete'],
-            'tahun-ajaran' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
-            'prodi' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
-            'matkul' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
-            // 'kelas' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
-            'data-temuan' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
-            'dokumen-perkuliahan' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
+            'tahun-ajaran' => ['view', 'create', 'edit', 'delete'],
+            'prodi' => ['view', 'create', 'edit', 'delete'],
+            'matkul' => ['view', 'create', 'edit', 'delete'],
+            'dokumen-perkuliahan' => ['view', 'create', 'edit', 'delete'],
             'assignment-dosen' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
             'progres-kelas' => ['view'],
             'kelas-diampu' => ['view'],
@@ -38,22 +36,71 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         $roles = [
-            'gkmf' => \Spatie\Permission\Models\Permission::where('name', 'not like', '%:assignment-dosen%')
-                ->pluck('name')
-                ->toArray(),
+            'gkmf' => [
+                'view:dashboard',
+                'view:user',
+                'create:user',
+                'edit:user',
+                'delete:user',
+                'view:role',
+                'create:role',
+                'edit:role',
+                'delete:role',
+                'view:tahun-ajaran',
+                'create:tahun-ajaran',
+                'edit:tahun-ajaran',
+                'delete:tahun-ajaran',
+                'view:prodi',
+                'create:prodi',
+                'edit:prodi',
+                'delete:prodi',
+                'view:matkul',
+                'create:matkul',
+                'edit:matkul',
+                'delete:matkul',
+                'view:data-temuan',
+                'create:data-temuan',
+                'edit:data-temuan',
+                'delete:data-temuan',
+                'view:dokumen-perkuliahan',
+                'create:dokumen-perkuliahan',
+                'edit:dokumen-perkuliahan',
+                'delete:dokumen-perkuliahan',
+                'view:kriteria',
+                'create:kriteria',
+                'edit:kriteria',
+                'delete:kriteria',
+                'view:subkriteria',
+                'create:subkriteria',
+                'edit:subkriteria',
+                'delete:subkriteria',
+                'view:isi-subkriteria',
+                'create:isi-subkriteria',
+                'edit:isi-subkriteria',
+                'delete:isi-subkriteria',
+                'view:master-data',
+            ],
 
             // gkmp tidak dapat mengelola role atau operasi massal (-all)
-            'gkmp' => \Spatie\Permission\Models\Permission::where('name', 'not like', '%:role')
-                ->where('name', 'not like', '%-all:%')
-                ->pluck('name')
-                ->toArray(),
+            'gkmp' => [
+                'view:dashboard',
+                'view:matkul',
+                'view:assignment-dosen',
+                'create:assignment-dosen',
+                'edit:assignment-dosen',
+                'delete:assignment-dosen',
+                'view:progres-kelas',     
+            ],
 
             // kaprodi tidak boleh punya permission apapun yang berkaitan dengan "prodi"
             'kaprodi' => [
-                \Spatie\Permission\Models\Permission::where('name', 'not like', '%:prodi%')
-                    ->where('name', 'not like', '%-all:%')
-                    ->pluck('name')
-                    ->toArray(),
+                'view:dashboard',
+                'view:matkul',
+                'view:assignment-dosen',
+                'create:assignment-dosen',
+                'edit:assignment-dosen',
+                'delete:assignment-dosen',
+                'view:progres-kelas',                   
             ],
 
             // dosen hanya bisa mengelola data-temuan
