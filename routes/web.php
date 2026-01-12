@@ -74,7 +74,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/assignment-dosen/step-two', [AdminAssignmentDosenController::class, 'submitStepOneAndTwo'])
             ->name('assignmentDosen.submitStepOneAndTwo');
 
-
         // CRUD DOKUMEN PERKULIAHAN
         Route::get('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'index'])->name('dokumenPerkuliahan.index');
         Route::post('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'store'])->name('dokumenPerkuliahan.store');
@@ -91,17 +90,12 @@ Route::middleware('auth')->group(function () {
 
             // LEVEL 2: SUBKRITERIA
             Route::prefix('{kriteria}/sub')->name('sub.')->group(function () {
-
                 Route::get('/create', [SubkriteriaController::class, 'create'])->name('create');
                 Route::post('/', [SubkriteriaController::class, 'store'])->name('store');
-
-                Route::get('/{sub}', [SubkriteriaController::class, 'show'])->name('show');
                 Route::get('/{sub}/edit', [SubkriteriaController::class, 'edit'])->name('edit');
                 Route::put('/{sub}', [SubkriteriaController::class, 'update'])->name('update');
-
                 Route::delete('/{sub}', [SubkriteriaController::class, 'destroy'])->name('destroy');
             });
-
 
             Route::get('/{kriteria}', [KriteriaController::class, 'show'])->name('show');
             Route::get('/{kriteria}/edit', [KriteriaController::class, 'edit'])->name('edit');
