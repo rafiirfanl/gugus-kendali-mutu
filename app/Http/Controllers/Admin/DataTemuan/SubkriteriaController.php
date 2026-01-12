@@ -19,6 +19,8 @@ class SubkriteriaController extends Controller
     public function store(StoreSubKriteriaRequest $request, $kriteria_id)
     {
         $data = $request->validated();
+        $data['kriteria_id'] = $kriteria_id;
+
         $sub = Subkriteria::create($data);
 
         foreach ($request->hasil_temuan as $hasil) {
@@ -31,16 +33,6 @@ class SubkriteriaController extends Controller
             ->route('admin.temuan.show', $kriteria_id)
             ->with('success', 'Subkriteria & hasil temuan berhasil ditambahkan');
     }
-
-    public function show($kriteria_id, $sub_id)
-    {
-        $kriteria = Kriteria::findOrFail($kriteria_id);
-
-        $sub = Subkriteria::with('hasilTemuan.isi')->findOrFail($sub_id);
-
-        return view('admin.data-temuan.subkriteria.show', compact('kriteria', 'sub'));
-    }
-
 
     public function edit($kriteria_id, $id)
     {

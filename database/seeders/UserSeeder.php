@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $gkmf=User::create([
+        $gkmf = User::create([
             'name'      => 'Admin GKMF',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmf->assignRole('gkmf');
 
-        $gkmp=User::create([
+        $gkmp = User::create([
             'name'      => 'Admin GKMP IF',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi=User::create([
+        $kaprodi = User::create([
             'name'      => 'Andika Setiawan S.Kom., M.Cs.',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -44,10 +44,10 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'prodi_id'  => 1,
         ]);
-        $kaprodi->assignRole('kaprodi');
+        $kaprodi->assignRole('kaprodi', 'dosen');
 
 
-        $dosen=User::create([
+        $dosen = User::create([
             'name'      => 'Dosen IF',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -58,8 +58,8 @@ class UserSeeder extends Seeder
         ]);
         $dosen->assignRole('dosen');
 
-        
-        $gkmp=User::create([
+
+        $gkmp = User::create([
             'name'      => 'Admin GKMP Geologi',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -69,8 +69,8 @@ class UserSeeder extends Seeder
             'prodi_id'  => 8,
         ]);
         $gkmp->assignRole('gkmp');
-        
-        $kaprodi=User::create([
+
+        $kaprodi = User::create([
             'name'      => 'Kaprodi GL',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -79,9 +79,9 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'prodi_id'  => 8,
         ]);
-        $kaprodi->assignRole('kaprodi');
-        
-        $dosen=User::create([
+        $kaprodi->assignRole('kaprodi', 'dosen');
+
+        $dosen = User::create([
             'name'      => 'Dosen Geologi',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -91,8 +91,8 @@ class UserSeeder extends Seeder
             'prodi_id'  => 8,
         ]);
         $dosen->assignRole('dosen');
-        
-        $gkmp=User::create([
+
+        $gkmp = User::create([
             'name'      => 'Admin GKMP SI',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -103,7 +103,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi=User::create([
+        $kaprodi = User::create([
             'name'      => 'Kaprodi SI',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -112,9 +112,9 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'prodi_id'  => 2,
         ]);
-        $kaprodi->assignRole('kaprodi');
+        $kaprodi->assignRole('kaprodi', 'dosen');
 
-        $dosen=User::create([
+        $dosen = User::create([
             'name'      => 'Dosen SI',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -124,8 +124,8 @@ class UserSeeder extends Seeder
             'prodi_id'  => 2,
         ]);
         $dosen->assignRole('dosen');
-        
-        $gkmp=User::create([
+
+        $gkmp = User::create([
             'name'      => 'Admin GKMP TI',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -136,7 +136,7 @@ class UserSeeder extends Seeder
         ]);
 
         $gkmp->assignRole('gkmp');
-        $kaprodi=User::create([
+        $kaprodi = User::create([
             'name'      => 'Kaprodi TI',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -145,9 +145,9 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'prodi_id'  => 6,
         ]);
-        $kaprodi->assignRole('kaprodi');
+        $kaprodi->assignRole('kaprodi', 'dosen');
 
-        $dosen=User::create([
+        $dosen = User::create([
             'name'      => 'Dosen Teknik Industri',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -158,7 +158,7 @@ class UserSeeder extends Seeder
         ]);
         $dosen->assignRole('dosen');
 
-        $gkmp=User::create([
+        $gkmp = User::create([
             'name'      => 'Admin GKMP TM',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -168,7 +168,7 @@ class UserSeeder extends Seeder
             'prodi_id'  => 7,
         ]);
         $gkmp->assignRole('gkmp');
-        $kaprodi=User::create([
+        $kaprodi = User::create([
             'name'      => 'Kaprodi TM',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -177,9 +177,9 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'prodi_id'  => 7,
         ]);
-        $kaprodi->assignRole('kaprodi');
+        $kaprodi->assignRole('kaprodi', 'dosen');
 
-        $dosen=User::create([
+        $dosen = User::create([
             'name'      => 'Dosen Teknik Mesin',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -190,7 +190,7 @@ class UserSeeder extends Seeder
         ]);
         $dosen->assignRole('dosen');
 
-        $gkmp=User::create([
+        $gkmp = User::create([
             'name'      => 'Admin GKMP TK',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -200,8 +200,8 @@ class UserSeeder extends Seeder
             'prodi_id'  => 5,
         ]);
         $gkmp->assignRole('gkmp');
-        
-        $kaprodi=User::create([
+
+        $kaprodi = User::create([
             'name'      => 'Kaprodi TK',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -210,9 +210,9 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'prodi_id'  => 5,
         ]);
-        $kaprodi->assignRole('kaprodi');
+        $kaprodi->assignRole('kaprodi', 'dosen');
 
-        $dosen=User::create([
+        $dosen = User::create([
             'name'      => 'Dosen Teknik Kimia',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -222,6 +222,5 @@ class UserSeeder extends Seeder
             'prodi_id'  => 5,
         ]);
         $dosen->assignRole('dosen');
-
     }
 }

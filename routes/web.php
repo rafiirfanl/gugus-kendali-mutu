@@ -16,11 +16,9 @@ use App\Http\Controllers\Admin\DosenKelasDiampuController;
 use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
 use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
 use App\Http\Controllers\Admin\DataTemuan\SubkriteriaController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -102,7 +100,6 @@ Route::middleware('auth')->group(function () {
                 Route::put('/{sub}', [SubkriteriaController::class, 'update'])->name('update');
 
                 Route::delete('/{sub}', [SubkriteriaController::class, 'destroy'])->name('destroy');
-
             });
 
 

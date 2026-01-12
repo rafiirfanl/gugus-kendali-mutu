@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Matkul;
 use App\Models\Prodi;
 use App\Http\Requests\MatkulRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminMatkulController extends Controller
 {
@@ -22,8 +23,14 @@ class AdminMatkulController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->hasRole('gkmf')) {
+            $matkuls = Matkul::all();
+        } else {
+            $matkuls = Matkul::where('prodi_id', Auth::user()->prodi_id)->get();
+        }
+
+
         $prodis = Prodi::all();
-        $matkuls = Matkul::all();
         return view('admin.matkul.index', compact('matkuls', 'prodis'));
     }
 

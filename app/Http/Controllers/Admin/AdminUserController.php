@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
+use App\Models\Prodi;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
@@ -28,6 +29,8 @@ class AdminUserController extends Controller
     {
         $roles = Role::all();
         $users = User::all();
+        $prodis = Prodi::all();
+
 
         if (Auth::user()->hasRole('gkmf')) {
             $roles = Role::whereIn('name', ['gkmf', 'gkmp', 'kaprodi'])->get();
@@ -43,7 +46,7 @@ class AdminUserController extends Controller
             })->where('prodi_id', Auth::user()->prodi_id)->get();
         }
 
-        return view('admin.user.index', compact('users', 'roles'));
+        return view('admin.user.index', compact('users', 'roles', 'prodis'));
     }
 
     /**
@@ -51,6 +54,10 @@ class AdminUserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        if (Auth::user()->hasRole('gkmp') || Auth::user()->hasRole('kaprodi')) {
+            $request->merge(['prodi_id' => Auth::user()->prodi_id]);
+        }
+
         $userData = $request->validated();
 
         if ($request->email_verified) {
