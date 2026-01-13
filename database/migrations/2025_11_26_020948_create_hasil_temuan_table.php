@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hasil_temuans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subkriteria_id');
+            $table->foreignId('subkriteria_id')->constrained('subkriterias')->cascadeOnDelete();
             $table->string('hasil_temuan');
             $table->timestamps();
         });
