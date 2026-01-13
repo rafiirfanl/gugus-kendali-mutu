@@ -30,11 +30,11 @@
                             <td>{{ $sub->kode }}</td>
 
                             <td>
-                                @if ($sub->hasilTemuan->count() == 0)
+                                @if ($sub->hasilTemuans->count() == 0)
                                     <span class="text-muted">Belum ada hasil temuan</span>
                                 @else
                                     <ul class="mb-0">
-                                        @foreach ($sub->hasilTemuan as $hasil)
+                                        @foreach ($sub->hasilTemuans as $hasil)
                                             <li>{{ $hasil->hasil_temuan }}</li>
                                         @endforeach
                                     </ul>

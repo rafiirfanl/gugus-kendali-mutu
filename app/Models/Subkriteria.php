@@ -15,7 +15,7 @@ class Subkriteria extends Model
         return $this->belongsTo(Kriteria::class);
     }
 
-    public function hasilTemuan()
+    public function hasilTemuans()
     {
         return $this->hasMany(HasilTemuan::class);
     }

@@ -24,7 +24,7 @@ class SubkriteriaController extends Controller
         $sub = Subkriteria::create($data);
 
         foreach ($request->hasil_temuan as $hasil) {
-            $sub->hasilTemuan()->create([
+            $sub->hasilTemuans()->create([
                 'hasil_temuan' => $hasil
             ]);
         }
@@ -56,11 +56,11 @@ class SubkriteriaController extends Controller
         foreach ($ids as $index => $id) {
 
             if ($id === "new") {
-                $sub->hasilTemuan()->create([
+                $sub->hasilTemuans()->create([
                     'hasil_temuan' => $values[$index]
                 ]);
             } else {
-                $hasil = $sub->hasilTemuan()->find($id);
+                $hasil = $sub->hasilTemuans()->find($id);
                 if ($hasil) {
                     $hasil->update([
                         'hasil_temuan' => $values[$index]
@@ -73,7 +73,7 @@ class SubkriteriaController extends Controller
             $deletedIds = json_decode($request->deleted_ids, true);
 
             if (!empty($deletedIds)) {
-                $sub->hasilTemuan()->whereIn('id', $deletedIds)->delete();
+                $sub->hasilTemuans()->whereIn('id', $deletedIds)->delete();
             }
         }
 

@@ -32,7 +32,8 @@
                     </a>
                 </li>
 
-                @canany(['view:user', 'view:tahun-ajaran', 'view:prodi', 'view:dokumen-perkuliahan', 'view:matkul', 'view:role'])
+                @canany(['view:user', 'view:tahun-ajaran', 'view:prodi', 'view:dokumen-perkuliahan', 'view:matkul',
+                    'view:role'])
                     {{-- MASTER DATA --}}
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">
@@ -134,7 +135,13 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.temuan.index') }}" class="nav-link text-white">
                             <i class="nav-icon fas fa-folder-open"></i>
-                            <p>Data Temuan & Tindak Lanjut</p>
+                            <p>Data Temuan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.tindak-lanjut.index') }}" class="nav-link text-white">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>Tindak Lanjut</p>
                         </a>
                     </li>
                 @endcan

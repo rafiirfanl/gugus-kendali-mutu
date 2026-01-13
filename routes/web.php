@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\DosenKelasDiampuController;
 use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
 use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
 use App\Http\Controllers\Admin\DataTemuan\SubkriteriaController;
+use App\Http\Controllers\Admin\DataTemuan\TindakLanjutController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
@@ -81,27 +82,28 @@ Route::middleware('auth')->group(function () {
         Route::delete('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'destroy'])->name('dokumenPerkuliahan.destroy');
 
 
-        // LEVEL 1: KRITERIA
         Route::prefix('temuan')->name('temuan.')->group(function () {
-
+            // LEVEL 1: KRITERIA
             Route::get('/', [KriteriaController::class, 'index'])->name('index');
             Route::get('/create', [KriteriaController::class, 'create'])->name('create');
             Route::post('/', [KriteriaController::class, 'store'])->name('store');
+            Route::get('/{kriteria}', [KriteriaController::class, 'show'])->name('show');
+            Route::get('/{kriteria}/edit', [KriteriaController::class, 'edit'])->name('edit');
+            Route::put('/{kriteria}', [KriteriaController::class, 'update'])->name('update');
+            Route::delete('/{kriteria}', [KriteriaController::class, 'destroy'])->name('destroy');
 
-            // LEVEL 2: SUBKRITERIA
             Route::prefix('{kriteria}/sub')->name('sub.')->group(function () {
+                // LEVEL 2: SUBKRITERIA
                 Route::get('/create', [SubkriteriaController::class, 'create'])->name('create');
                 Route::post('/', [SubkriteriaController::class, 'store'])->name('store');
                 Route::get('/{sub}/edit', [SubkriteriaController::class, 'edit'])->name('edit');
                 Route::put('/{sub}', [SubkriteriaController::class, 'update'])->name('update');
                 Route::delete('/{sub}', [SubkriteriaController::class, 'destroy'])->name('destroy');
             });
-
-            Route::get('/{kriteria}', [KriteriaController::class, 'show'])->name('show');
-            Route::get('/{kriteria}/edit', [KriteriaController::class, 'edit'])->name('edit');
-            Route::put('/{kriteria}', [KriteriaController::class, 'update'])->name('update');
-            Route::delete('/{kriteria}', [KriteriaController::class, 'destroy'])->name('destroy');
         });
+
+        // TINDAK LANJUT
+        Route::resource('tindak-lanjut', TindakLanjutController::class);
     });
 
     Route::prefix('gkmp')->name('gkmp.')->group(function () {
