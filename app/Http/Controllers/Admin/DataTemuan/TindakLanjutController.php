@@ -5,34 +5,88 @@ namespace App\Http\Controllers\Admin\DataTemuan;
 use App\Http\Controllers\Controller;
 use App\Models\HasilTemuan;
 use App\Models\TindakLanjut;
-use Illuminate\Http\Request;
+use App\Models\Prodi;
 
 class TindakLanjutController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $hasil_temuans = HasilTemuan::all();
-        return view('admin.data-temuan.tindak-lanjut.index', compact('hasil_temuans'));
+        $this->middleware('permission:generate:tindak-lanjut')->only(['index', 'generate']);
     }
 
-    public function store(Request $request, $hasil_temuan_id)
+    public function index()
     {
-        $request->validate([
-            'hasil_temuan_id' => 'required|exists:hasil_temuans,id',
-            'prodi_id' => 'required|exists:prodis,id',
-            'tindak_lanjut' => 'nullable|string|max:500',
-            'masukan' => 'nullable|string|max:500',
-            'kendala' => 'nullable|string|max:500',
-        ]);
+        // Ambil SEMUA tindak lanjut yang sudah digenerate
+        $tindakLanjuts = TindakLanjut::with([
+            'prodi',
+            'hasilTemuan.subkriteria.kriteria'
+        ])->get();
 
-        TindakLanjut::create([
-            'hasil_temuan_id' => $hasil_temuan_id,
-            'prodi_id' => $request->prodi_id,
-            'tindak_lanjut' => $request->tindak_lanjut,
-            'kendala' => $request->kendala,
-            'masukan' => $request->masukan,
-        ]);
+        // Kalau BELUM PERNAH generate
+        if ($tindakLanjuts->isEmpty()) {
+            return view('admin.data-temuan.tindak-lanjut.index', [
+                'data' => collect(),
+                'belumGenerate' => true
+            ]);
+        }
 
-        return back()->with('success', 'Tindak Lanjut berhasil ditugaskan');
+        $data = $tindakLanjuts
+            ->groupBy(fn($tl) => $tl->prodi->id)
+            ->map(function ($group) {
+
+                $prodi = $group->first()->prodi;
+
+                $total = $group->count();
+
+                $selesai = $group->filter(function ($tl) {
+                    return !empty($tl->masukan)
+                        && !empty($tl->tindak_lanjut)
+                        && !empty($tl->kendala);
+                })->count();
+
+                $persen = $total > 0
+                    ? round(($selesai / $total) * 100, 2)
+                    : 0;
+
+                return [
+                    'prodi' => $prodi,
+                    'total' => $total,
+                    'selesai' => $selesai,
+                    'persen' => $persen,
+                ];
+            })
+            ->values();
+
+        return view('admin.data-temuan.tindak-lanjut.index', [
+            'data' => $data,
+            'belumGenerate' => false
+        ]);
+    }
+
+    public function generate()
+    {
+        $hasilTemuans = HasilTemuan::all();
+        $prodis = Prodi::all();
+
+        foreach ($hasilTemuans as $hasilTemuan) {
+            foreach ($prodis as $prodi) {
+
+                $exists = TindakLanjut::where('hasil_temuan_id', $hasilTemuan->id)
+                    ->where('prodi_id', $prodi->id)
+                    ->exists();
+
+                if (!$exists) {
+                    TindakLanjut::create([
+                        'hasil_temuan_id' => $hasilTemuan->id,
+                        'prodi_id' => $prodi->id,
+                        'tindak_lanjut' => null,
+                        'kendala' => null,
+                        'masukan' => null,
+                    ]);
+                }
+            }
+        }
+
+        return back()->with('success', 'Tindak Lanjut berhasil digenerate untuk seluruh Prodi');
     }
 }

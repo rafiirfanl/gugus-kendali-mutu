@@ -21,7 +21,7 @@ class TindakLanjut extends Model
         return $this->belongsTo(Prodi::class);
     }
 
-    public function hasilTemuans()
+    public function hasilTemuan()
     {
         return $this->belongsTo(HasilTemuan::class);
     }

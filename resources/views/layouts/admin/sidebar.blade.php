@@ -138,6 +138,8 @@
                             <p>Data Temuan</p>
                         </a>
                     </li>
+                @endcan
+                @can('generate:tindak-lanjut')
                     <li class="nav-item">
                         <a href="{{ route('admin.tindak-lanjut.index') }}" class="nav-link text-white">
                             <i class="nav-icon fas fa-book"></i>
@@ -153,6 +155,14 @@
                         <a href="{{ route('gkmp.progresKelas.index') }}" class="nav-link text-white">
                             <i class="nav-icon fas fa-user-tie"></i>
                             <p>Progres Kelas</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('progres:tindak-lanjut')
+                    <li class="nav-item">
+                        <a href="{{ route('gkmp.tindak-lanjut.index') }}" class="nav-link text-white">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>Progres Tindak Lanjut</p>
                         </a>
                     </li>
                 @endcan

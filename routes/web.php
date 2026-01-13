@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminDokumenPerkuliahanController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminAssignmentDosenController;
 use App\Http\Controllers\Admin\GKMPProgresKelasController;
+use App\Http\Controllers\Admin\GKMPTindakLanjutController;
 use App\Http\Controllers\Admin\DosenKelasDiampuController;
 use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
 use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
@@ -103,6 +104,7 @@ Route::middleware('auth')->group(function () {
         });
 
         // TINDAK LANJUT
+        Route::post('/data-temuan/tindak-lanjut/generate', [TindakLanjutController::class, 'generate'])->name('tindak-lanjut.generate');
         Route::resource('tindak-lanjut', TindakLanjutController::class);
     });
 
@@ -118,7 +120,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/progres-kelas/{id}', [GKMPProgresKelasController::class, 'detailKelas'])->name('detailKelas.index');
 
         // TOLAK DOKUMEN
-        Route::post('/gkmp/progres-kelas/tolak', [GKMPProgresKelasController::class, 'tolak'])->name('progres-kelas.tolak');
+        Route::post('/progres-kelas/tolak', [GKMPProgresKelasController::class, 'tolak'])->name('progres-kelas.tolak');
+
+        // TINDAK LANJUT
+        Route::get('/tindak-lanjut', [GKMPTindakLanjutController::class, 'index'])->name('tindak-lanjut.index');
+        Route::put('/tindak-lanjut/update/{id}', [GKMPTindakLanjutController::class, 'update'])->name('tindak-lanjut.update');
     });
 
     Route::prefix('dosen')->name('dosen.')->group(function () {
