@@ -38,7 +38,7 @@ class SubkriteriaController extends Controller
     {
         $kriteria = Kriteria::findOrFail($kriteria_id);
 
-        $sub = Subkriteria::with('hasilTemuan')->findOrFail($id);
+        $sub = Subkriteria::with('hasilTemuans')->findOrFail($id);
 
         return view('admin.data-temuan.subkriteria.edit', compact('kriteria', 'sub'));
     }
@@ -50,20 +50,19 @@ class SubkriteriaController extends Controller
         $data = $request->validated();
         $sub->update($data);
 
-        $ids = json_decode($request->ids, true);
-        $values = json_decode($request->values, true);
+        $ids = json_decode($request->ids, true) ?? [];
+        $values = json_decode($request->values, true) ?? [];
 
         foreach ($ids as $index => $id) {
-
             if ($id === "new") {
                 $sub->hasilTemuans()->create([
-                    'hasil_temuan' => $values[$index]
+                    'hasil_temuan' => $values[$index] ?? null
                 ]);
             } else {
                 $hasil = $sub->hasilTemuans()->find($id);
                 if ($hasil) {
                     $hasil->update([
-                        'hasil_temuan' => $values[$index]
+                        'hasil_temuan' => $values[$index] ?? null
                     ]);
                 }
             }
@@ -83,9 +82,12 @@ class SubkriteriaController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function destroy($kriteria_id, $sub_id)
     {
-        Subkriteria::findOrFail($id)->delete();
-        return back()->with('success', 'Subkriteria dihapus');
+        Subkriteria::findOrFail($sub_id)->delete();
+
+        return redirect()
+            ->route('admin.temuan.show', $kriteria_id)
+            ->with('success', 'Subkriteria dihapus');
     }
 }
