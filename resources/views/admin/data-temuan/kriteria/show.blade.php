@@ -25,7 +25,7 @@
                 </thead>
 
                 <tbody>
-                    @forelse ($kriteria->subkriteria as $sub)
+                    @forelse ($kriteria->subkriterias as $sub)
                         <tr>
                             <td>{{ $sub->kode }}</td>
 

@@ -37,7 +37,7 @@
 
                     <h5 class="mb-2">Subkriteria</h5>
 
-                    @foreach ($kriteria->subkriteria as $sub)
+                    @foreach ($kriteria->subkriterias as $sub)
                         <div class="border rounded p-3 mb-3">
 
                             <div class="row">

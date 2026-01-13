@@ -10,7 +10,7 @@ class KriteriaController extends Controller
 {
     public function index()
     {
-        $kriteria = Kriteria::with('subkriteria')->get();
+        $kriteria = Kriteria::with('subkriterias')->get();
         return view('admin.data-temuan.kriteria.index', compact('kriteria'));
     }
 
@@ -34,7 +34,7 @@ class KriteriaController extends Controller
 
     public function show($id)
     {
-        $kriteria = Kriteria::with('subkriteria')->findOrFail($id);
+        $kriteria = Kriteria::with('subkriterias')->findOrFail($id);
         return view('admin.data-temuan.kriteria.show', compact('kriteria'));
     }
 
