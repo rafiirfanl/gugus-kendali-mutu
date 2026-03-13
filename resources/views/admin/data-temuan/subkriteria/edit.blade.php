@@ -21,7 +21,7 @@
             <div id="container-hasil-temuan">
 
                 {{-- LOOP DATA EXISTING --}}
-                @foreach ($sub->hasilTemuan as $hasil)
+                @foreach ($sub->hasilTemuans as $hasil)
                     <div class="row mb-2 hasil-temuan-row">
 
                         <input type="hidden" name="id_hasil_temuan[]" value="{{ $hasil->id }}">

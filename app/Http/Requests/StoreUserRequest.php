@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+
 
 class StoreUserRequest extends FormRequest
 {
@@ -32,8 +34,22 @@ class StoreUserRequest extends FormRequest
                 'email',
                 Rule::unique('users', 'email')->ignore($id),
             ],
+            'nip' => [
+                'required',
+                'max:25',
+            ],
             'password' => 'required|min:8',
             'role' => 'required',
+            'prodi_id' => [
+            'nullable',
+            function ($attribute, $value, $fail) {
+                if (Auth::user()->hasRole('gkmf')) {
+                    if (in_array(request()->role, ['gkmp', 'kaprodi']) && !$value) {
+                        $fail('Prodi wajib dipilih.');
+                    }
+                }
+            }
+            ],
             'email_verified' => 'required|in:0,1',
         ];
     }

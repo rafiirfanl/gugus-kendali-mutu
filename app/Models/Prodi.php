@@ -26,4 +26,9 @@ class Prodi extends Model
     {
         return $this->hasMany(Matkul::class);
     }
+
+    public function tindakLanjuts()
+    {
+        return $this->hasMany(TindakLanjut::class);
+    }
 }

@@ -12,15 +12,15 @@ use App\Http\Controllers\Admin\AdminDokumenPerkuliahanController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminAssignmentDosenController;
 use App\Http\Controllers\Admin\GKMPProgresKelasController;
+use App\Http\Controllers\Admin\GKMPTindakLanjutController;
 use App\Http\Controllers\Admin\DosenKelasDiampuController;
 use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
 use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
 use App\Http\Controllers\Admin\DataTemuan\SubkriteriaController;
+use App\Http\Controllers\Admin\DataTemuan\TindakLanjutController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -76,7 +76,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/assignment-dosen/step-two', [AdminAssignmentDosenController::class, 'submitStepOneAndTwo'])
             ->name('assignmentDosen.submitStepOneAndTwo');
 
-
         // CRUD DOKUMEN PERKULIAHAN
         Route::get('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'index'])->name('dokumenPerkuliahan.index');
         Route::post('/dokumen-perkuliahan', [AdminDokumenPerkuliahanController::class, 'store'])->name('dokumenPerkuliahan.store');
@@ -84,33 +83,29 @@ Route::middleware('auth')->group(function () {
         Route::delete('/dokumen-perkuliahan/{dokumenPerkuliahan}', [AdminDokumenPerkuliahanController::class, 'destroy'])->name('dokumenPerkuliahan.destroy');
 
 
-        // LEVEL 1: KRITERIA
         Route::prefix('temuan')->name('temuan.')->group(function () {
-
+            // LEVEL 1: KRITERIA
             Route::get('/', [KriteriaController::class, 'index'])->name('index');
             Route::get('/create', [KriteriaController::class, 'create'])->name('create');
             Route::post('/', [KriteriaController::class, 'store'])->name('store');
-
-            // LEVEL 2: SUBKRITERIA
-            Route::prefix('{kriteria}/sub')->name('sub.')->group(function () {
-
-                Route::get('/create', [SubkriteriaController::class, 'create'])->name('create');
-                Route::post('/', [SubkriteriaController::class, 'store'])->name('store');
-
-                Route::get('/{sub}', [SubkriteriaController::class, 'show'])->name('show');
-                Route::get('/{sub}/edit', [SubkriteriaController::class, 'edit'])->name('edit');
-                Route::put('/{sub}', [SubkriteriaController::class, 'update'])->name('update');
-
-                Route::delete('/{sub}', [SubkriteriaController::class, 'destroy'])->name('destroy');
-
-            });
-
-
             Route::get('/{kriteria}', [KriteriaController::class, 'show'])->name('show');
             Route::get('/{kriteria}/edit', [KriteriaController::class, 'edit'])->name('edit');
             Route::put('/{kriteria}', [KriteriaController::class, 'update'])->name('update');
             Route::delete('/{kriteria}', [KriteriaController::class, 'destroy'])->name('destroy');
+
+            Route::prefix('{kriteria}/sub')->name('sub.')->group(function () {
+                // LEVEL 2: SUBKRITERIA
+                Route::get('/create', [SubkriteriaController::class, 'create'])->name('create');
+                Route::post('/', [SubkriteriaController::class, 'store'])->name('store');
+                Route::get('/{sub}/edit', [SubkriteriaController::class, 'edit'])->name('edit');
+                Route::put('/{sub}', [SubkriteriaController::class, 'update'])->name('update');
+                Route::delete('/{sub}', [SubkriteriaController::class, 'destroy'])->name('destroy');
+            });
         });
+
+        // TINDAK LANJUT
+        Route::post('/data-temuan/tindak-lanjut/generate', [TindakLanjutController::class, 'generate'])->name('tindak-lanjut.generate');
+        Route::resource('tindak-lanjut', TindakLanjutController::class);
     });
 
     Route::prefix('gkmp')->name('gkmp.')->group(function () {
@@ -125,7 +120,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/progres-kelas/{id}', [GKMPProgresKelasController::class, 'detailKelas'])->name('detailKelas.index');
 
         // TOLAK DOKUMEN
-        Route::post('/gkmp/progres-kelas/tolak', [GKMPProgresKelasController::class, 'tolak'])->name('progres-kelas.tolak');
+        Route::post('/progres-kelas/tolak', [GKMPProgresKelasController::class, 'tolak'])->name('progres-kelas.tolak');
+
+        // TINDAK LANJUT
+        Route::get('/tindak-lanjut', [GKMPTindakLanjutController::class, 'index'])->name('tindak-lanjut.index');
+        Route::put('/tindak-lanjut/update/{id}', [GKMPTindakLanjutController::class, 'update'])->name('tindak-lanjut.update');
     });
 
     Route::prefix('dosen')->name('dosen.')->group(function () {

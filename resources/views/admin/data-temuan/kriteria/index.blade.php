@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'Data Temuan & Tindak Lanjut')
+@section('title', 'Data Temuan')
 
 @section('content')
     <div class="container">
@@ -28,7 +28,7 @@
                                 <td>{{ $i + 1 }}</td>
                                 <td>{{ $k->nama }}</td>
                                 <td>
-                                    @forelse ($k->subkriteria as $sub)
+                                    @forelse ($k->subkriterias as $sub)
                                         <span class="badge bg-secondary">{{ $sub->kode }}</span>
                                     @empty
                                         <span class="text-muted">Belum ada</span>

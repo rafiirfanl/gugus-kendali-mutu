@@ -32,7 +32,8 @@
                     </a>
                 </li>
 
-                @canany(['view:user', 'view:tahun-ajaran', 'view:prodi', 'view:dokumen-perkuliahan', 'view:matkul', 'view:role'])
+                @canany(['view:user', 'view:tahun-ajaran', 'view:prodi', 'view:dokumen-perkuliahan', 'view:matkul',
+                    'view:role'])
                     {{-- MASTER DATA --}}
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">
@@ -134,7 +135,15 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.temuan.index') }}" class="nav-link text-white">
                             <i class="nav-icon fas fa-folder-open"></i>
-                            <p>Data Temuan & Tindak Lanjut</p>
+                            <p>Data Temuan</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('generate:tindak-lanjut')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.tindak-lanjut.index') }}" class="nav-link text-white">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>Tindak Lanjut</p>
                         </a>
                     </li>
                 @endcan
@@ -146,6 +155,14 @@
                         <a href="{{ route('gkmp.progresKelas.index') }}" class="nav-link text-white">
                             <i class="nav-icon fas fa-user-tie"></i>
                             <p>Progres Kelas</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('progres:tindak-lanjut')
+                    <li class="nav-item">
+                        <a href="{{ route('gkmp.tindak-lanjut.index') }}" class="nav-link text-white">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>Progres Tindak Lanjut</p>
                         </a>
                     </li>
                 @endcan
