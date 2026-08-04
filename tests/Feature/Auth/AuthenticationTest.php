@@ -17,7 +17,20 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
+    public function test_users_can_not_authenticate_with_invalid_credentials(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong-password',
+        ]);
+
+        $this->assertGuest();
+        $response->assertRedirect();
+    }
+
+    public function test_users_can_authenticate_with_valid_credentials(): void
     {
         $user = User::factory()->create();
 
@@ -30,16 +43,38 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(route('dashboard', absolute: false));
     }
 
-    public function test_users_can_not_authenticate_with_invalid_password(): void
+    public function test_users_can_not_authenticate_with_invalid_email(): void
     {
-        $user = User::factory()->create();
-
         $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'wrong-password',
+            'email' => 'nonexistent@example.com',
+            'password' => 'password',
         ]);
 
         $this->assertGuest();
+    }
+
+    public function test_users_can_not_authenticate_when_email_is_empty(): void
+    {
+        $response = $this->post('/login', [
+            'email' => '',
+            'password' => 'password',
+        ]);
+
+        $this->assertGuest();
+        $response->assertSessionHasErrors('email');
+    }
+
+    public function test_users_can_not_authenticate_when_password_is_empty(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => '',
+        ]);
+
+        $this->assertGuest();
+        $response->assertSessionHasErrors('password');
     }
 
     public function test_users_can_logout(): void
@@ -50,5 +85,26 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
         $response->assertRedirect('/');
+    }
+
+    public function test_session_is_invalidated_after_logout(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $this->assertAuthenticated();
+
+        $response = $this->post('/logout');
+
+        $this->assertGuest();
+        $response->assertRedirect('/');
+    }
+
+    public function test_unauthenticated_user_is_redirected_when_accessing_protected_route(): void
+    {
+        $response = $this->get('/profile');
+
+        $response->assertRedirect('/login');
     }
 }

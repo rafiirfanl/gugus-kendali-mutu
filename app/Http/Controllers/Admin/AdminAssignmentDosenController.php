@@ -27,6 +27,11 @@ class AdminAssignmentDosenController extends Controller
         $matkul_id = $request->matkul_id ?? [];
         $jumlah_kelas = $request->jumlah_kelas ?? [];
 
+        if (empty($matkul_id)) {
+            return redirect()->route('admin.assignmentDosen.stepOne')
+                ->with('error', 'Pilih minimal satu mata kuliah.');
+        }
+
         session([
             'matkul_id' => $matkul_id,
             'jumlah_kelas' => $jumlah_kelas

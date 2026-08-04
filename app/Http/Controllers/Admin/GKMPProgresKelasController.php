@@ -25,6 +25,15 @@ class GKMPProgresKelasController extends Controller
     public function index()
     {
         $tahunAjaran = TahunAjaran::where('is_aktif', true)->first();
+
+        if (!$tahunAjaran) {
+            return view('gkmp.progres-kelas.index', [
+                'kelasList' => collect(),
+                'progres' => collect(),
+                'sesiList' => collect(),
+            ]);
+        }
+
         $userProdi = Auth::user()->prodi_id;
         $kelasList = Kelas::where('tahun_ajaran_id', $tahunAjaran->id)
             ->whereHas('matkulDibuka.matkul', function ($q) use ($userProdi) {
@@ -65,6 +74,11 @@ class GKMPProgresKelasController extends Controller
     {
         $now = now();
         $tahunAjaran = TahunAjaran::where('is_aktif', true)->first();
+
+        if (!$tahunAjaran) {
+            abort(404, 'Tahun ajaran aktif tidak ditemukan.');
+        }
+
         $userProdi = Auth::user()->prodi_id;
         $kelasList = Kelas::where('tahun_ajaran_id', $tahunAjaran->id)
             ->whereHas('matkulDibuka.matkul', function ($q) use ($userProdi) {

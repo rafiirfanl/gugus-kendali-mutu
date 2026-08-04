@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class HasilTemuan extends Model
 {
+    use HasFactory;
+
     protected $table = 'hasil_temuans';
 
     protected $fillable = [
+        'subkriteria_id',
         'prodi_id',
         'hasil_temuan',
     ];
