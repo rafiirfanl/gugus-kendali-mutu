@@ -11,6 +11,8 @@ use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use ZipArchive;
 
 class GKMPProgresKelasController extends Controller
 {
@@ -68,6 +70,158 @@ class GKMPProgresKelasController extends Controller
             ->keyBy('kelas_id');
 
         return view('gkmp.progres-kelas.index', compact('kelasList', 'progres', 'sesiList'));
+    }
+
+    public function downloadAll()
+    {
+        $sesiList = DokumenPerkuliahan::select('sesi')->distinct()->orderBy('sesi')->pluck('sesi');
+
+        if ($sesiList->isEmpty()) {
+            return redirect()->back()->with('error', 'Tidak ada sesi untuk diunduh.');
+        }
+
+        $pdfs = [];
+        foreach ($sesiList as $sesi) {
+            $pdfContent = $this->generateSesiPDF($sesi);
+            $pdfs[$sesi] = $pdfContent;
+        }
+
+        if ($sesiList->count() === 1) {
+            $sesi = $sesiList->first();
+            return response($pdfs[$sesi], 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="Progres Sesi ' . $sesi . '.pdf"',
+            ]);
+        }
+
+        $tempFile = tempnam(sys_get_temp_dir(), 'progres_sesi_');
+        $zip = new ZipArchive();
+        $zip->open($tempFile, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($pdfs as $sesi => $content) {
+            $zip->addFromString("Progres Sesi {$sesi}.pdf", $content);
+        }
+
+        $zip->close();
+
+        $filename = 'Progres Semua Sesi.zip';
+        $headers = [
+            'Content-Type' => 'application/zip',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        return response()->download($tempFile, $filename, $headers)->deleteFileAfterSend(true);
+    }
+
+    private function generateSesiPDF($sesi)
+    {
+        $now = now();
+        $tahunAjaran = TahunAjaran::where('is_aktif', true)->first();
+
+        if (!$tahunAjaran) {
+            abort(404, 'Tahun ajaran aktif tidak ditemukan.');
+        }
+
+        $userProdi = Auth::user()->prodi_id;
+        $kelasList = Kelas::where('tahun_ajaran_id', $tahunAjaran->id)
+            ->whereHas('matkulDibuka.matkul', function ($q) use ($userProdi) {
+                $q->where('prodi_id', $userProdi);
+            })
+            ->get();
+
+        $progres = DokumenKelas::selectRaw("
+        dokumen_kelas.kelas_id,
+        SUM(CASE WHEN dokumen_kelas.status = 'dikumpulkan' THEN 1 ELSE 0 END) AS terkumpul,
+        SUM(CASE WHEN dokumen_kelas.status IS NULL OR dokumen_kelas.status = 'ditolak' THEN 1 ELSE 0 END) AS ditugaskan,
+        SUM(
+            CASE
+                WHEN dp.tenggat_waktu_default < ?
+                AND (dokumen_kelas.status IS NULL OR dokumen_kelas.status = 'ditolak')
+            THEN 1 ELSE 0
+            END
+        ) AS terlewat
+    ", [$now])
+            ->leftJoin('dokumen_perkuliahans as dp', 'dp.id', 'dokumen_kelas.dokumen_perkuliahan_id')
+            ->whereHas('dokumenPerkuliahan', function ($q) use ($sesi) {
+                $q->where('sesi', $sesi);
+            })
+            ->groupBy('dokumen_kelas.kelas_id')
+            ->get()
+            ->keyBy('kelas_id');
+
+        $namaDokumenList = DokumenPerkuliahan::where('sesi', $sesi)
+            ->pluck('nama_dokumen')
+            ->toArray();
+
+        $groupedProgres = [];
+
+        foreach ($kelasList as $kelas) {
+            $dokumens = [];
+
+            foreach ($namaDokumenList as $dokumenName) {
+                $dokumenPerkuliahan = DokumenPerkuliahan::where('sesi', $sesi)
+                    ->where('nama_dokumen', $dokumenName)
+                    ->first();
+
+                if (!$dokumenPerkuliahan) {
+                    $dokumens[$dokumenName] = false;
+                    continue;
+                }
+
+                $dokumenKelas = DokumenKelas::where('kelas_id', $kelas->id)
+                    ->where('dokumen_perkuliahan_id', $dokumenPerkuliahan->id)
+                    ->first();
+
+                $dokumens[$dokumenName] = $dokumenKelas && $dokumenKelas->status === 'dikumpulkan';
+            }
+
+            $groupedProgres[] = [
+                'matkul' => $kelas?->matkulDibuka?->matkul?->nama_matkul ?? '-',
+                'dosen'  => $kelas->dosen->name ?? '-',
+                'dokumens' => $dokumens,
+            ];
+        }
+
+        $kelas = $kelasList->first();
+
+        $prodi_id    = $kelas?->matkulDibuka?->matkul?->prodi_id;
+        $nama_prodi  = $kelas?->matkulDibuka?->matkul?->prodi?->nama_prodi ?? '-';
+        $ruang_prodi = $kelas?->matkulDibuka?->matkul?->prodi?->ruang_prodi ?? '-';
+
+        $kaprodiUser = User::role('kaprodi')
+            ->where('prodi_id', $prodi_id)
+            ->first();
+
+        $kaprodi     = $kaprodiUser->name ?? '-';
+        $nip_kaprodi = $kaprodiUser->nip  ?? '-';
+        $ttd_kaprodi = $kaprodiUser->ttd ?? null;
+
+        $gkmpUser = User::role('gkmp')
+            ->where('prodi_id', $prodi_id)
+            ->first();
+
+        $gkmp     = $gkmpUser->name ?? '-';
+        $nip_gkmp = $gkmpUser->nip  ?? '-';
+        $ttd_gkmp = $gkmpUser->ttd ?? null;
+
+        $pdf = Pdf::loadView('gkmp.progres-kelas.sesi', [
+            'kelasList' => $kelasList,
+            'progres'   => $progres,
+            'sesi'      => $sesi,
+            'namaDokumenList' => $namaDokumenList,
+            'groupedProgres' => $groupedProgres,
+            'dokumenSesi'    => $namaDokumenList,
+            'nama_prodi' => $nama_prodi,
+            'ruang_prodi' => $ruang_prodi,
+            'kaprodi' => $kaprodi,
+            'nip_kaprodi' => $nip_kaprodi,
+            'ttd_kaprodi' => $ttd_kaprodi,
+            'gkmp' => $gkmp,
+            'nip_gkmp' => $nip_gkmp,
+            'ttd_gkmp' => $ttd_gkmp,
+        ]);
+
+        return $pdf->output();
     }
 
     public function previewSesiPDF($sesi)

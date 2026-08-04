@@ -9,9 +9,9 @@
             <div class="crud-card-header">
                 <h5><i class="fas fa-chalkboard"></i> Progres Kelas</h5>
                 <div class="d-flex gap-2">
-                    <a class="btn-crud btn-crud-info btn-crud-sm" href="#"><i class="fas fa-download mr-1"></i> Unduh Semua</a>
+                    <a class="btn-crud btn-crud-info btn-crud-sm" href="{{ route('gkmp.progresKelas.downloadAll') }}"><i class="fas fa-download mr-1"></i> Unduh Semua</a>
                     @foreach ($sesiList as $item)
-                        <a href="{{ route('gkmp.progresKelas.sesi', $item->sesi) }}" class="btn-crud btn-crud-secondary btn-crud-sm"><i class="fas fa-file-pdf mr-1"></i> Sesi {{ $item->sesi }}</a>
+                        <a href="{{ route('gkmp.progresKelas.sesi', $item->sesi) }}" target="_blank" class="btn-crud btn-crud-secondary btn-crud-sm"><i class="fas fa-file-pdf mr-1"></i> Sesi {{ $item->sesi }}</a>
                     @endforeach
                 </div>
             </div>

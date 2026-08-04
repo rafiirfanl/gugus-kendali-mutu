@@ -4,29 +4,28 @@
 
 @section('content')
     <section class="content">
-
         <div class="crud-card">
             <div class="crud-card-header">
                 <h5><i class="fas fa-user-plus"></i> Assignment Dosen — Jumlah Kelas & Mata Kuliah</h5>
+                <div class="d-flex gap-2">
+                    <button class="btn-crud btn-crud-success btn-crud-sm btn-all" type="button">
+                        <i class="fas fa-check mr-1"></i> Semua
+                    </button>
+                    <button class="btn-crud btn-crud-danger btn-crud-sm btn-reset" type="button">
+                        <i class="fas fa-undo mr-1"></i> Reset
+                    </button>
+                </div>
             </div>
             <div class="crud-card-body">
                 <form action="{{ route('admin.assignmentDosen.stepTwo') }}" method="GET">
                     @csrf
-
-                    <div class="d-flex justify-content-between align-items-center mb-2 px-1">
-                        <h6 class="mb-0" style="font-weight:700;"><i class="fas fa-book mr-1"></i> Mata Kuliah Yang Dibuka</h6>
-                        <div class="d-flex gap-2">
-                            <button class="btn-crud btn-crud-success btn-crud-sm btn-all" type="button"><i class="fas fa-check mr-1"></i> Semua</button>
-                            <button class="btn-crud btn-crud-danger btn-crud-sm btn-reset" type="button"><i class="fas fa-undo mr-1"></i> Reset</button>
-                        </div>
-                    </div>
 
                     <div class="table-responsive">
                         <table class="crud-table">
                             <thead>
                                 <tr>
                                     <th style="width: 80%">Mata Kuliah</th>
-                                    <th class="text-center">Jumlah Kelas</th>
+                                    <th class="text-center" style="width: 20%">Jumlah Kelas</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,9 +47,10 @@
                     </div>
 
                     <div class="d-flex justify-content-end mt-3">
-                        <button type="submit" class="btn-crud btn-crud-primary"><i class="fas fa-arrow-right mr-1"></i> Selanjutnya</button>
+                        <button type="submit" class="btn-crud btn-crud-primary">
+                            <i class="fas fa-arrow-right mr-1"></i> Selanjutnya
+                        </button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -84,5 +84,4 @@
             });
         });
     </script>
-
 @endsection

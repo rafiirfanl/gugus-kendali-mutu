@@ -3,13 +3,7 @@
 @section('title', 'Assignment Dosen - Step 2')
 
 @section('content')
-
     <section class="content">
-        <div class="progress-modern mb-3">
-            <div class="progress-bar bg-primary" style="width:100%;"></div>
-        </div>
-        <div class="text-center mb-4" style="font-weight:700;color:#0c3366;">Step 2 — Dosen dan Tipe Dokumen</div>
-
         <div class="crud-card">
             <div class="crud-card-header">
                 <h5><i class="fas fa-users"></i> Dosen Pengampu Tiap Kelas</h5>
@@ -20,14 +14,14 @@
 
                     @foreach ($matkul as $key => $m)
                         <div class="mb-4">
-                            <h6 class="cell-bold border-bottom pb-2"><i class="fas fa-book mr-1"></i> {{ $m->nama_matkul }}</h6>
+                            <h6 class="cell-bold border-bottom pb-2 mb-3"><i class="fas fa-book mr-1"></i> {{ $m->nama_matkul }}</h6>
 
                             <div class="table-responsive">
                                 <table class="crud-table">
                                     <thead>
                                         <tr>
                                             <th class="text-center" style="width:25%">Kelas</th>
-                                            <th class="text-center">Dosen Pengampu</th>
+                                            <th>Dosen Pengampu</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -38,7 +32,7 @@
                                                     <input type="text" class="form-control form-crud" name="kelas[{{ $m->id }}][{{ $i }}][nama_kelas]" value="{{ 'Kelas R' . ($jumlah_kelas[$key] == 1 ? '' : $huruf) }}" readonly>
                                                 </td>
                                                 <td>
-                                                    <select class="form-select form-crud select2" name="kelas[{{ $m->id }}][{{ $i }}][dosen_id]" required>
+                                                    <select class="form-select form-crud select2-dosen" name="kelas[{{ $m->id }}][{{ $i }}][dosen_id]" required>
                                                         <option value="">-- Pilih Dosen --</option>
                                                         @foreach ($dosen[$m->id] as $d)
                                                             <option value="{{ $d->id }}">{{ $d->name }}</option>
@@ -55,9 +49,10 @@
                     @endforeach
 
                     <div class="d-flex justify-content-center mt-4">
-                        <button type="submit" class="btn-crud btn-crud-primary"><i class="fas fa-save mr-1"></i> Simpan Step 2</button>
+                        <button type="submit" class="btn-crud btn-crud-primary">
+                            <i class="fas fa-save mr-1"></i> Simpan
+                        </button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -65,8 +60,7 @@
 
     <script>
         $(document).ready(function() {
-            $('.select2').select2({ theme: 'bootstrap-5', width: '100%' });
+            $('.select2-dosen').select2({ theme: 'bootstrap-5', width: '100%' });
         });
     </script>
-
 @endsection

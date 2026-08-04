@@ -6,13 +6,9 @@
         <div class="crud-card">
             <div class="crud-card-header">
                 <h5><i class="fas fa-tasks"></i> Progres Tindak Lanjut per Prodi</h5>
-                <form action="{{ route('admin.tindak-lanjut.generate') }}" method="POST"
-                    onsubmit="return confirm('Generate tindak lanjut untuk semua prodi?')" style="display:inline;">
-                    @csrf
-                    <button type="submit" class="btn-crud btn-crud-primary btn-crud-sm">
-                        <i class="fas fa-plus mr-1"></i> Generate Tindak Lanjut
-                    </button>
-                </form>
+                <button type="button" class="btn-crud btn-crud-primary btn-crud-sm" data-bs-toggle="modal" data-bs-target="#modalGenerate">
+                    <i class="fas fa-plus mr-1"></i> Generate Tindak Lanjut
+                </button>
             </div>
             <div class="crud-card-body">
                 @if ($data->isEmpty())
@@ -56,4 +52,36 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade modal-crud" id="modalGenerate" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-plus-circle mr-2"></i>Generate Tindak Lanjut</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="modal-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="modal-title-text">Generate tindak lanjut?</div>
+                    <p class="modal-desc">Tindak lanjut akan dibuat otomatis untuk semua prodi berdasarkan hasil temuan yang ada.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn-crud btn-crud-secondary mr-2" data-bs-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i> Batal
+                    </button>
+                    <form action="{{ route('admin.tindak-lanjut.generate') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn-crud btn-crud-primary btn-submit">
+                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            <i class="fas fa-plus mr-1"></i> <span class="btn-text">Generate</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

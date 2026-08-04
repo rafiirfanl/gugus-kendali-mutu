@@ -411,6 +411,10 @@
     </div>
 
     <div class="sidebar-footer">
+        <a href="{{ route('profile.edit') }}" class="sidebar-nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+            <i class="fas fa-user-cog nav-icon"></i>
+            <span class="nav-text">Profile</span>
+        </a>
         <form id="sidebar-logout-form" action="{{ route('logout') }}" method="POST" hidden>@csrf</form>
         <a href="#" class="sidebar-nav-link"
            onclick="event.preventDefault(); document.getElementById('sidebar-logout-form').submit();">

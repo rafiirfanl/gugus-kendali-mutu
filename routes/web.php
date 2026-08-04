@@ -112,6 +112,9 @@ Route::middleware('auth')->group(function () {
         // PROGRES KELAS
         Route::get('/progres-kelas', [GKMPProgresKelasController::class, 'index'])->name('progresKelas.index');
 
+        // DOWNLOAD ALL SESI PDFs
+        Route::get('/progres-kelas/download-all', [GKMPProgresKelasController::class, 'downloadAll'])->name('progresKelas.downloadAll');
+
         // PROGRES BY SESI
         Route::get('/progres-kelas/sesi/{sesi}', [GKMPProgresKelasController::class, 'previewSesiPDF'])
             ->name('progresKelas.sesi');

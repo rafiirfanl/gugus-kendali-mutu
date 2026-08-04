@@ -116,6 +116,18 @@
                     </button>
                 </div>
             </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var modalEl = document.querySelector('.formEdit{{ $user->id }}');
+                    $(modalEl).on('shown.bs.modal', function() {
+                        $(modalEl).find('.form-select').each(function() {
+                            if (!$(this).data('select2')) {
+                                $(this).select2({ theme: 'bootstrap-5', width: '100%', dropdownParent: $(modalEl) });
+                            }
+                        });
+                    });
+                });
+            </script>
         </div>
     </div>
 </div>

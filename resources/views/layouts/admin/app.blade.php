@@ -283,6 +283,7 @@
         .modal-crud .modal-header .modal-title {
             font-weight: 700;
             font-size: 1.05rem;
+            color: white;
         }
         .modal-crud .modal-header .close {
             color: white;

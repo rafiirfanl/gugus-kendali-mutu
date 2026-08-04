@@ -546,15 +546,6 @@
             opacity: 0.85;
             font-size: 0.92rem;
         }
-        .welcome-banner .banner-icon {
-            position: relative;
-            z-index: 1;
-        }
-        .welcome-banner .banner-icon i {
-            font-size: 3.5rem;
-            opacity: 0.25;
-        }
-
         /* ============================================
            EMPTY STATE
            ============================================ */
@@ -842,9 +833,7 @@
                                     <h4>Selamat Datang, {{ $user->name }}</h4>
                                     <p>Gugus Kendali Mutu Prodi &bull; TA <strong>{{ $activeTa->tahun_ajaran ?? '-' }}</strong></p>
                                 </div>
-                                <div class="banner-icon">
-                                    <i class="fas fa-user-tie"></i>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -1040,9 +1029,7 @@
                                     <h4>Selamat Datang, {{ $user->name }}</h4>
                                     <p>Kepala Program Studi &bull; TA <strong>{{ $activeTa->tahun_ajaran ?? '-' }}</strong></p>
                                 </div>
-                                <div class="banner-icon">
-                                    <i class="fas fa-user-graduate"></i>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -1193,9 +1180,7 @@
                                     <h4>Selamat Datang, {{ $user->name }}</h4>
                                     <p>Dosen &bull; TA <strong>{{ $activeTa->tahun_ajaran ?? '-' }}</strong></p>
                                 </div>
-                                <div class="banner-icon">
-                                    <i class="fas fa-chalkboard-teacher"></i>
-                                </div>
+
                             </div>
                         </div>
                     </div>
