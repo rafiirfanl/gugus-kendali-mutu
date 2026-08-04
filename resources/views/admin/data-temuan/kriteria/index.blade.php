@@ -2,59 +2,56 @@
 @section('title', 'Data Temuan')
 
 @section('content')
-    <div class="container">
-
-        <a href="{{ route('admin.temuan.create') }}" class="btn btn-primary mb-3">
-            <i class="fa fa-plus"></i> Tambah Kriteria
-        </a>
-
-        <div class="card">
-            <div class="card-header bg-primary text-white">Daftar Kriteria</div>
-            <div class="card-body">
-
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Kriteria</th>
-                            <th>Subkriteria</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($kriteria as $i => $k)
+    <section class="content">
+        <div class="crud-card">
+            <div class="crud-card-header">
+                <h5><i class="fas fa-folder-open"></i> Daftar Kriteria</h5>
+                <a href="{{ route('admin.temuan.create') }}" class="btn-crud btn-crud-primary btn-crud-sm">
+                    <i class="fas fa-plus mr-1"></i> Tambah Kriteria
+                </a>
+            </div>
+            <div class="crud-card-body">
+                <div class="table-responsive">
+                    <table class="crud-table">
+                        <thead>
                             <tr>
-                                <td>{{ $i + 1 }}</td>
-                                <td>{{ $k->nama }}</td>
-                                <td>
-                                    @forelse ($k->subkriterias as $sub)
-                                        <span class="badge bg-secondary">{{ $sub->kode }}</span>
-                                    @empty
-                                        <span class="text-muted">Belum ada</span>
-                                    @endforelse
-                                </td>
-
-                                <td>
-                                    <a href="{{ route('admin.temuan.show', $k->id) }}" class="btn btn-info btn-sm">
-                                        Detail
-                                    </a>
-                                    @can('edit:kriteria')
-                                        @include('admin.data-temuan.kriteria.edit', ['kriteria' => $k])
-                                    @endcan
-                                    @csrf @method('DELETE')
-                                    @can('delete:kriteria')
-                                        @include('admin.data-temuan.kriteria.delete', ['kriteria' => $k])
-                                    @endcan
-                                </td>
+                                <th class="text-center" width="60">No</th>
+                                <th>Nama Kriteria</th>
+                                <th>Subkriteria</th>
+                                <th class="text-center" width="180">Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-
-                </table>
-
+                        </thead>
+                        <tbody>
+                            @foreach ($kriteria as $i => $k)
+                                <tr>
+                                    <td class="text-center"><span class="row-num">{{ $i + 1 }}</span></td>
+                                    <td class="cell-bold">{{ $k->nama }}</td>
+                                    <td>
+                                        @forelse ($k->subkriterias as $sub)
+                                            <span class="badge-crud badge-crud-info">{{ $sub->kode }}</span>
+                                        @empty
+                                            <span class="badge-crud badge-crud-warning">Belum ada</span>
+                                        @endforelse
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <a href="{{ route('admin.temuan.show', $k->id) }}" class="btn-crud btn-crud-info btn-crud-sm">
+                                                <i class="fas fa-eye"></i> Detail
+                                            </a>
+                                            @can('edit:kriteria')
+                                                @include('admin.data-temuan.kriteria.edit', ['kriteria' => $k])
+                                            @endcan
+                                            @can('delete:kriteria')
+                                                @include('admin.data-temuan.kriteria.delete', ['kriteria' => $k])
+                                            @endcan
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-
-    </div>
+    </section>
 @endsection

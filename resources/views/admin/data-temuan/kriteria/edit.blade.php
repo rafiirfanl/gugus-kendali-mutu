@@ -5,7 +5,7 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade formEditKriteria{{ $kriteria->id }}" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel"
+<div class="modal fade formEditKriteria{{ $kriteria->id }} modal-crud" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel"
     aria-hidden="true">
 
     <div class="modal-dialog modal-lg" role="document">

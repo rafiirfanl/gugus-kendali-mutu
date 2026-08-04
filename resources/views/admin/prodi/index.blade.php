@@ -3,39 +3,47 @@
 @section('title', 'Prodi Management')
 
 @section('content')
-    <!-- Main content -->
     <section class="content">
-        @can('create:prodi')
-            @include('admin.prodi.create')
-        @endcan
-        <!-- Table -->
-        <table id="example1" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>{{ __('No') }}</th>
-                    <th>{{ __('Program Studi') }}</th>
-                    <th>{{ __('Kode Program Studi') }}</th>
-                    <th class="text-center">{{ __('Action') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($prodis as $prodi)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $prodi->nama_prodi ?? '-' }}</td>
-                        <td>{{ $prodi->kode_prodi ?? '-' }}</td>
-                        <td class="text-center">
-                            @can('edit:prodi')
-                                @include('admin.prodi.edit')
-                            @endcan
-                            @can('delete:prodi')
-                                @include('admin.prodi.delete')
-                            @endcan
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="crud-card">
+            <div class="crud-card-header">
+                <h5><i class="fas fa-university"></i> Data Program Studi</h5>
+                @can('create:prodi')
+                    @include('admin.prodi.create')
+                @endcan
+            </div>
+            <div class="crud-card-body">
+                <div class="table-responsive">
+                    <table class="crud-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="60">No</th>
+                                <th>Program Studi</th>
+                                <th>Kode Prodi</th>
+                                <th class="text-center" width="140">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($prodis as $prodi)
+                                <tr>
+                                    <td class="text-center"><span class="row-num">{{ $loop->iteration }}</span></td>
+                                    <td class="cell-bold">{{ $prodi->nama_prodi ?? '-' }}</td>
+                                    <td><span class="badge-crud badge-crud-info">{{ $prodi->kode_prodi ?? '-' }}</span></td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            @can('edit:prodi')
+                                                @include('admin.prodi.edit')
+                                            @endcan
+                                            @can('delete:prodi')
+                                                @include('admin.prodi.delete')
+                                            @endcan
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </section>
-    <!-- /.content -->
 @endsection

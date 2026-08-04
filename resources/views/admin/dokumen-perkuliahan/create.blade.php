@@ -1,80 +1,61 @@
 <!-- Button to open modal -->
-<button role="button" class="btn btn-sm m-1 btn-primary" data-bs-toggle="modal" data-bs-target=".formCreate"><i
-        class="fas fa-plus"></i><span class="d-none d-sm-inline"> {{ __('Add') }}</span></button>
+<button role="button" class="btn-crud btn-crud-primary btn-crud-sm" data-bs-toggle="modal" data-bs-target=".formCreate">
+    <i class="fas fa-plus"></i> <span class="d-none d-sm-inline">Tambah</span>
+</button>
 
 <!-- Modal -->
-<div class="modal fade formCreate" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade formCreate modal-crud" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form method="POST" action="{{ route('admin.dokumenPerkuliahan.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.dokumenPerkuliahan.store') }}" enctype="multipart/form-data" class="form-crud">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalFormLabel">{{ __('Add Data') }}</h5>
+                    <h5 class="modal-title" id="modalFormLabel"><i class="fas fa-plus-circle mr-2"></i>Tambah Dokumen</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-left">
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="mb-2">
-                                <label class="form-label">{{ __('Name') }}<span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <label class="form-label">Nama Dokumen <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('nama_dokumen') is-invalid @enderror"
-                                    placeholder="nama_dokumen" name="nama_dokumen" id="nama_dokumen"
-                                    value="{{ old('nama_dokumen') }}" required>
+                                    placeholder="Masukkan nama dokumen" name="nama_dokumen" value="{{ old('nama_dokumen') }}" required>
                                 @error('nama_dokumen')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-2">
-                                <label class="form-label">{{ __('Sesi') }}<span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <label class="form-label">Sesi <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control @error('sesi') is-invalid @enderror"
-                                    placeholder="sesi" name="sesi" id="sesi" value="{{ old('sesi') }}"
-                                    required>
+                                    placeholder="Nomor sesi" name="sesi" value="{{ old('sesi') }}" min="1" max="4" required>
                                 @error('sesi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-2">
-                                <label class="form-label">{{ __('Tenggat Waktu Default') }}<span
-                                        class="text-danger">*</span></label>
-                                {{-- <input type="text"
-                                    class="form-control @error('tenggat_waktu_default') is-invalid @enderror"
-                                    placeholder="tenggat_waktu_default" name="tenggat_waktu_default"
-                                    id="tenggat_waktu_default" value="{{ old('tenggat_waktu_default') }}" required> --}}
-                                    <select name="tenggat_waktu_default" id="tenggat_waktu_default" class="form-control @error('tenggat_waktu_default') is-invalid @enderror" required>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                    </select>
+                            <div class="mb-3">
+                                <label class="form-label">Tenggat Waktu (Minggu) <span class="text-danger">*</span></label>
+                                <select name="tenggat_waktu_default" class="form-select @error('tenggat_waktu_default') is-invalid @enderror" required>
+                                    @for($i = 1; $i <= 16; $i++)
+                                        <option value="{{ $i }}" {{ old('tenggat_waktu_default') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                    @endfor
+                                </select>
                                 @error('tenggat_waktu_default')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="mb-2">
-                                <label class="form-label">{{ __('Template') }}<span class="text-danger">*</span> <span class="text-muted">(Allowed file types: doc, docx, pdf. Max size: 2MB)</span></label>
+                            <div class="mb-3">
+                                <label class="form-label">Template <span class="text-danger">*</span></label>
                                 <input type="file" class="form-control @error('template') is-invalid @enderror"
-                                    placeholder="template" name="template" id="template" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                                    value="{{ old('template') }}" required>
+                                    name="template" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+                                <small class="text-muted">Format: doc, docx, pdf. Maks: 2MB</small>
                                 @error('template')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -83,11 +64,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">{{ __('Close') }}</button>
-                    <button type="submit" class="btn btn-primary btn-submit">
+                    <button type="button" class="btn-crud btn-crud-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i> Batal
+                    </button>
+                    <button type="submit" class="btn-crud btn-crud-primary btn-submit">
                         <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                        <span class="btn-text">{{ __('Save') }}</span>
+                        <i class="fas fa-save mr-1"></i> <span class="btn-text">Simpan</span>
                     </button>
                 </div>
             </form>

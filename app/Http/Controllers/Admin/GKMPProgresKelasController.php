@@ -171,9 +171,10 @@ class GKMPProgresKelasController extends Controller
 
     public function detailKelas(string $kelasId)
     {
+        $kelas = Kelas::findOrFail($kelasId);
         $dokumenKelas = DokumenKelas::where('kelas_id', $kelasId)->get();
 
-        return view('gkmp.progres-kelas.detail-kelas', compact('kelasId', 'dokumenKelas'));
+        return view('gkmp.progres-kelas.detail-kelas', compact('kelas', 'dokumenKelas'));
     }
 
     public function tolak(Request $request)

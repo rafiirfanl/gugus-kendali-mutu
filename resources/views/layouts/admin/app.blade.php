@@ -42,16 +42,349 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.2.7/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* ============================================
+           SHARED CRUD STYLES
+           ============================================ */
+        :root {
+            --crud-primary: #0c3366;
+            --crud-primary-light: #1a5276;
+            --crud-accent: #1a73e8;
+            --crud-success: #34a853;
+            --crud-warning: #fbbc04;
+            --crud-danger: #ea4335;
+            --crud-text: #1a1a2e;
+            --crud-muted: #6c757d;
+            --crud-border: #e9ecef;
+            --crud-bg: #f8f9fc;
+            --crud-radius: 10px;
+            --crud-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            --crud-shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* Card Wrapper */
+        .crud-card {
+            background: white;
+            border: none;
+            border-radius: var(--crud-radius);
+            box-shadow: var(--crud-shadow);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .crud-card .crud-card-header {
+            padding: 18px 24px;
+            border-bottom: 2px solid var(--crud-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .crud-card .crud-card-header h5 {
+            margin: 0;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--crud-text);
+        }
+        .crud-card .crud-card-header h5 i {
+            margin-right: 8px;
+        }
+        .crud-card .crud-card-body {
+            padding: 0;
+        }
+
+        /* Table */
+        .crud-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            margin: 0;
+        }
+        .crud-table thead th {
+            background: var(--crud-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 14px 18px;
+            border: none;
+            white-space: nowrap;
+        }
+        .crud-table thead th:first-child { border-radius: 0; }
+        .crud-table thead th:last-child { border-radius: 0; }
+        .crud-table tbody td {
+            padding: 14px 18px;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--crud-border);
+            font-size: 0.88rem;
+            color: var(--crud-text);
+            transition: background 0.15s;
+        }
+        .crud-table tbody tr {
+            transition: all 0.15s;
+        }
+        .crud-table tbody tr:hover {
+            background-color: #f0f4ff;
+        }
+        .crud-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .crud-table .row-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--crud-border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--crud-muted);
+        }
+        .crud-table .cell-bold {
+            font-weight: 600;
+            color: var(--crud-text);
+        }
+        .crud-table .cell-muted {
+            color: var(--crud-muted);
+            font-size: 0.82rem;
+        }
+
+        /* Buttons */
+        .btn-crud {
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.82rem;
+            padding: 8px 18px;
+            letter-spacing: 0.3px;
+            transition: all 0.2s;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-crud:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            transform: translateY(-1px);
+        }
+        .btn-crud-primary {
+            background: var(--crud-accent);
+            color: white;
+        }
+        .btn-crud-primary:hover {
+            background: #1557b0;
+            color: white;
+        }
+        .btn-crud-success {
+            background: var(--crud-success);
+            color: white;
+        }
+        .btn-crud-success:hover {
+            background: #2d9249;
+            color: white;
+        }
+        .btn-crud-warning {
+            background: #f59e0b;
+            color: white;
+        }
+        .btn-crud-warning:hover {
+            background: #d97706;
+            color: white;
+        }
+        .btn-crud-danger {
+            background: var(--crud-danger);
+            color: white;
+        }
+        .btn-crud-danger:hover {
+            background: #c62828;
+            color: white;
+        }
+        .btn-crud-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-crud-secondary:hover {
+            background: #5a6268;
+            color: white;
+        }
+        .btn-crud-outline {
+            background: transparent;
+            border: 1.5px solid var(--crud-accent);
+            color: var(--crud-accent);
+            box-shadow: none;
+        }
+        .btn-crud-outline:hover {
+            background: var(--crud-accent);
+            color: white;
+        }
+        .btn-crud-sm {
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            border-radius: 6px;
+        }
+        .btn-crud-icon {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        /* Badges */
+        .badge-crud {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .badge-crud-success {
+            background: #e8f5e9;
+            color: #1b7a35;
+        }
+        .badge-crud-danger {
+            background: #fce4ec;
+            color: #c62828;
+        }
+        .badge-crud-warning {
+            background: #fff8e1;
+            color: #e65100;
+        }
+        .badge-crud-info {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .badge-crud-primary {
+            background: #e8eaf6;
+            color: #283593;
+        }
+
+        /* Modal */
+        .modal-crud .modal-content {
+            border: none;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .modal-crud .modal-header {
+            background: linear-gradient(135deg, var(--crud-primary) 0%, var(--crud-primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 18px 24px;
+        }
+        .modal-crud .modal-header .modal-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .modal-crud .modal-header .close {
+            color: white;
+            opacity: 0.8;
+            text-shadow: none;
+        }
+        .modal-crud .modal-header .close:hover {
+            opacity: 1;
+        }
+        .modal-crud .modal-body {
+            padding: 24px;
+            text-align: left;
+        }
+        .modal-crud .modal-dialog {
+            align-items: flex-start;
+            padding-top: 60px;
+        }
+        .modal-crud .modal-footer {
+            border-top: 2px solid var(--crud-border);
+            padding: 16px 24px;
+        }
+
+        /* Form Fields */
+        .form-crud .form-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--crud-text);
+            margin-bottom: 6px;
+            text-align: left;
+            display: block;
+        }
+        .form-crud .form-label .text-danger {
+            margin-left: 2px;
+        }
+        .form-crud .form-control,
+        .form-crud .form-select {
+            border: 1.5px solid var(--crud-border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+            background: white;
+        }
+        .form-crud .form-control:focus,
+        .form-crud .form-select:focus {
+            border-color: var(--crud-accent);
+            box-shadow: 0 0 0 3px rgba(26,115,232,0.12);
+        }
+        .form-crud .form-control::placeholder {
+            color: #adb5bd;
+        }
+        .form-crud .invalid-feedback {
+            font-size: 0.78rem;
+            margin-top: 4px;
+        }
+
+        /* Delete Modal */
+        .modal-crud-delete .modal-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fce4ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .modal-crud-delete .modal-icon i {
+            font-size: 1.8rem;
+            color: var(--crud-danger);
+        }
+        .modal-crud-delete .modal-title-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--crud-text);
+            margin-bottom: 8px;
+        }
+        .modal-crud-delete .modal-desc {
+            color: var(--crud-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--crud-muted);
+        }
+        .empty-state i {
+            font-size: 3.5rem;
+            margin-bottom: 14px;
+            opacity: 0.3;
+        }
+        .empty-state p {
+            margin: 0;
+            font-size: 0.92rem;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
-                height="60" width="60">
-        </div>
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
