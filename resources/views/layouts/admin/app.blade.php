@@ -380,25 +380,49 @@
             margin: 0;
             font-size: 0.92rem;
         }
+
+        /* Responsive sidebar */
+        @media (max-width: 991.98px) {
+            .main-header.navbar {
+                margin-left: 0 !important;
+            }
+            .content-wrapper {
+                margin-left: 0 !important;
+            }
+            .main-footer {
+                margin-left: 0 !important;
+            }
+        }
+
+        /* Main content area */
+        .content-wrapper > .content {
+            padding: 0 28px 28px;
+        }
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+<body class="hold-transition sidebar-mini layout-fixed" style="background: #f3f4f6;">
+    <div class="wrapper" style="margin-left: 0;">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light"
+             style="margin-left: 260px; border-bottom: 1px solid #e5e7eb; background: white;">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" href="#" role="button"
+                       onclick="event.preventDefault(); toggleSidebar();"
+                       style="color: #64748b;">
+                        <i class="fas fa-bars"></i>
+                    </a>
                 </li>
             </ul>
 
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <span class="nav-link" style="color: #6b7280; font-size: 0.83rem;">
+                        {{ now()->translatedFormat('l, d M Y') }}
+                    </span>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -432,18 +456,18 @@
 
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="margin-left: 260px; background: #f1f5f9; border: none;">
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+            <div class="content-header" style="background: transparent; border: none; padding: 20px 28px 0;">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">@yield('title')</h1>
+                            <h1 class="m-0" style="font-size: 1.4rem; font-weight: 700; color: #1e293b;">@yield('title')</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                                <li class="breadcrumb-item active">@yield('title')</li>
+                            <ol class="breadcrumb float-sm-right" style="background: transparent; padding: 0; margin: 0;">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="color: #3b82f6; text-decoration: none;">Home</a></li>
+                                <li class="breadcrumb-item active" style="color: #64748b;">@yield('title')</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -456,8 +480,8 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2025 <a href="#">{{ strtoupper(config('app.name')) }}</a>.</strong>
+        <footer class="main-footer" style="margin-left: 260px; background: white; border-top: 1px solid #e2e8f0; padding: 16px 24px;">
+            <strong style="color: #64748b; font-size: 0.82rem;">Copyright &copy; {{ date('Y') }} <a href="#" style="color: #3b82f6; text-decoration: none;">{{ strtoupper(config('app.name')) }}</a>.</strong>
         </footer>
 
         <!-- Control Sidebar -->

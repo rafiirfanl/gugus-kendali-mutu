@@ -605,9 +605,7 @@
                                     <h4>Selamat Datang, {{ $user->name }}</h4>
                                     <p>Tahun Ajaran Aktif: <strong>{{ $activeTa->tahun_ajaran ?? '-' }} ({{ $activeTa->jenis ?? '-' }})</strong></p>
                                 </div>
-                                <div class="banner-icon">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 <!-- Tombol untuk membuka modal -->
-<button role="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+<button role="button" class="btn-crud btn-crud-warning btn-crud-sm" data-bs-toggle="modal"
     data-bs-target=".formEditKriteria{{ $kriteria->id }}">
     <i class="fas fa-edit"></i> <span class="d-none d-sm-inline">Edit</span>
 </button>
@@ -15,16 +15,18 @@
                 @csrf
                 @method('PUT')
 
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title" id="modalFormLabel">Edit Kriteria</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFormLabel"><i class="fas fa-edit mr-2"></i>Edit Kriteria</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
                 <div class="modal-body text-left">
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-2">
+                            <div class="mb-3">
                                 <label class="form-label">Nama Kriteria <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="nama"
                                     value="{{ old('nama', $kriteria->nama) }}" required>
@@ -62,11 +64,13 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn-crud btn-crud-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i> Batal
+                    </button>
 
-                    <button type="submit" class="btn btn-primary btn-submit">
+                    <button type="submit" class="btn-crud btn-crud-primary btn-submit">
                         <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                        <span class="btn-text">Save</span>
+                        <i class="fas fa-save mr-1"></i> <span class="btn-text">Simpan</span>
                     </button>
                 </div>
 

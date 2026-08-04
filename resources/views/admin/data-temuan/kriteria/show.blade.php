@@ -40,11 +40,11 @@
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-1">
                                             <a href="{{ route('admin.temuan.sub.edit', [$kriteria->id, $sub->id]) }}" class="btn-crud btn-crud-warning btn-crud-sm">
-                                                <i class="fas fa-edit"></i> Edit
+                                                <i class="fas fa-edit"></i> <span class="d-none d-sm-inline">Edit</span>
                                             </a>
                                             <form action="{{ route('admin.temuan.sub.destroy', [$kriteria->id, $sub->id]) }}" method="POST" class="d-inline">
                                                 @csrf @method('DELETE')
-                                                <button class="btn-crud btn-crud-danger btn-crud-sm"><i class="fas fa-trash"></i> Hapus</button>
+                                                <button class="btn-crud btn-crud-danger btn-crud-sm"><i class="fas fa-trash"></i> <span class="d-none d-sm-inline">Hapus</span></button>
                                             </form>
                                         </div>
                                     </td>
