@@ -266,6 +266,10 @@
             background: #e8eaf6;
             color: #283593;
         }
+        .badge-crud-secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
 
         /* Modal */
         .modal-crud .modal-content {

@@ -11,7 +11,7 @@ class Subkriteria extends Model
     use HasFactory;
 
     protected $table = 'subkriterias';
-    protected $fillable = ['kriteria_id', 'kode'];
+    protected $fillable = ['kriteria_id', 'kode', 'judul'];
 
     public function kriteria()
     {

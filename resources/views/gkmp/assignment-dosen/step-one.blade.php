@@ -2,6 +2,15 @@
 
 @section('title', 'Assignment Dosen')
 
+<style>
+    .crud-card-header {
+        background: linear-gradient(135deg, var(--crud-primary) 0%, var(--crud-primary-light) 100%) !important;
+        border-bottom: none !important;
+    }
+    .crud-card-header h5 { color: #fff !important; }
+    .crud-card-header h5 i { color: rgba(255,255,255,0.8) !important; }
+</style>
+
 @section('content')
     <section class="content">
         <div class="crud-card">
@@ -20,36 +29,38 @@
                 <form action="{{ route('admin.assignmentDosen.stepTwo') }}" method="GET">
                     @csrf
 
-                    <div class="table-responsive">
-                        <table class="crud-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 80%">Mata Kuliah</th>
-                                    <th class="text-center" style="width: 20%">Jumlah Kelas</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($matkuls as $key => $item)
+                    <div class="p-4">
+                        <div class="table-responsive">
+                            <table class="crud-table">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input form-matkul-dibuka" type="checkbox" value="{{ $item->id }}" id="checkbox_{{ $key }}" name="matkul_id[]">
-                                                <label class="form-check-label" for="checkbox_{{ $key }}">{{ $item->nama_matkul }}</label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <input type="number" class="form-control form-crud jumlah_kelas_input" name="jumlah_kelas[]" min="1" placeholder="Jumlah Kelas" disabled>
-                                        </td>
+                                        <th style="width: 80%">Mata Kuliah</th>
+                                        <th class="text-center" style="width: 20%">Jumlah Kelas</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    @foreach ($matkuls as $key => $item)
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input form-matkul-dibuka" type="checkbox" value="{{ $item->id }}" id="checkbox_{{ $key }}" name="matkul_id[]">
+                                                    <label class="form-check-label" for="checkbox_{{ $key }}">{{ $item->nama_matkul }}</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control form-crud jumlah_kelas_input" name="jumlah_kelas[]" min="1" placeholder="Jumlah Kelas" disabled>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <div class="d-flex justify-content-end mt-3">
-                        <button type="submit" class="btn-crud btn-crud-primary">
-                            <i class="fas fa-arrow-right mr-1"></i> Selanjutnya
-                        </button>
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="submit" class="btn-crud btn-crud-primary">
+                                <i class="fas fa-arrow-right mr-1"></i> Selanjutnya
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

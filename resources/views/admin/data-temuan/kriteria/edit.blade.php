@@ -32,34 +32,40 @@
                                     value="{{ old('nama', $kriteria->nama) }}" required>
                             </div>
                         </div>
-
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Deskripsi</label>
+                                <textarea class="form-control" name="deskripsi" rows="3" placeholder="Deskripsi kriteria (opsional)">{{ old('deskripsi', $kriteria->deskripsi ?? '') }}</textarea>
+                            </div>
+                        </div>
                     </div>
 
                     <hr>
 
-                    <h5 class="mb-2">Subkriteria</h5>
+                    <h6 class="mb-3" style="font-weight:700;color:#0c3366;">
+                        <i class="fas fa-sitemap mr-1"></i> Subkriteria
+                    </h6>
 
-                    @foreach ($kriteria->subkriterias as $sub)
-                        <div class="border rounded p-3 mb-3">
-
+                    @forelse ($kriteria->subkriterias as $sub)
+                        <div class="border rounded p-3 mb-3" style="background:#f8f9fc;">
                             <div class="row">
-
                                 <div class="col-md-4">
                                     <label class="form-label">Kode Sub</label>
                                     <input type="text" name="subkriteria[{{ $sub->id }}][kode]"
                                         value="{{ $sub->kode }}" class="form-control">
                                 </div>
-
                                 <div class="col-md-8">
                                     <label class="form-label">Judul Sub</label>
                                     <input type="text" name="subkriteria[{{ $sub->id }}][judul]"
-                                        value="{{ $sub->judul }}" class="form-control">
+                                        value="{{ $sub->judul ?? '' }}" class="form-control">
                                 </div>
-
                             </div>
-
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="text-center py-3" style="color:#6c757d;">
+                            <i class="fas fa-info-circle mr-1"></i> Belum ada subkriteria
+                        </div>
+                    @endforelse
 
                 </div>
 

@@ -6,11 +6,21 @@
         <div class="crud-card">
             <div class="crud-card-header">
                 <h5><i class="fas fa-folder-open"></i> Kriteria: {{ $kriteria->nama }}</h5>
-                <a href="{{ route('admin.temuan.sub.create', $kriteria->id) }}" class="btn-crud btn-crud-primary btn-crud-sm">
-                    <i class="fas fa-plus mr-1"></i> Tambah Subkriteria
-                </a>
+                <div class="d-flex gap-2">
+                    <a href="{{ route('admin.temuan.index') }}" class="btn-crud btn-crud-secondary btn-crud-sm">
+                        <i class="fas fa-arrow-left mr-1"></i> Kembali
+                    </a>
+                    <a href="{{ route('admin.temuan.sub.create', $kriteria->id) }}" class="btn-crud btn-crud-primary btn-crud-sm">
+                        <i class="fas fa-plus mr-1"></i> Tambah Subkriteria
+                    </a>
+                </div>
             </div>
             <div class="crud-card-body">
+                @if ($kriteria->deskripsi)
+                    <div class="p-4" style="border-bottom:1px solid #e9ecef;">
+                        <p class="mb-0" style="color:#6c757d;font-size:0.9rem;">{{ $kriteria->deskripsi }}</p>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="crud-table">
                         <thead>

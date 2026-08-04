@@ -17,6 +17,7 @@
                             <tr>
                                 <th class="text-center" width="60">No</th>
                                 <th>Nama Kriteria</th>
+                                <th>Deskripsi</th>
                                 <th>Subkriteria</th>
                                 <th class="text-center" width="180">Aksi</th>
                             </tr>
@@ -26,6 +27,7 @@
                                 <tr>
                                     <td class="text-center"><span class="row-num">{{ $i + 1 }}</span></td>
                                     <td class="cell-bold">{{ $k->nama }}</td>
+                                    <td class="cell-muted">{{ $k->deskripsi ?? '-' }}</td>
                                     <td>
                                         @forelse ($k->subkriterias as $sub)
                                             <span class="badge-crud badge-crud-info">{{ $sub->kode }}</span>

@@ -23,6 +23,7 @@ class StoreSubKriteriaRequest extends FormRequest
     {
         return [
             'kode' => 'required',
+            'judul' => 'required|string',
             'hasil_temuan' => 'required|array',
             'hasil_temuan.*' => 'required|string',
         ];

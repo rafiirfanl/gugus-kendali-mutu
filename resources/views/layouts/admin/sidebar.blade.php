@@ -47,6 +47,12 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        transition: background 0.15s;
+        cursor: pointer;
+    }
+
+    .sidebar-user:hover {
+        background: rgba(255, 255, 255, 0.08);
     }
 
     .sidebar-user .user-avatar {
@@ -221,7 +227,7 @@
         <span class="brand-text">{{ strtoupper(config('app.name')) }}</span>
     </div>
 
-    <div class="sidebar-user">
+    <a href="{{ route('profile.edit') }}" class="sidebar-user" style="text-decoration:none;color:inherit;">
         <div class="user-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</div>
         <div>
             <div class="user-name">{{ Auth::user()->name }}</div>
@@ -234,7 +240,7 @@
                 @endif
             </div>
         </div>
-    </div>
+    </a>
 
     <div class="sidebar-menu">
         <div class="sidebar-section">
