@@ -505,5 +505,71 @@ class UserSeeder extends Seeder
             ]);
             $user->assignRole('dosen');
         }
+
+        $gkmp = User::create([
+            'name'      => 'Admin GKMP Teknik Biosistem',
+            'nip'       => '1234567890',
+            'ttd'       => 'ttd/ttd.jpeg',
+            'email'     => 'gkmp.bio@itera.ac.id',
+            'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
+            'prodi_id'  => 9,
+        ]);
+        $gkmp->assignRole('gkmp');
+
+        $gkmp = User::create([
+            'name'      => 'Admin GKMP Teknologi Industri Pertanian',
+            'nip'       => '1234567890',
+            'ttd'       => 'ttd/ttd.jpeg',
+            'email'     => 'gkmp.tip@itera.ac.id',
+            'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
+            'prodi_id'  => 10,
+        ]);
+        $gkmp->assignRole('gkmp');
+
+        $gkmp = User::create([
+            'name'      => 'Admin GKMP Teknologi Pangan',
+            'nip'       => '1234567890',
+            'ttd'       => 'ttd/ttd.jpeg',
+            'email'     => 'gkmp.tp@itera.ac.id',
+            'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
+            'prodi_id'  => 11,
+        ]);
+        $gkmp->assignRole('gkmp');
+
+        $gkmp = User::create([
+            'name'      => 'Admin GKMP Teknik Sistem Energi',
+            'nip'       => '1234567890',
+            'ttd'       => 'ttd/ttd.jpeg',
+            'email'     => 'gkmp.se@itera.ac.id',
+            'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
+            'prodi_id'  => 12,
+        ]);
+        $gkmp->assignRole('gkmp');
+
+        $gkmp = User::create([
+            'name'      => 'Admin GKMP Teknik Pertambangan',
+            'nip'       => '1234567890',
+            'ttd'       => 'ttd/ttd.jpeg',
+            'email'     => 'gkmp.tpb@itera.ac.id',
+            'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
+            'prodi_id'  => 13,
+        ]);
+        $gkmp->assignRole('gkmp');
+
+        $gkmp = User::create([
+            'name'      => 'Admin GKMP Teknik Telekomunikasi',
+            'nip'       => '1234567890',
+            'ttd'       => 'ttd/ttd.jpeg',
+            'email'     => 'gkmp.tl@itera.ac.id',
+            'password'  => Hash::make('password'),
+            'email_verified_at' => now(),
+            'prodi_id'  => 15,
+        ]);
+        $gkmp->assignRole('gkmp');
     }
 }
