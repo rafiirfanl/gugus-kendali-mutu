@@ -50,20 +50,25 @@
                                             <table class="crud-table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center" width="50">No</th>
-                                                        <th width="25%">Hasil Temuan</th>
-                                                        <th width="15%">Masukan</th>
-                                                        <th width="30%">Tindak Lanjut</th>
-                                                        <th width="15%">Kendala</th>
-                                                        <th class="text-center" width="100">Aksi</th>
+                                                        <th class="text-center" width="50">NO</th>
+                                                        <th width="20%">HASIL TEMUAN</th>
+                                                        <th width="15%">MASUKAN</th>
+                                                        <th width="22%">TINDAK LANJUT</th>
+                                                        <th width="15%">KENDALA</th>
+                                                        <th class="text-center" width="90">STATUS</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($sub['items'] as $tindak_lanjut)
-                                                        <tr>
-                                                            <form action="{{ route('gkmp.tindak-lanjut.update', $tindak_lanjut->id) }}" method="POST">
-                                                                @csrf
-                                                                @method('PUT')
+                                                        @php
+                                                            $isComplete = !empty($tindak_lanjut->masukan)
+                                                                && !empty($tindak_lanjut->tindak_lanjut)
+                                                                && !empty($tindak_lanjut->kendala);
+                                                        @endphp
+                                                        <form action="{{ route('gkmp.tindak-lanjut.update', $tindak_lanjut->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <tr>
                                                                 <td class="text-center"><span class="row-num">{{ $loop->iteration }}</span></td>
                                                                 <td style="font-size:0.85rem;">{{ $tindak_lanjut->hasilTemuan->hasil_temuan ?? '-' }}</td>
                                                                 <td>
@@ -76,12 +81,19 @@
                                                                     <textarea name="kendala" placeholder="Isi tanda (-)" class="form-control form-control-sm" rows="2" style="border-radius:8px; font-size:0.82rem;">{{ old('kendala', $tindak_lanjut->kendala) }}</textarea>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <button class="btn-crud btn-crud-success btn-crud-sm">
-                                                                        <i class="fas fa-save mr-1"></i> Simpan
-                                                                    </button>
+                                                                    <div class="d-flex flex-column align-items-center gap-1">
+                                                                        @if ($isComplete)
+                                                                            <span class="badge-crud badge-crud-success"><i class="fas fa-check mr-1"></i>Selesai</span>
+                                                                        @else
+                                                                            <span class="badge-crud badge-crud-warning"><i class="fas fa-clock mr-1"></i>Belum</span>
+                                                                        @endif
+                                                                        <button type="submit" class="btn-crud btn-crud-success btn-crud-sm mt-1">
+                                                                            <i class="fas fa-save"></i>
+                                                                        </button>
+                                                                    </div>
                                                                 </td>
-                                                            </form>
-                                                        </tr>
+                                                            </tr>
+                                                        </form>
                                                     @endforeach
                                                 </tbody>
                                             </table>

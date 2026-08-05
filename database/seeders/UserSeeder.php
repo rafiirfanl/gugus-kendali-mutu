@@ -47,16 +47,48 @@ class UserSeeder extends Seeder
         $kaprodi->assignRole('kaprodi', 'dosen');
 
 
-        $dosen = User::create([
-            'name'      => 'Dosen IF',
-            'nip'       => '1234567890',
-            'ttd'       => 'ttd/ttd.jpeg',
-            'email'     => 'dosen.if@itera.ac.id',
-            'password'  => Hash::make('password'),
-            'email_verified_at' => now(),
-            'prodi_id'  => 1,
-        ]);
-        $dosen->assignRole('dosen');
+        $dosenList = [
+            ['name' => 'Eko Dwi Nugroho, S.Kom., M.Cs.', 'email' => 'eko.dwi.nugroho@if.itera.ac.id'],
+            ['name' => 'Muhammad Habib Algifari, S.Kom., M.T.I.', 'email' => 'muhammad.habib.algifari@if.itera.ac.id'],
+            ['name' => 'Miranti Verdiana, M.Si.', 'email' => 'miranti.verdiana@if.itera.ac.id'],
+            ['name' => 'Radhinka Bagaskara, S.Si.Kom., M.Si., M.Sc.', 'email' => 'radhinka.bagaskara@if.itera.ac.id'],
+            ['name' => 'Meida Cahyo Untoro, S.Kom., M.Kom', 'email' => 'meida.cahyo.untoro@if.itera.ac.id'],
+            ['name' => 'Leslie Anggraini, S.Kom., M.Cs.', 'email' => 'leslie.anggraini@if.itera.ac.id'],
+            ['name' => 'Angga Wijaya, S.Si., M.Si.', 'email' => 'angga.wijaya@if.itera.ac.id'],
+            ['name' => 'Winda Yulita, M.Cs.', 'email' => 'winda.yulita@if.itera.ac.id'],
+            ['name' => 'Ilham Firman Ashari, S.Kom., M.T.', 'email' => 'ilham.firman.ashari@if.itera.ac.id'],
+            ['name' => 'Ir. Hira Laksmiwati Soemitro, M.Sc.', 'email' => 'hira.laksmiwati.soemitro@if.itera.ac.id'],
+            ['name' => 'Rajif Agung Yunmar, S.Kom., M.Cs.', 'email' => 'rajif.agung.yunmar@if.itera.ac.id'],
+            ['name' => 'Raidah Hanifah, S.T., M.T.', 'email' => 'raidah.hanifah@if.itera.ac.id'],
+            ['name' => 'Arkham Zahri Rakhman, S.Kom., M.Eng.', 'email' => 'arkham.zahri.rakhman@if.itera.ac.id'],
+            ['name' => 'Rahman Indra Kesuma, S.Kom., M.Cs.', 'email' => 'rahman.indra.kesuma@if.itera.ac.id'],
+            ['name' => 'Hafiz Budi Firmansyah, S.Kom., M.Sc., Ph.D.', 'email' => 'hafiz.budi.firmansyah@if.itera.ac.id'],
+            ['name' => 'I Wayan Wiprayoga Wisesa, S.Kom., M.Kom', 'email' => 'i.wayan.wiprayoga.wisesa@if.itera.ac.id'],
+            ['name' => 'Imam Ekowicaksono, S.Si., M.Si.', 'email' => 'imam.ekowicaksono@if.itera.ac.id'],
+            ['name' => 'Hartanto Tantriawan, S.Kom., M.Kom.', 'email' => 'hartanto.tantriawan@if.itera.ac.id'],
+            ['name' => 'Amirul Iqbal, S.Kom., M.Eng.', 'email' => 'amirul.iqbal@if.itera.ac.id'],
+            ['name' => 'Mohamad Idris, S.Si., M.Sc.', 'email' => 'mohamad.idris@if.itera.ac.id'],
+            ['name' => 'Arief Ichwani, S.Kom., M.Cs.', 'email' => 'arief.ichwani@if.itera.ac.id'],
+            ['name' => 'Martin C.T. Manullang, Ph.D.', 'email' => 'martin.ct.manullang@if.itera.ac.id'],
+            ['name' => 'Ir. Mugi Praseptiawan, S.T., M.Kom', 'email' => 'mugi.praseptiawan@if.itera.ac.id'],
+            ['name' => 'Andre Febrianto, S.Kom., M.Eng', 'email' => 'andre.febrianto@if.itera.ac.id'],
+            ['name' => 'Aidil Afriansyah, S.Kom., M.Kom.', 'email' => 'aidil.afriansyah@if.itera.ac.id'],
+            ['name' => 'Prof. Sarwono Sutikno, Dr.Eng., CISA, CISSP, CISM, CSX-F, IIAP, CC', 'email' => 'sarwono.sutikno@if.itera.ac.id'],
+            ['name' => 'Alya Khairunnisa Rizkita, S.Kom., M.Kom', 'email' => 'alya.khairunnisa.rizkita@if.itera.ac.id'],
+        ];
+
+        foreach ($dosenList as $dosen) {
+            $user = User::create([
+                'name'      => $dosen['name'],
+                'nip'       => '1234567890',
+                'ttd'       => 'ttd/ttd.jpeg',
+                'email'     => $dosen['email'],
+                'password'  => Hash::make('password'),
+                'email_verified_at' => now(),
+                'prodi_id'  => 1,
+            ]);
+            $user->assignRole('dosen');
+        }
 
 
         $gkmp = User::create([
