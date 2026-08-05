@@ -603,7 +603,7 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
                         <div class="dashboard-stat stat-blue">
                             <div class="inner">
                                 <h3>{{ $totalUsers }}</h3>
@@ -616,7 +616,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
                         <div class="dashboard-stat stat-green">
                             <div class="inner">
                                 <h3>{{ $totalProdi }}</h3>
@@ -629,27 +629,14 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
                         <div class="dashboard-stat stat-orange">
                             <div class="inner">
-                                <h3>{{ $totalMatkul }}</h3>
-                                <p>Mata Kuliah</p>
+                                <h3>{{ $totalDokumen }}</h3>
+                                <p>Jenis Dokumen</p>
                             </div>
-                            <div class="icon-wrap"><i class="fas fa-book"></i></div>
-                            <a href="{{ route('admin.matkul.index') }}" class="stat-footer">
-                                <span>Lihat Detail</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
-                        <div class="dashboard-stat stat-red">
-                            <div class="inner">
-                                <h3>{{ $totalKelas }}</h3>
-                                <p>Kelas Aktif</p>
-                            </div>
-                            <div class="icon-wrap"><i class="fas fa-door-open"></i></div>
-                            <a href="{{ route('admin.kelas.index') }}" class="stat-footer">
+                            <div class="icon-wrap"><i class="fas fa-file-alt"></i></div>
+                            <a href="{{ route('admin.dokumenPerkuliahan.index') }}" class="stat-footer">
                                 <span>Lihat Detail</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
@@ -658,40 +645,7 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col-lg-4 col-md-6 mb-3">
-                        <div class="card card-dashboard h-100">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-file-alt text-primary mr-2"></i>Progres Dokumen</h3>
-                            </div>
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    @php $color = $persentaseTerkumpul >= 75 ? '#34a853' : ($persentaseTerkumpul >= 50 ? '#fbbc04' : '#ea4335'); @endphp
-                                    <div class="percentage-circle mx-auto" style="border: 4px solid {{ $color }};">
-                                        <span style="color: {{ $color }};">{{ $persentaseTerkumpul }}%</span>
-                                    </div>
-                                </div>
-                                <div class="progress-modern mb-3">
-                                    <div class="progress-bar bg-success" style="width: {{ $persentaseTerkumpul }}%"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="stat-box" style="background: #e8f5e9;">
-                                            <h4 style="color: #34a853;">{{ $dokumenTerkumpul }}</h4>
-                                            <small class="text-success">Terkumpul</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="stat-box" style="background: #fce4ec;">
-                                            <h4 style="color: #ea4335;">{{ $dokumenDitolak }}</h4>
-                                            <small class="text-danger">Ditolak</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="col-lg-6 col-md-6 mb-3">
                         <div class="card card-dashboard h-100">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tasks text-success mr-2"></i>Tindak Lanjut</h3>
@@ -724,7 +678,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-12 mb-3">
+                    <div class="col-lg-6 col-md-12 mb-3">
                         <div class="card card-dashboard h-100">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-chart-pie text-info mr-2"></i>Ringkasan Sistem</h3>
@@ -757,63 +711,6 @@
                                         <strong>{{ $totalUsers }}</strong>
                                         <small>User Terdaftar</small>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card card-dashboard">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h3 class="card-title"><i class="fas fa-chart-bar text-primary mr-2"></i>Progres Dokumen Per Prodi</h3>
-                                <span class="badge-dashboard badge-dashboard-primary">{{ $activeTa->tahun_ajaran ?? '-' }}</span>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table-dashboard mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" width="60">No</th>
-                                                <th>Program Studi</th>
-                                                <th class="text-center" width="90">Total</th>
-                                                <th class="text-center" width="100">Terkumpul</th>
-                                                <th class="text-center" width="90">Ditolak</th>
-                                                <th width="240">Progres</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse($prodiStats as $index => $prodi)
-                                                <tr>
-                                                    <td class="text-center"><span class="row-num">{{ $index + 1 }}</span></td>
-                                                    <td class="cell-primary">{{ $prodi['nama'] }}</td>
-                                                    <td class="text-center"><strong>{{ $prodi['total'] }}</strong></td>
-                                                    <td class="text-center"><span class="badge-dashboard badge-dashboard-success">{{ $prodi['terkumpul'] }}</span></td>
-                                                    <td class="text-center"><span class="badge-dashboard badge-dashboard-danger">{{ $prodi['total'] - $prodi['terkumpul'] }}</span></td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="progress-thin flex-grow-1 mr-3">
-                                                                <div class="progress-bar {{ $prodi['persentase'] >= 75 ? 'bg-success' : ($prodi['persentase'] >= 50 ? 'bg-warning' : 'bg-danger') }}" style="width: {{ $prodi['persentase'] }}%"></div>
-                                                            </div>
-                                                            <span class="font-weight-bold" style="min-width: 45px; text-align: right; color: {{ $prodi['persentase'] >= 75 ? '#34a853' : ($prodi['persentase'] >= 50 ? '#f09819' : '#ea4335') }};">
-                                                                {{ $prodi['persentase'] }}%
-                                                            </span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="6">
-                                                        <div class="empty-state">
-                                                            <i class="fas fa-inbox d-block"></i>
-                                                            <p>Belum ada data prodi</p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>

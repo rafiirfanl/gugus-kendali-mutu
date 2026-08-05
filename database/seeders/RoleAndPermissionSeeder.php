@@ -17,6 +17,7 @@ class RoleAndPermissionSeeder extends Seeder
             'tahun-ajaran' => ['view', 'create', 'edit', 'delete'],
             'prodi' => ['view', 'create', 'edit', 'delete'],
             'matkul' => ['view', 'create', 'edit', 'delete'],
+            'kelas' => ['view', 'create', 'edit', 'delete'],
             'dokumen-perkuliahan' => ['view', 'create', 'edit', 'delete'],
             'assignment-dosen' => ['view', 'create', 'edit', 'delete', 'delete-all', 'soft-delete', 'soft-delete-all', 'restore', 'restore-all', 'import', 'export'],
             'progres-kelas' => ['view'],
@@ -26,6 +27,7 @@ class RoleAndPermissionSeeder extends Seeder
             'kriteria' => ['view', 'create', 'edit', 'delete'],
             'subkriteria' => ['view', 'create', 'edit', 'delete'],
             'tindak-lanjut' => ['generate', 'progres', 'update'],
+            'history-progres' => ['view'],
         ];
 
         foreach ($entities as $entity => $actions) {
@@ -86,6 +88,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'delete:user',
                 'progres:tindak-lanjut',
                 'update:tindak-lanjut',
+                'view:history-progres',
             ],
 
             // kaprodi 

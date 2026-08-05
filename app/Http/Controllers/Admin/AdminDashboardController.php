@@ -51,41 +51,13 @@ class AdminDashboardController extends Controller
         $totalKelas = $activeTa ? Kelas::where('tahun_ajaran_id', $activeTa->id)->count() : 0;
         $totalDokumen = DokumenPerkuliahan::count();
 
-        $dokumenTerkumpul = DokumenKelas::where('status', 'dikumpulkan')->count();
-        $totalDokumenKelas = DokumenKelas::count();
-        $persentaseTerkumpul = $totalDokumenKelas > 0 ? round(($dokumenTerkumpul / $totalDokumenKelas) * 100, 1) : 0;
-
-        $dokumenDitolak = DokumenKelas::where('status', 'ditolak')->count();
-
-        $prodiStats = [];
-        $prodis = Prodi::all();
-        foreach ($prodis as $prodi) {
-            $kelasIds = Kelas::whereHas('matkulDibuka', function ($q) use ($prodi) {
-                $q->whereHas('matkul', function ($q2) use ($prodi) {
-                    $q2->where('prodi_id', $prodi->id);
-                });
-            })->when($activeTa, function ($q) use ($activeTa) {
-                $q->where('tahun_ajaran_id', $activeTa->id);
-            })->pluck('id');
-
-            $total = DokumenKelas::whereIn('kelas_id', $kelasIds)->count();
-            $terkumpul = DokumenKelas::whereIn('kelas_id', $kelasIds)->where('status', 'dikumpulkan')->count();
-            $prodiStats[] = [
-                'nama' => $prodi->nama_prodi,
-                'total' => $total,
-                'terkumpul' => $terkumpul,
-                'persentase' => $total > 0 ? round(($terkumpul / $total) * 100, 1) : 0,
-            ];
-        }
-
         $tlTotal = TindakLanjut::count();
         $tlSelesai = TindakLanjut::where('tindak_lanjut', '!=', null)->where('tindak_lanjut', '!=', '')->count();
         $tlPersentase = $tlTotal > 0 ? round(($tlSelesai / $tlTotal) * 100, 1) : 0;
 
         return compact(
             'totalUsers', 'totalProdi', 'totalMatkul', 'totalKelas', 'totalDokumen',
-            'dokumenTerkumpul', 'totalDokumenKelas', 'persentaseTerkumpul', 'dokumenDitolak',
-            'prodiStats', 'tlTotal', 'tlSelesai', 'tlPersentase'
+            'tlTotal', 'tlSelesai', 'tlPersentase'
         );
     }
 

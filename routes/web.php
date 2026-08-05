@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminAssignmentDosenController;
 use App\Http\Controllers\Admin\GKMPProgresKelasController;
 use App\Http\Controllers\Admin\GKMPTindakLanjutController;
+use App\Http\Controllers\Admin\GKMPHistoryProgresController;
 use App\Http\Controllers\Admin\DosenKelasDiampuController;
 use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
 use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
@@ -128,6 +129,9 @@ Route::middleware('auth')->group(function () {
         // TINDAK LANJUT
         Route::get('/tindak-lanjut', [GKMPTindakLanjutController::class, 'index'])->name('tindak-lanjut.index');
         Route::put('/tindak-lanjut/update/{id}', [GKMPTindakLanjutController::class, 'update'])->name('tindak-lanjut.update');
+
+        // HISTORY PROGRES
+        Route::get('/history-progres', [GKMPHistoryProgresController::class, 'index'])->name('historyProgres.index');
     });
 
     Route::prefix('dosen')->name('dosen.')->group(function () {

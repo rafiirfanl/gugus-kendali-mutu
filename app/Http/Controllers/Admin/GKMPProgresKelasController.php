@@ -37,7 +37,8 @@ class GKMPProgresKelasController extends Controller
         }
 
         $userProdi = Auth::user()->prodi_id;
-        $kelasList = Kelas::where('tahun_ajaran_id', $tahunAjaran->id)
+        $kelasList = Kelas::with(['matkulDibuka.matkul', 'dosen'])
+            ->where('tahun_ajaran_id', $tahunAjaran->id)
             ->whereHas('matkulDibuka.matkul', function ($q) use ($userProdi) {
                 $q->where('prodi_id', $userProdi);
             })

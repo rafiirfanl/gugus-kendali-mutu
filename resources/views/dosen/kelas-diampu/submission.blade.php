@@ -31,12 +31,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dokumenKelas as $dok)
+                            @foreach ($dokumenPerkuliahan as $dok)
                                 @php
                                     $existing = $kelas->dokumenKelas->where('dokumen_perkuliahan_id', $dok->id)->first();
                                 @endphp
                                 <tr>
-                                    <td>{{ $dok->dokumenPerkuliahan->nama_dokumen }}</td>
+                                    <td>{{ $dok->nama_dokumen }}</td>
                                     <td class="text-center">
                                         @if ($existing && $existing->file_dokumen)
                                             <span class="badge-crud badge-crud-success">Sudah Upload</span>

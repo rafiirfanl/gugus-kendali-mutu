@@ -22,6 +22,8 @@
                             <tr>
                                 <th class="text-center" width="60">No</th>
                                 <th>Kelas</th>
+                                <th>Matakuliah</th>
+                                <th>Dosen Pengampu</th>
                                 <th class="text-center" width="100">Terlewat</th>
                                 <th class="text-center" width="100">Terkumpul</th>
                                 <th class="text-center" width="100">Ditugaskan</th>
@@ -42,6 +44,8 @@
                                 <tr>
                                     <td class="text-center"><span class="row-num">{{ $index + 1 }}</span></td>
                                     <td class="cell-bold">{{ $kelas->nama_kelas }}</td>
+                                    <td>{{ $kelas->matkulDibuka->matkul->nama_matkul ?? '-' }}</td>
+                                    <td>{{ $kelas->dosen->name ?? '-' }}</td>
                                     <td class="text-center"><span class="badge-crud badge-crud-danger">{{ $terlewat }}</span></td>
                                     <td class="text-center"><span class="badge-crud badge-crud-success">{{ $terkumpul }}</span></td>
                                     <td class="text-center"><span class="badge-crud badge-crud-info">{{ $ditugaskan }}</span></td>

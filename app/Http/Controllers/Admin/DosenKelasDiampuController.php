@@ -42,9 +42,9 @@ class DosenKelasDiampuController extends Controller
             ->where('id', $kelasID)
             ->get();
 
-        $dokumenKelas = DokumenKelas::whereIn('kelas_id', $kelasList->pluck('id'))->get();
+        $dokumenPerkuliahan = \App\Models\DokumenPerkuliahan::all();
 
-        return view('dosen.kelas-diampu.submission', compact('kelasList', 'dokumenKelas'));
+        return view('dosen.kelas-diampu.submission', compact('kelasList', 'dokumenPerkuliahan'));
     }
 
     public function upload(Request $request, DokumenKelas $dokumenKelas)
