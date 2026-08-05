@@ -27,7 +27,7 @@ class DokumenKelasFactory extends Factory
     {
         return $this->state(fn () => [
             'status' => 'dikumpulkan',
-            'waktu_pengumpulan' => now(),
+            'waktu_pengumpulan' => '2022-08-05 13:12:11',
             'file_dokumen' => 'dokumen_kelas/test.pdf',
         ]);
     }

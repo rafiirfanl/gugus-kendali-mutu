@@ -25,6 +25,7 @@
                                     <th>Program Studi</th>
                                     <th class="text-center" width="120">Selesai</th>
                                     <th class="text-center" width="200">Progres</th>
+                                    <th class="text-center" width="100">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,6 +43,11 @@
                                                     {{ $row['persen'] }}%
                                                 </span>
                                             </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('admin.tindak-lanjut.show', $row['prodi']->id) }}" class="btn-crud btn-crud-info btn-crud-sm">
+                                                <i class="fas fa-eye mr-1"></i> Lihat
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -63,6 +63,57 @@ class TindakLanjutController extends Controller
         ]);
     }
 
+    public function show(Prodi $tindak_lanjut)
+    {
+        $prodi = $tindak_lanjut;
+
+        $tindakLanjuts = TindakLanjut::with([
+            'hasilTemuan.subkriteria.kriteria',
+        ])
+            ->where('prodi_id', $prodi->id)
+            ->get();
+
+        $total = $tindakLanjuts->count();
+        $selesai = $tindakLanjuts->filter(function ($tl) {
+            return !empty($tl->masukan)
+                && !empty($tl->tindak_lanjut)
+                && !empty($tl->kendala);
+        })->count();
+        $persen = $total > 0 ? round(($selesai / $total) * 100, 1) : 0;
+
+        $grouped = $tindakLanjuts
+            ->groupBy(fn($tl) => $tl->hasilTemuan->subkriteria->kriteria->nama_kriteria)
+            ->map(function ($kriteriaGroup) {
+                $kriteriaPersen = $kriteriaGroup->filter(function ($tl) {
+                    return !empty($tl->masukan)
+                        && !empty($tl->tindak_lanjut)
+                        && !empty($tl->kendala);
+                })->count();
+                $kriteriaTotal = $kriteriaGroup->count();
+
+                return [
+                    'persen' => $kriteriaTotal > 0 ? round(($kriteriaPersen / $kriteriaTotal) * 100, 1) : 0,
+                    'subkriteria' => $kriteriaGroup
+                        ->groupBy(fn($tl) => $tl->hasilTemuan->subkriteria->nama_subkriteria)
+                        ->map(function ($subGroup) {
+                            $subPersen = $subGroup->filter(function ($tl) {
+                                return !empty($tl->masukan)
+                                    && !empty($tl->tindak_lanjut)
+                                    && !empty($tl->kendala);
+                            })->count();
+                            $subTotal = $subGroup->count();
+
+                            return [
+                                'persen' => $subTotal > 0 ? round(($subPersen / $subTotal) * 100, 1) : 0,
+                                'items' => $subGroup,
+                            ];
+                        }),
+                ];
+            });
+
+        return view('admin.data-temuan.tindak-lanjut.show', compact('prodi', 'total', 'selesai', 'persen', 'grouped'));
+    }
+
     public function generate()
     {
         $hasilTemuans = HasilTemuan::all();

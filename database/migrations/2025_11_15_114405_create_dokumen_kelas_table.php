@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('dokumen_perkuliahan_id')->nullable();
             $table->string('file_dokumen')->nullable();
             $table->dateTime('waktu_pengumpulan')->nullable();
-            $table->enum('status', ['dikumpulkan', 'ditolak'])->default('dikumpulkan');
+            $table->enum('status', ['dikumpulkan', 'ditolak'])->nullable()->default(null);
             $table->string('catatan')->nullable();
             $table->timestamps();
         });
