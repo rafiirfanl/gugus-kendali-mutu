@@ -19,7 +19,16 @@ class AdminAssignmentDosenController extends Controller
     {
         $matkuls = Matkul::where('prodi_id', Auth::user()->prodi_id)->get();
 
-        return view('gkmp.assignment-dosen.step-one', compact('matkuls'));
+        $tahunAjaranAktif = TahunAjaran::where('is_aktif', true)->first();
+
+        $hasAssignment = false;
+        if ($tahunAjaranAktif) {
+            $hasAssignment = MatkulDibuka::where('tahun_ajaran_id', $tahunAjaranAktif->id)
+                ->whereIn('matkul_id', $matkuls->pluck('id'))
+                ->exists();
+        }
+
+        return view('gkmp.assignment-dosen.step-one', compact('matkuls', 'tahunAjaranAktif', 'hasAssignment'));
     }
 
     public function stepTwo(Request $request)
@@ -89,13 +98,12 @@ class AdminAssignmentDosenController extends Controller
                     DokumenKelas::create([
                         'kelas_id'                 => $kelasBaru->id,
                         'dokumen_perkuliahan_id'   => $dok->id,
-                        'status'                   => 'ditolak',
                     ]);
                 }
             }
         }
 
-        return redirect()->route('admin.assignmentDosen.stepOne')
+        return redirect()->route('admin.dashboard')
             ->with('success', 'Assignment dosen berhasil disimpan!');
     }
 }

@@ -2,22 +2,13 @@
 
 @section('title', 'Assignment Dosen')
 
-<style>
-    .crud-card-header {
-        background: linear-gradient(135deg, var(--crud-primary) 0%, var(--crud-primary-light) 100%) !important;
-        border-bottom: none !important;
-    }
-    .crud-card-header h5 { color: #fff !important; }
-    .crud-card-header h5 i { color: rgba(255,255,255,0.8) !important; }
-</style>
-
 @section('content')
     <section class="content">
         <div class="crud-card">
             <div class="crud-card-header">
                 <h5><i class="fas fa-user-plus"></i> Assignment Dosen — Jumlah Kelas & Mata Kuliah</h5>
                 <div class="d-flex gap-2">
-                    <button class="btn-crud btn-crud-success btn-crud-sm btn-all" type="button">
+                    <button class="btn-crud btn-crud-primary btn-crud-sm btn-all" type="button">
                         <i class="fas fa-check mr-1"></i> Semua
                     </button>
                     <button class="btn-crud btn-crud-danger btn-crud-sm btn-reset" type="button">
@@ -26,41 +17,39 @@
                 </div>
             </div>
             <div class="crud-card-body">
-                <form action="{{ route('admin.assignmentDosen.stepTwo') }}" method="GET">
+                <form id="assignmentForm" action="{{ route('admin.assignmentDosen.stepTwo') }}" method="GET">
                     @csrf
 
-                    <div class="p-4">
-                        <div class="table-responsive">
-                            <table class="crud-table">
-                                <thead>
+                    <div class="table-responsive">
+                        <table class="crud-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 80%">Mata Kuliah</th>
+                                    <th class="text-center" style="width: 20%">Jumlah Kelas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($matkuls as $key => $item)
                                     <tr>
-                                        <th style="width: 80%">Mata Kuliah</th>
-                                        <th class="text-center" style="width: 20%">Jumlah Kelas</th>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input form-matkul-dibuka" type="checkbox" value="{{ $item->id }}" id="checkbox_{{ $key }}" name="matkul_id[]">
+                                                <label class="form-check-label" for="checkbox_{{ $key }}">{{ $item->nama_matkul }}</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-crud jumlah_kelas_input" name="jumlah_kelas[]" min="1" placeholder="Jumlah Kelas" disabled>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($matkuls as $key => $item)
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input form-matkul-dibuka" type="checkbox" value="{{ $item->id }}" id="checkbox_{{ $key }}" name="matkul_id[]">
-                                                    <label class="form-check-label" for="checkbox_{{ $key }}">{{ $item->nama_matkul }}</label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="number" class="form-control form-crud jumlah_kelas_input" name="jumlah_kelas[]" min="1" placeholder="Jumlah Kelas" disabled>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <div class="d-flex justify-content-end gap-2 mt-4">
-                            <button type="submit" class="btn-crud btn-crud-primary">
-                                <i class="fas fa-arrow-right mr-1"></i> Selanjutnya
-                            </button>
-                        </div>
+                    <div class="d-flex justify-content-end gap-2 p-4">
+                        <button type="button" class="btn-crud btn-crud-primary btn-next">
+                            <i class="fas fa-arrow-right mr-1"></i> Selanjutnya
+                        </button>
                     </div>
                 </form>
             </div>
@@ -71,6 +60,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.form-matkul-dibuka');
             const jumlahInputs = document.querySelectorAll('.jumlah_kelas_input');
+            const form = document.getElementById('assignmentForm');
+            const hasAssignment = {{ $hasAssignment ? 'true' : 'false' }};
+            const tahunAjaranLabel = '{{ $tahunAjaranAktif->tahun_ajaran }} {{ $tahunAjaranAktif->jenis ?? '' }}'.trim();
 
             checkboxes.forEach((chk, index) => {
                 chk.addEventListener('change', function() {
@@ -91,6 +83,47 @@
                     chk.checked = false;
                     jumlahInputs[i].disabled = true;
                     jumlahInputs[i].value = "";
+                });
+            });
+
+            document.querySelector('.btn-next').addEventListener('click', function() {
+                const checked = document.querySelectorAll('.form-matkul-dibuka:checked');
+                if (checked.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Perhatian',
+                        text: 'Pilih minimal satu mata kuliah terlebih dahulu.',
+                        confirmButtonColor: '#d33',
+                    });
+                    return;
+                }
+
+                let title, text, confirmButtonText, confirmButtonColor;
+                if (hasAssignment) {
+                    title = 'Assignment Dosen Sudah Ada';
+                    text = 'Anda sudah pernah melakukan Assignment Dosen pada Tahun Ajaran ' + tahunAjaranLabel + ', apakah anda yakin untuk membuat ulang Assignment Dosen pada Tahun Ajaran ' + tahunAjaranLabel + '?';
+                    confirmButtonText = 'Ya, Buat Ulang';
+                    confirmButtonColor = '#e67e22';
+                } else {
+                    title = 'Konfirmasi Assignment Dosen';
+                    text = 'Apakah anda yakin ingin melakukan assignment dosen untuk Tahun Ajaran ' + tahunAjaranLabel + '?';
+                    confirmButtonText = 'Ya, Lanjutkan';
+                    confirmButtonColor = '#28a745';
+                }
+
+                Swal.fire({
+                    icon: 'question',
+                    title: title,
+                    text: text,
+                    showCancelButton: true,
+                    confirmButtonColor: confirmButtonColor,
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: confirmButtonText,
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
                 });
             });
         });

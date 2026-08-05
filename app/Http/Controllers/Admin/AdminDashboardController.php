@@ -146,9 +146,11 @@ class AdminDashboardController extends Controller
                 ];
             });
 
+        $dokumenPending = $dokumenDitolak;
+
         return compact(
             'totalMatkul', 'totalKelas', 'totalDosen',
-            'totalDokumenKelas', 'dokumenTerkumpul', 'dokumenDitolak', 'persentaseTerkumpul',
+            'totalDokumenKelas', 'dokumenTerkumpul', 'dokumenDitolak', 'dokumenPending', 'persentaseTerkumpul',
             'tlTotal', 'tlSelesai', 'tlPersentase', 'kelasList'
         );
     }
