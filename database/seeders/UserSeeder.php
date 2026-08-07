@@ -571,5 +571,32 @@ class UserSeeder extends Seeder
             'prodi_id'  => 15,
         ]);
         $gkmp->assignRole('gkmp');
+
+        $dosenDummy = [
+            ['name' => 'Dosen Teknik Biosistem', 'email' => 'dosen.bio@itera.ac.id', 'prodi_id' => 9],
+            ['name' => 'Dosen Teknologi Industri Pertanian', 'email' => 'dosen.tip@itera.ac.id', 'prodi_id' => 10],
+            ['name' => 'Dosen Teknologi Pangan', 'email' => 'dosen.tp@itera.ac.id', 'prodi_id' => 11],
+            ['name' => 'Dosen Teknik Sistem Energi', 'email' => 'dosen.se@itera.ac.id', 'prodi_id' => 12],
+            ['name' => 'Dosen Teknik Pertambangan', 'email' => 'dosen.tpb@itera.ac.id', 'prodi_id' => 13],
+            ['name' => 'Dosen Teknik Telekomunikasi', 'email' => 'dosen.tl@itera.ac.id', 'prodi_id' => 15],
+            ['name' => 'Dosen Rekayasa Kehutanan', 'email' => 'dosen.rk@itera.ac.id', 'prodi_id' => 16],
+            ['name' => 'Dosen Teknik Biomedis', 'email' => 'dosen.bm@itera.ac.id', 'prodi_id' => 17],
+            ['name' => 'Dosen Rekayasa Kosmetik', 'email' => 'dosen.kos@itera.ac.id', 'prodi_id' => 18],
+            ['name' => 'Dosen Rekayasa Minyak dan Gas', 'email' => 'dosen.mg@itera.ac.id', 'prodi_id' => 19],
+            ['name' => 'Dosen Rekayasa Instrumentasi dan Automasi', 'email' => 'dosen.ia@itera.ac.id', 'prodi_id' => 20],
+        ];
+
+        foreach ($dosenDummy as $dosen) {
+            $user = User::create([
+                'name'      => $dosen['name'],
+                'nip'       => '1234567890',
+                'ttd'       => 'ttd/ttd.jpeg',
+                'email'     => $dosen['email'],
+                'password'  => Hash::make('password'),
+                'email_verified_at' => now(),
+                'prodi_id'  => $dosen['prodi_id'],
+            ]);
+            $user->assignRole('dosen');
+        }
     }
 }
