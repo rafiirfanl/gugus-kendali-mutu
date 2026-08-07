@@ -678,43 +678,6 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-12 mb-3">
-                        <div class="card card-dashboard h-100">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-chart-pie text-info mr-2"></i>Ringkasan Sistem</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="summary-item">
-                                    <div class="summary-icon" style="background: #e3f2fd; color: #1a73e8;"><i class="fas fa-file-alt"></i></div>
-                                    <div class="summary-text">
-                                        <strong>{{ $totalDokumen }}</strong>
-                                        <small>Jenis Dokumen</small>
-                                    </div>
-                                </div>
-                                <div class="summary-item">
-                                    <div class="summary-icon" style="background: #fff8e1; color: #f09819;"><i class="fas fa-book"></i></div>
-                                    <div class="summary-text">
-                                        <strong>{{ $totalMatkul }}</strong>
-                                        <small>Mata Kuliah</small>
-                                    </div>
-                                </div>
-                                <div class="summary-item">
-                                    <div class="summary-icon" style="background: #fce4ec; color: #ea4335;"><i class="fas fa-door-open"></i></div>
-                                    <div class="summary-text">
-                                        <strong>{{ $totalKelas }}</strong>
-                                        <small>Kelas Aktif</small>
-                                    </div>
-                                </div>
-                                <div class="summary-item">
-                                    <div class="summary-icon" style="background: #e8f5e9; color: #34a853;"><i class="fas fa-users"></i></div>
-                                    <div class="summary-text">
-                                        <strong>{{ $totalUsers }}</strong>
-                                        <small>User Terdaftar</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             @endif
 
