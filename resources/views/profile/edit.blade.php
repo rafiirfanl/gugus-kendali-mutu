@@ -1,29 +1,40 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.admin.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+@section('title', 'Profile')
+
+@section('content')
+<div class="content" style="padding: 20px 28px;">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="crud-card">
+                    <div class="crud-card-header">
+                        <h5><i class="fas fa-user"></i> Profile Information</h5>
+                    </div>
+                    <div class="crud-card-body" style="padding: 24px;">
+                        @include('profile.partials.update-profile-information-form')
+                    </div>
                 </div>
-            </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+                <div class="crud-card">
+                    <div class="crud-card-header">
+                        <h5><i class="fas fa-lock"></i> Update Password</h5>
+                    </div>
+                    <div class="crud-card-body" style="padding: 24px;">
+                        @include('profile.partials.update-password-form')
+                    </div>
                 </div>
-            </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+                <div class="crud-card">
+                    <div class="crud-card-header">
+                        <h5><i class="fas fa-trash"></i> Delete Account</h5>
+                    </div>
+                    <div class="crud-card-body" style="padding: 24px;">
+                        @include('profile.partials.delete-user-form')
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection

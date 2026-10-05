@@ -1063,7 +1063,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12 mb-3">
                         <div class="dashboard-stat stat-red">
-                            <div class="inner"><h3>{{ $dokumenPending }}</h3><p>Perlu Revisi</p></div>
+                            <div class="inner"><h3>{{ $dokumenPending ?? 0 }}</h3><p>Perlu Revisi</p></div>
                             <div class="icon-wrap"><i class="fas fa-exclamation-triangle"></i></div>
                             <a href="{{ route('dosen.kelasDiampu.index') }}" class="stat-footer"><span>Lihat Detail</span><i class="fas fa-arrow-right"></i></a>
                         </div>
@@ -1090,7 +1090,7 @@
                                 <div class="row text-center">
                                     <div class="col-4">
                                         <div class="stat-box" style="background: #e3f2fd;">
-                                            <h4 style="color: #1a73e8;">{{ $totalDokumen }}</h4>
+                                            <h4 style="color: #1a73e8;">{{ $totalDokumen ?? 0 }}</h4>
                                             <small class="cell-secondary">Total</small>
                                         </div>
                                     </div>
@@ -1102,7 +1102,7 @@
                                     </div>
                                     <div class="col-4">
                                         <div class="stat-box" style="background: #fce4ec;">
-                                            <h4 style="color: #ea4335;">{{ $dokumenPending }}</h4>
+                                            <h4 style="color: #ea4335;">{{ $dokumenPending ?? 0 }}</h4>
                                             <small class="cell-secondary">Revisi</small>
                                         </div>
                                     </div>
@@ -1177,7 +1177,7 @@
                                                         <td class="cell-primary">{{ $kelas['nama'] }}</td>
                                                         <td>{{ $kelas['matkul'] }}</td>
                                                         <td class="text-center"><span class="badge-dashboard badge-dashboard-success">{{ $kelas['terkumpul'] }}</span></td>
-                                                        <td class="text-center"><span class="badge-dashboard badge-dashboard-danger">{{ $kelas['pending'] }}</span></td>
+                                                        <td class="text-center"><span class="badge-dashboard badge-dashboard-danger">{{ $kelas['pending'] ?? 0 }}</span></td>
                                                         <td>
                                                             <div class="d-flex align-items-center">
                                                                 <div class="progress-thin flex-grow-1 mr-3">

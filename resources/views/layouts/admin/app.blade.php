@@ -311,6 +311,13 @@
         }
 
         /* Form Fields */
+        .form-crud {
+            width: 100%;
+        }
+        .form-crud .mb-3 {
+            display: block;
+            width: 100%;
+        }
         .form-crud .form-label {
             font-weight: 600;
             font-size: 0.85rem;
@@ -330,6 +337,8 @@
             font-size: 0.88rem;
             transition: all 0.2s;
             background: white;
+            width: 100%;
+            display: block;
         }
         .form-crud .form-control:focus,
         .form-crud .form-select:focus {
@@ -541,6 +550,8 @@
 
     <!-- Flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @yield('script')
 </body>
 

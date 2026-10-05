@@ -231,7 +231,7 @@
         <div class="auth-left">
             <div class="brand-icon">GKM</div>
             <h1>Gugus Kendali Mutu</h1>
-            <p>Sistem manajemen akademik untuk monitoring dan evaluasi kualitas perkuliahan.</p>
+            <p>Sistem manajemen akademik untuk monitoring dan evaluasi perkuliahan.</p>
         </div>
 
         <div class="auth-right">
