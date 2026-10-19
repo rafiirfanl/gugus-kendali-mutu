@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminAssignmentDosenController;
 use App\Http\Controllers\Admin\GKMPProgresKelasController;
 use App\Http\Controllers\Admin\GKMPTindakLanjutController;
 use App\Http\Controllers\Admin\GKMPHistoryProgresController;
+use App\Http\Controllers\Admin\GKMPPemeringkatanDosenController;
 use App\Http\Controllers\Admin\DosenKelasDiampuController;
 use App\Http\Controllers\Admin\DosenRiwayatDokumenController;
 use App\Http\Controllers\Admin\DataTemuan\KriteriaController;
@@ -132,6 +133,9 @@ Route::middleware('auth')->group(function () {
 
         // HISTORY PROGRES
         Route::get('/history-progres', [GKMPHistoryProgresController::class, 'index'])->name('historyProgres.index');
+
+        // PEMERINGKATAN DOSEN
+        Route::get('/pemeringkatan-dosen', [GKMPPemeringkatanDosenController::class, 'index'])->name('pemeringkatanDosen.index');
     });
 
     Route::prefix('dosen')->name('dosen.')->group(function () {

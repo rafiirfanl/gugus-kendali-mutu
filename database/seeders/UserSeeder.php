@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $gkmf = User::create([
+        $gkmf = $this->buat([
             'name'      => 'Admin GKMF',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmf->assignRole('gkmf');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP IF',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Andika Setiawan S.Kom., M.Cs.',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -78,7 +78,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenList as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -91,7 +91,7 @@ class UserSeeder extends Seeder
         }
 
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Geofisika',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -102,7 +102,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi TG',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -141,7 +141,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenListTg as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -154,7 +154,7 @@ class UserSeeder extends Seeder
         }
 
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Geologi',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -165,7 +165,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi GL',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -196,7 +196,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenListGl as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -208,7 +208,7 @@ class UserSeeder extends Seeder
             $user->assignRole('dosen');
         }
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Elektro',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -219,7 +219,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi EL',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -255,7 +255,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenListEl as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -267,7 +267,7 @@ class UserSeeder extends Seeder
             $user->assignRole('dosen');
         }
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP TI',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -278,7 +278,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi TI',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -289,7 +289,7 @@ class UserSeeder extends Seeder
         ]);
         $kaprodi->assignRole('kaprodi', 'dosen');
 
-        $dosen = User::create([
+        $dosen = $this->buat([
             'name'      => 'Dosen Teknik Industri',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -300,7 +300,7 @@ class UserSeeder extends Seeder
         ]);
         $dosen->assignRole('dosen');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP TM',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -311,7 +311,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi TM',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -322,7 +322,7 @@ class UserSeeder extends Seeder
         ]);
         $kaprodi->assignRole('kaprodi', 'dosen');
 
-        $dosen = User::create([
+        $dosen = $this->buat([
             'name'      => 'Dosen Teknik Material',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -333,7 +333,7 @@ class UserSeeder extends Seeder
         ]);
         $dosen->assignRole('dosen');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP TK',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -344,7 +344,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi TK',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -385,7 +385,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenListTk as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -397,7 +397,7 @@ class UserSeeder extends Seeder
             $user->assignRole('dosen');
         }
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Mesin',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -408,7 +408,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi MS',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -443,7 +443,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenListMs as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -455,7 +455,7 @@ class UserSeeder extends Seeder
             $user->assignRole('dosen');
         }
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Fisika',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -466,7 +466,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $kaprodi = User::create([
+        $kaprodi = $this->buat([
             'name'      => 'Kaprodi TF',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -494,7 +494,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenListTf as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -506,7 +506,7 @@ class UserSeeder extends Seeder
             $user->assignRole('dosen');
         }
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Biosistem',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -517,7 +517,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknologi Industri Pertanian',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -528,7 +528,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknologi Pangan',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -539,7 +539,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Sistem Energi',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -550,7 +550,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Pertambangan',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -561,7 +561,7 @@ class UserSeeder extends Seeder
         ]);
         $gkmp->assignRole('gkmp');
 
-        $gkmp = User::create([
+        $gkmp = $this->buat([
             'name'      => 'Admin GKMP Teknik Telekomunikasi',
             'nip'       => '1234567890',
             'ttd'       => 'ttd/ttd.jpeg',
@@ -587,7 +587,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($dosenDummy as $dosen) {
-            $user = User::create([
+            $user = $this->buat([
                 'name'      => $dosen['name'],
                 'nip'       => '1234567890',
                 'ttd'       => 'ttd/ttd.jpeg',
@@ -598,5 +598,10 @@ class UserSeeder extends Seeder
             ]);
             $user->assignRole('dosen');
         }
+    }
+
+    private function buat(array $data): User
+    {
+        return User::firstOrCreate(['email' => $data['email']], $data);
     }
 }

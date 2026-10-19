@@ -38,7 +38,7 @@ class ProdiSeeder extends Seeder
         ];
 
         foreach ($prodiList as $prodi) {
-            Prodi::create($prodi);
+            Prodi::firstOrCreate(['kode_prodi' => $prodi['kode_prodi']], $prodi);
         }
 
     }

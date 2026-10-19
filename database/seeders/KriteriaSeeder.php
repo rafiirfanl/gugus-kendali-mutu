@@ -169,17 +169,17 @@ class KriteriaSeeder extends Seeder
         // ================================
         foreach ($data as $kriteriaNama => $subkriterias) {
 
-            $kriteria = Kriteria::create(['nama' => $kriteriaNama]);
+            $kriteria = Kriteria::firstOrCreate(['nama' => $kriteriaNama]);
 
             foreach ($subkriterias as $kode => $hasilList) {
 
-                $sub = Subkriteria::create([
+                $sub = Subkriteria::firstOrCreate([
                     'kriteria_id' => $kriteria->id,
                     'kode' => $kode
                 ]);
 
                 foreach ($hasilList as $hasil) {
-                    HasilTemuan::create([
+                    HasilTemuan::firstOrCreate([
                         'subkriteria_id' => $sub->id,
                         'hasil_temuan' => $hasil
                     ]);

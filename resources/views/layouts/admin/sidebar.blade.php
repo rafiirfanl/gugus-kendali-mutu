@@ -363,7 +363,7 @@
             </div>
         @endcanany
 
-        @canany(['view:progres-kelas', 'progres:tindak-lanjut', 'view:history-progres'])
+        @canany(['view:progres-kelas', 'progres:tindak-lanjut', 'view:history-progres', 'view:pemeringkatan-dosen'])
             <div class="sidebar-section">
                 <div class="sidebar-section-title">GKM Prodi</div>
                 <ul class="sidebar-nav">
@@ -391,6 +391,15 @@
                                class="sidebar-nav-link {{ request()->routeIs('gkmp.historyProgres.*') ? 'active' : '' }}">
                                 <i class="fas fa-history nav-icon"></i>
                                 <span class="nav-text">History Progres</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('view:pemeringkatan-dosen')
+                        <li class="sidebar-nav-item">
+                            <a href="{{ route('gkmp.pemeringkatanDosen.index') }}"
+                               class="sidebar-nav-link {{ request()->routeIs('gkmp.pemeringkatanDosen.*') ? 'active' : '' }}">
+                                <i class="fas fa-trophy nav-icon"></i>
+                                <span class="nav-text">Pemeringkatan Dosen</span>
                             </a>
                         </li>
                     @endcan

@@ -16,7 +16,7 @@ class DokumenKelasSeeder extends Seeder
 
         foreach ($kelasList as $kelas) {
             foreach ($dokumenList as $dok) {
-                DokumenKelas::create([
+                DokumenKelas::firstOrCreate([
                     'kelas_id' => $kelas->id,
                     'dokumen_perkuliahan_id' => $dok->id,
                 ]);

@@ -28,6 +28,7 @@ class RoleAndPermissionSeeder extends Seeder
             'subkriteria' => ['view', 'create', 'edit', 'delete'],
             'tindak-lanjut' => ['generate', 'progres', 'update'],
             'history-progres' => ['view'],
+            'pemeringkatan-dosen' => ['view'],
         ];
 
         foreach ($entities as $entity => $actions) {
@@ -68,6 +69,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'edit:subkriteria',
                 'delete:subkriteria',
                 'generate:tindak-lanjut',
+                'view:pemeringkatan-dosen',
             ],
 
             // gkmp
@@ -89,6 +91,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'progres:tindak-lanjut',
                 'update:tindak-lanjut',
                 'view:history-progres',
+                'view:pemeringkatan-dosen',
             ],
 
             // kaprodi 
@@ -107,6 +110,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'create:user',
                 'edit:user',
                 'delete:user',
+                'view:pemeringkatan-dosen',
             ],
 
             // dosen 

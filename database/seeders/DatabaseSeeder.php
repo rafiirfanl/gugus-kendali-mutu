@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DokumenPerkuliahanSeeder::class);
         $this->call(DokumenKelasSeeder::class);
         $this->call(KriteriaSeeder::class);
+        $this->call(PemeringkatanDosenDummySeeder::class);
     }
 }

@@ -14,7 +14,7 @@ class MatkulSeeder extends Seeder
      */
     public function run(): void
     {  
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Algoritma dan Pemrograman',
             'kode_matkul'   => 'IF101',
             'bobot_sks'     => 3,
@@ -22,7 +22,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 1,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Basis Data',
             'kode_matkul'   => 'IF102',
             'bobot_sks'     => 3,
@@ -30,7 +30,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 1,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Rangkaian Elektronika',
             'kode_matkul'   => 'EL101',
             'bobot_sks'     => 3,
@@ -38,7 +38,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 2,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Geofisika',
             'kode_matkul'   => 'TG101',
             'bobot_sks'     => 3,
@@ -46,7 +46,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 3,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Geologi Dasar',
             'kode_matkul'   => 'GL101',
             'bobot_sks'     => 3,
@@ -54,7 +54,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 4,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Mekanika Teknik',
             'kode_matkul'   => 'MS101',
             'bobot_sks'     => 3,
@@ -62,7 +62,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 5,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Statistika dan Probabilitas',
             'kode_matkul'   => 'TI101',
             'bobot_sks'     => 3,
@@ -70,7 +70,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 6,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Kimia Umum',
             'kode_matkul'   => 'TK101',
             'bobot_sks'     => 4,
@@ -78,7 +78,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 7,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Fisika Dasar',
             'kode_matkul'   => 'TF101',
             'bobot_sks'     => 3,
@@ -86,7 +86,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 8,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknik Biosistem',
             'kode_matkul'   => 'BIO101',
             'bobot_sks'     => 3,
@@ -94,7 +94,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 9,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknologi Industri Pertanian',
             'kode_matkul'   => 'TIP101',
             'bobot_sks'     => 3,
@@ -102,7 +102,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 10,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknologi Pangan',
             'kode_matkul'   => 'TP101',
             'bobot_sks'     => 3,
@@ -110,7 +110,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 11,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknik Sistem Energi',
             'kode_matkul'   => 'SE101',
             'bobot_sks'     => 3,
@@ -118,7 +118,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 12,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknik Pertambangan',
             'kode_matkul'   => 'TPB101',
             'bobot_sks'     => 3,
@@ -126,7 +126,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 13,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknik Material',
             'kode_matkul'   => 'TM101',
             'bobot_sks'     => 3,
@@ -134,7 +134,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 14,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknik Telekomunikasi',
             'kode_matkul'   => 'TL101',
             'bobot_sks'     => 3,
@@ -142,7 +142,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 15,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Rekayasa Kehutanan',
             'kode_matkul'   => 'RK101',
             'bobot_sks'     => 3,
@@ -150,7 +150,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 16,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Teknik Biomedis',
             'kode_matkul'   => 'BM101',
             'bobot_sks'     => 3,
@@ -158,7 +158,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 17,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Rekayasa Kosmetik',
             'kode_matkul'   => 'KOS101',
             'bobot_sks'     => 3,
@@ -166,7 +166,7 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 18,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Rekayasa Minyak dan Gas',
             'kode_matkul'   => 'MG101',
             'bobot_sks'     => 3,
@@ -174,12 +174,17 @@ class MatkulSeeder extends Seeder
             'prodi_id'      => 19,
         ]);
 
-        Matkul::create([
+        $this->buat([
             'nama_matkul'   => 'Pengantar Rekayasa Instrumentasi dan Automasi',
             'kode_matkul'   => 'IA101',
             'bobot_sks'     => 3,
             'praktikum'     => 1,
             'prodi_id'      => 20,
         ]);
-    }   
+    }
+
+    private function buat(array $data): Matkul
+    {
+        return Matkul::firstOrCreate(['kode_matkul' => $data['kode_matkul']], $data);
+    }
 }
