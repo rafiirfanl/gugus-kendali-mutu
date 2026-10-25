@@ -33,7 +33,6 @@ class GKMPPemeringkatanDosenController extends Controller
             ?? $tahunAjaranList->firstWhere('is_aktif', true)
             ?? $tahunAjaranList->first();
 
-        // GKMF: melihat seluruh prodi (bisa difilter). GKMP/Kaprodi: prodi tanggung jawabnya.
         $prodiList = collect();
         $prodiId = null;
 
@@ -44,8 +43,6 @@ class GKMPPemeringkatanDosenController extends Controller
                 $prodiId = (int) $request->prodi;
             }
         } else {
-            // GKMP/Kaprodi terkunci pada prodi tanggung jawabnya
-            // (0 = prodi tidak ada, maka tidak ada baris yang cocok)
             $prodiId = (int) $user->prodi_id;
         }
 
