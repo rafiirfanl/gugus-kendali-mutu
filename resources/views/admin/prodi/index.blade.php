@@ -17,7 +17,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center" width="60">No</th>
-                                <th>Program Studi</th>
+                                <th>Program Studiiiiiiii</th>
                                 <th>Kode Prodi</th>
                                 <th class="text-center" width="140">Aksi</th>
                             </tr>
